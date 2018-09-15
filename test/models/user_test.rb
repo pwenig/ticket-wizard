@@ -1,12 +1,13 @@
-require 'test_helper'
+# frozen_string_literal: true
+
+require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
-
   def setup
     @user = users(:eric)
   end
 
-  test "should be valid" do 
+  test "should be valid" do
     assert @user.valid?
   end
 
@@ -21,7 +22,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "password should be present (nonblank)" do
-    @user.password =  " " * 6
+    @user.password = " " * 6
     assert_not @user.valid?
   end
 
@@ -42,20 +43,19 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "associated events should be destroyed" do
-    user = User.create!(name: "Example User", 
-                        email: "user@example.com", 
-                        password: "foobar", 
+    user = User.create!(name: "Example User",
+                        email: "user@example.com",
+                        password: "foobar",
                         password_confirmation: "foobar")
 
-    user.events.create!(title: "testing", 
-                        description: "testing", 
-                        date: 10.days.from_now, 
-                        category_id: 450215487, 
+    user.events.create!(title: "testing",
+                        description: "testing",
+                        date: 10.days.from_now,
+                        category_id: 450215487,
                         address: "Los Angeles, CA")
-    
-    assert_difference 'Event.count', -1 do
+
+    assert_difference "Event.count", -1 do
       user.destroy
     end
   end
-
 end

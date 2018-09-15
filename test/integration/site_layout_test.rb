@@ -1,7 +1,8 @@
-require 'test_helper'
+# frozen_string_literal: true
+
+require "test_helper"
 
 class SiteLayoutTest < ActionDispatch::IntegrationTest
-
   def setup
     @user = users(:eric)
   end

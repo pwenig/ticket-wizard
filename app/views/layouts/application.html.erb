@@ -4,13 +4,13 @@
 
   <%= favicon_link_tag 'favicon.ico' %>
 
-  <title>Eventor | <%= yield(:title) %></title>
+  <title>Ticket Weeb | <%= yield(:title) %></title>
 
   <!-- Meta Tags -->
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <meta name="Eventor" content="">
+  <meta name="Ticket Weeb" content="">
   <%= csrf_meta_tags %>
   
   <!-- Application Stylesheets -->
@@ -38,7 +38,7 @@
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
           <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
         </button>
-        <%= link_to "Eventor", root_path, class: "navbar-brand page-scroll", style: "color: white;" %>
+        <%= link_to "Ticket Weeb", root_path, class: "navbar-brand page-scroll", style: "color: white;" %>
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
@@ -65,16 +65,11 @@
   <div class="container">
     <footer>
       <div class="navbar-header" id="copyright">
-        Copyright © <a href="http://www.eric-gonzalez.com/" target="blank" >Eric Gonzalez</a>, All Rights Reserved
+        Copyright © <a href="http://www.sugarmountain-software.com/" target="blank" >Sugar Mountain Software</a>, All Rights Reserved
       </div>
-      <ul id="social-links" class="pull-right">
-        <li><a href="https://www.facebook.com/EventorWeb/" target="blank"><i class="fa fa-facebook fa-lg"></i> Facebook</a></li> 
-        <li><a href="https://github.com/Twinpair/Eventor" target="blank"><i class="fa fa-github fa-lg"></i> Source Code</a></li>            
-      </ul>
     </footer>
   </div>
 
-  <%= debug(params) if Rails.env.development? %>
 </body>
 </html>
 

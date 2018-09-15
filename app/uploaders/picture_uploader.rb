@@ -1,7 +1,7 @@
 # encoding: utf-8
+# frozen_string_literal: true
 
 class PictureUploader < CarrierWave::Uploader::Base
-
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   include CarrierWave::MiniMagick
@@ -18,7 +18,7 @@ class PictureUploader < CarrierWave::Uploader::Base
 
   # Creates thumbnail size of image
   version :thumb do
-    process resize_to_fill: [261,180]
+    process resize_to_fill: [261, 180]
   end
 
   # Override the directory where uploaded files will be stored.
@@ -57,5 +57,4 @@ class PictureUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
-
 end

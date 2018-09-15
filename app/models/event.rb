@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Event < ActiveRecord::Base
   default_scope -> { order(date: :asc) }
   mount_uploader :picture, PictureUploader
@@ -5,17 +7,17 @@ class Event < ActiveRecord::Base
   has_many :passive_attends, class_name: "Attend", foreign_key: "attended_event_id", dependent: :destroy
   has_many :attendees, through: :passive_attends, source: :attendee
   has_many :comments, dependent: :destroy
-  validates :title, presence: true, length: {maximum: 100}
-  validates :description, presence: true, length: {maximum: 1000}
+  validates :title, presence: true, length: { maximum: 100 }
+  validates :description, presence: true, length: { maximum: 1000 }
   validates :address, presence: true
   validates :category_id, presence: true
   validate  :picture_size
   after_validation :normalize_title
   after_validation :exclude_united_states_text_from_address
   geocoded_by :address
-  after_validation :geocode, :if => :address_changed?
+  after_validation :geocode, if: :address_changed?
 
-  def Event.upcoming()
+  def Event.upcoming
     Event.all.where("date > ?", Time.now)
   end
 
@@ -32,7 +34,7 @@ class Event < ActiveRecord::Base
   end
 
   def Event.search(params)
-    params[:category].to_i != 0 ? events = Event.where(category_id: params[:category].to_i ) : events = Event.all
+    params[:category].to_i != 0 ? events = Event.where(category_id: params[:category].to_i) : events = Event.all
     events = events.where("lower(title) LIKE ? or lower(description) LIKE ?", "%#{params[:search].downcase}%", "%#{params[:search.downcase].downcase}%") if params[:search].present?
     events = events.near(params[:location], 30) if params[:location].present?
     params[:timeline] == "Past Events" ? events.past : events.upcoming
