@@ -1,0 +1,23 @@
+<div class="col-sm-4 col-lg-4 col-md-4" onclick="document.location='<%= event_path(event.id)%>'" style="cursor: pointer;">
+            <div class="thumbnail">
+              <% if event.picture? %>
+                <%= image_tag event.picture.thumb.url, class: "img-responsive", id: "event-thumbnail", alt: event.picture %>
+              <% else %>
+                <%= image_tag "event-index-default.jpg", alt: "default-image", id: "event-thumbnail" %>
+              <% end %>
+              <div class="caption">
+                <h4 class="wrap"><%= truncate event.title, length: 49 %></h4>
+                <p>Created by: <%= link_to event.user.name, event.user %><br>
+                <%= event.date.strftime("Date: %a, %b %d %Y") %><br>
+                <%= event.date.strftime("Time: %I : %M %p") %><br>
+                Category: <a href="/events?utf8=✓&search=&location=&category=<%=event.category_id %>"><%= Category.find(event.category_id).name %></a></p>
+              </div>
+              <div class="attendees">
+                <% if event.date > Time.now %>
+                  <p><%= pluralize(event.attendees.count, 'person') %> attending</p>
+                <% else %>
+                    <p><%= pluralize(event.attendees.count, 'person') %> attended</p>
+                <% end %>
+              </div>
+            </div>
+          </div>

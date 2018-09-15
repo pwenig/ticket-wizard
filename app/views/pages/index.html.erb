@@ -1,0 +1,71 @@
+  <% provide(:title, "Home") %>
+
+  <!-- Page Conent -->
+  <header id="body-up">
+    <div class="header-content">
+      <div class="header-content-inner">
+        <h1 id="homeHeading">Start exploring, creating, and attending events now!</h1>
+        <hr>
+        <% if current_user %>
+          <h2>Check Out Upcoming Events By Clicking Below</h2><br>
+          <%= link_to "Browse All Events", events_path, class: "btn btn-primary btn-xl" %>
+        <% else %>
+          <h2>Sign Up Now!</h2><br>
+          <%= link_to "Sign Up!", signup_path, class: "btn btn-primary btn-xl" %>
+        <% end %>
+      </div>
+    </div>
+  </header>
+
+  <aside class="bg-dark">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <h1 id="homeHeading">Always find things to do!</h1>
+          <hr class="primary">
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-md-6 text-center">
+          <div class="service-box">
+            <i class="fa fa-4x fa-search"></i>
+            <h3><%= link_to "Explore Events", events_path %></h3>
+            <p class="text-faded">You can search events by name, zip code, city, and categories!</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 text-center">
+          <div class="service-box">
+            <i class="fa fa-4x fa-calendar"></i>
+            <h3><%= link_to "Create Events", create_event_path %></h3>
+            <p class="text-faded">Create your own events and start invting you friends!</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 text-center">
+          <div class="service-box">
+            <i class="fa fa-4x fa-user-plus"></i>
+            <h3><%= link_to "Attend Events", events_path %></h3>
+            <p class="text-faded">Once you find an event you're interested in, you can choose to attend the event.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <section id="contact">
+    <div class="col-md-8 col-md-offset-2 text-center">
+      <div class="row">
+        <h3 id="events">Events Near You</h3>
+        <hr>
+        <% if @events.any? %>
+          <%= render @events %>
+        <% else %>
+          <p>No events nearby</p>
+        <% end %>
+      </div>
+      <div class="row">
+        <%= link_to "Browse All Events", events_path, class: "btn btn-primary btn-xl" %>
+      </div>
+    </div>
+  </section>
