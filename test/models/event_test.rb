@@ -1,12 +1,13 @@
-require 'test_helper'
+# frozen_string_literal: true
+
+require "test_helper"
 
 class EventTest < ActiveSupport::TestCase
-
   def setup
     @event = events(:event)
   end
 
-  test "should be valid" do 
+  test "should be valid" do
     assert @event.valid?
   end
 
@@ -43,5 +44,4 @@ class EventTest < ActiveSupport::TestCase
   test "order should be most recent first" do
     assert_equal events(:first_upcoming_event), Event.first
   end
-
 end

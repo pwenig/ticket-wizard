@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class AttendsController < ApplicationController
-	before_action :logged_in_user
+  before_action :logged_in_user
 
   def create
     @event = Event.find(params[:attended_event_id])
