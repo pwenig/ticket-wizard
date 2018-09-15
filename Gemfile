@@ -48,7 +48,7 @@ group :test do
   gem "rspec-rails", "~> 3.8"
   gem "capybara", "~> 3.7", ">= 3.7.2"
   gem "factory_bot_rails", "~> 4.0"
-
+  gem 'database_cleaner'
   gem "rails-controller-testing", "1.0.2"
   gem "minitest-reporters",       "1.1.14"
   gem "guard",                    "2.13.0"
