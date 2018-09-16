@@ -7,25 +7,25 @@ class Event < ActiveRecord::Base
   has_many :passive_attends, class_name: "Attend", foreign_key: "attended_event_id", dependent: :destroy
   has_many :attendees, through: :passive_attends, source: :attendee
   has_many :comments, dependent: :destroy
-  validates :title, presence: true, length: { maximum: 100 }
-  validates :description, presence: true, length: { maximum: 1000 }
-  validates :address, presence: true
-  validates :category_id, presence: true
+  validates_presence_of :title, length: { maximum: 100 }
+  validates_presence_of :description, length: { maximum: 1000 }
+  validates_presence_of :address
+  validates_presence_of :category_id
   validate  :picture_size
-  after_validation :normalize_title
-  after_validation :exclude_united_states_text_from_address
+  before_save :normalize_title
+  before_save :exclude_united_states_text_from_address
   geocoded_by :address
-  after_validation :geocode, if: :address_changed?
+  before_save :geocode, if: :address_changed?
 
-  def Event.upcoming
-    Event.all.where("date > ?", Time.now)
+  def self.upcoming
+    Event.where("date > ?", Time.now)
   end
 
-  def Event.past
-    Event.all.where("date < ?", Time.now)
+  def self.past
+    Event.where("date < ?", Time.now)
   end
 
-  def Event.featured(visitor_latitude, visitor_longitude)
+  def self.featured(visitor_latitude, visitor_longitude)
     Event.upcoming.near([visitor_latitude, visitor_longitude], 20).limit(6)
   end
 
@@ -33,7 +33,7 @@ class Event < ActiveRecord::Base
     self.date < Time.now.advance(days: 1) ? false : true
   end
 
-  def Event.search(params)
+  def self.search(params)
     params[:category].to_i != 0 ? events = Event.where(category_id: params[:category].to_i) : events = Event.all
     events = events.where("lower(title) LIKE ? or lower(description) LIKE ?", "%#{params[:search].downcase}%", "%#{params[:search.downcase].downcase}%") if params[:search].present?
     events = events.near(params[:location], 30) if params[:location].present?
