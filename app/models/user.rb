@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class User < ActiveRecord::Base
   has_many :events, dependent: :destroy
   has_many :comments, dependent: :destroy

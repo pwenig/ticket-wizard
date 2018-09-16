@@ -4,7 +4,7 @@
 
 * Ruby version - 2.4
 
-* Rails version - 5.0.2
+* Rails version - 5.2
 
 * Database - Postgres
 

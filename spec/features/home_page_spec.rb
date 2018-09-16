@@ -1,8 +1,10 @@
-require 'rails_helper'
+# frozen_string_literal: true
 
-RSpec.feature 'Home Page', type: :feature do
-  it 'visits root path' do
-    visit('/')
+require "rails_helper"
+
+RSpec.feature "Home Page", type: :feature do
+  it "visits root path" do
+    visit("/")
     expect(current_path).to eq(root_path)
   end
 end
