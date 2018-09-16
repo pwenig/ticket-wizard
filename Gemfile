@@ -51,8 +51,8 @@ end
 group :test do
   gem "rspec-rails", "~> 3.8"
   gem "capybara", ">= 2.15"
-  gem "chromedriver-helper"
-  gem "selenium-webdriver"
+  # gem "chromedriver-helper"
+  # gem "selenium-webdriver"
   gem "factory_bot_rails", "~> 4.0"
   gem "database_cleaner"
   gem "rails-controller-testing", "1.0.2"
