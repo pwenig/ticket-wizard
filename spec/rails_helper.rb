@@ -5,7 +5,7 @@
 require "simplecov"
 SimpleCov.start "rails"
 
-require './spec/helpers/authentication_helper.rb'
+require "./spec/helpers/authentication_helper.rb"
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require "spec_helper"

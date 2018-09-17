@@ -8,7 +8,7 @@ class AttendsController < ApplicationController
     if current_user.attend(@event)
       flash[:success] = "Confirmed. Enjoy #{@event.title} on #{@event.date.to_formatted_s(:long)}"
       redirect_to user_path(current_user)
-    end 
+    end
   end
 
   def destroy
@@ -16,6 +16,6 @@ class AttendsController < ApplicationController
     if current_user.unattend(@event)
       flash[:success] = "Confirmed. You are no longer attending #{@event.title}"
       redirect_to user_path(current_user)
-    end 
+    end
   end
 end

@@ -9,10 +9,10 @@ FactoryBot.define do
     category
     user
 
-    trait :attendees  do 
+    trait :attendees  do
       after(:create) do |event|
         event.attendees << User.last
-      end 
+      end
     end
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.feature "User Signup", type: :feature do
@@ -10,75 +12,73 @@ RSpec.feature "User Signup", type: :feature do
 
   it "should create a new user" do
     visit signup_path
-    fill_in('user_name', with: 'Test User')
-    fill_in('user_email', with: 'test@test.com')
-    fill_in('user_password', with: 'password')
-    fill_in('user_password_confirmation', with: 'password')
-    click_on 'submit'
+    fill_in("user_name", with: "Test User")
+    fill_in("user_email", with: "test@test.com")
+    fill_in("user_password", with: "password")
+    fill_in("user_password_confirmation", with: "password")
+    click_on "submit"
     user = User.last
     expect(current_path).to eq(user_path(user.id))
   end
 
-  it 'should display error with incomplete user profile' do 
+  it "should display error with incomplete user profile" do
     visit signup_path
-    fill_in('user_name', with: '')
-    fill_in('user_email', with: 'test@test.com')
-    fill_in('user_password', with: 'password')
-    fill_in('user_password_confirmation', with: 'password')
-    click_on 'submit'
-    expect(page.text).to include('The form contains 1 error')
-  end 
+    fill_in("user_name", with: "")
+    fill_in("user_email", with: "test@test.com")
+    fill_in("user_password", with: "password")
+    fill_in("user_password_confirmation", with: "password")
+    click_on "submit"
+    expect(page.text).to include("The form contains 1 error")
+  end
 
-  
-  it 'should edit a user profile' do 
+
+  it "should edit a user profile" do
     sign_in_user(user)
     visit edit_user_path(user.id)
-    expect(page.text).to include('Edit Account')
-    fill_in('user_name', with: 'Test User Update')
-    click_on 'submit'
-    expect(page.text).to include('Updated Successfully')
-  end 
+    expect(page.text).to include("Edit Account")
+    fill_in("user_name", with: "Test User Update")
+    click_on "submit"
+    expect(page.text).to include("Updated Successfully")
+  end
 
-  it 'should display error with incomplete user profile' do 
+  it "should display error with incomplete user profile" do
     sign_in_user(user)
     visit edit_user_path(user.id)
-    expect(page.text).to include('Edit Account')
-    fill_in('user_name', with: '')
-    click_on 'submit'
-    expect(page.text).to include('The form contains 1 error')
-  end 
+    expect(page.text).to include("Edit Account")
+    fill_in("user_name", with: "")
+    click_on "submit"
+    expect(page.text).to include("The form contains 1 error")
+  end
 
 
-  it 'should show upcoming events' do
+  it "should show upcoming events" do
     sign_in_user(user)
     visit user_path(user)
-    within '#search-sidebar' do 
-      click_on 'Upcoming Events'
-    end 
+    within "#search-sidebar" do
+      click_on "Upcoming Events"
+    end
     expect(page.text).to include(upcoming_event.title)
     expect(page.text).to_not include(past_event.title)
-  end 
+  end
 
-  it 'should show past events' do
+  it "should show past events" do
     sign_in_user(user)
     visit user_path(user)
-    within '#search-sidebar' do 
-      click_on 'Past Events'
-    end 
+    within "#search-sidebar" do
+      click_on "Past Events"
+    end
     expect(page.text).to_not include(upcoming_event.title)
     expect(page.text).to include(past_event.title)
-  end 
+  end
 
-  it 'should show attending events' do
+  it "should show attending events" do
     sign_in_user(user)
     visit user_path(user)
-    within '#search-sidebar' do 
-      click_on 'Events Attending'
-    end 
+    within "#search-sidebar" do
+      click_on "Events Attending"
+    end
     expect(page.text).to_not include(upcoming_event.title)
     expect(page.text).to_not include(past_event.title)
     expect(page.text).to include(attending_event.title)
-  end 
-
-
+  end
 end

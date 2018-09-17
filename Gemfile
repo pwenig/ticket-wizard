@@ -59,7 +59,7 @@ group :test do
   gem "minitest-reporters",       "1.1.14"
   gem "guard",                    "2.13.0"
   gem "guard-minitest",           "2.4.4"
-  gem 'simplecov', '~> 0.16.1'
+  gem "simplecov", "~> 0.16.1"
   gem "shoulda-matchers", "~> 3.1"
 end
 
