@@ -11,7 +11,7 @@ class Event < ActiveRecord::Base
   validates_presence_of :description, length: { maximum: 1000 }
   validates_presence_of :address
   validates_presence_of :category_id
-  validate  :picture_size
+  validate :picture_size
   before_save :normalize_title
   before_save :exclude_united_states_text_from_address
   geocoded_by :address

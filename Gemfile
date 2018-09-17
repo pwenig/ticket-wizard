@@ -21,7 +21,7 @@ gem "font-awesome-sass"
 gem "carrierwave", "0.11.2"
 gem "mini_magick", "4.5.1"
 gem "fog", "1.38.0"
-gem "geocoder"
+gem "geocoder", "~> 1.5"
 gem "gmaps4rails"
 gem "i18n"
 gem "rubocop-rails_config"
@@ -59,7 +59,7 @@ group :test do
   gem "minitest-reporters",       "1.1.14"
   gem "guard",                    "2.13.0"
   gem "guard-minitest",           "2.4.4"
-  gem "simplecov",                "0.15.1", require: false
+  gem 'simplecov', '~> 0.16.1'
   gem "shoulda-matchers", "~> 3.1"
 end
 
