@@ -11,7 +11,7 @@
     </h4>
     <%= comment.body %>
     <% if current_user && current_user == comment.user %>
-      <div class="pull-right"><%= link_to "Delete", comment, method: :delete, remote: true %></div>
+      <div class="pull-right"><%= link_to "Delete", comment, method: :delete %></div>
     <% end %>
   </div><br><br>
 </div>
