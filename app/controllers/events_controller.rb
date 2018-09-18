@@ -66,10 +66,10 @@ class EventsController < ApplicationController
     redirect_to current_user
   end
 
-  def attendees
-    @event = Event.find(params[:id])
-    @users = @event.attendees.paginate(page: params[:page])
-  end
+# def attendees
+#   @event = Event.find(params[:id])
+#   @users = @event.attendees.paginate(page: params[:page])
+# end
 
 private
 

@@ -18,7 +18,7 @@
         <p class="lead wrap">Event Description: <%= @event.description %></p><br>
         <% if current_user%>
           <% if current_user.id == @event.user_id %>
-            <p class="lead center" ><%= link_to "Edit Event", edit_event_path(@event), class: "btn btn-primary", id: "show-edit-button" %><%= link_to "Delete Event", @event, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-primary" %></p>
+            <p class="lead center" ><%= link_to "Edit Event", edit_event_path(@event), class: "btn btn-primary", id: "show-edit-button" %><%= link_to "Delete Event", @event, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-primary", id: "delete_event_button" %></p>
           <% elsif @event.date > Time.now %>  
             <div id="attend_form" >
               <% if current_user.attending?(@event) %>

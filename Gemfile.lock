@@ -46,6 +46,8 @@ GEM
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
     ansi (1.5.0)
+    archive-zip (0.11.0)
+      io-like (~> 0.3.0)
     arel (9.0.0)
     ast (2.4.0)
     autoprefixer-rails (9.1.4)
@@ -74,6 +76,11 @@ GEM
       json (>= 1.7)
       mime-types (>= 1.16)
       mimemagic (>= 0.3.0)
+    childprocess (0.9.0)
+      ffi (~> 1.0, >= 1.0.11)
+    chromedriver-helper (2.0.1)
+      archive-zip (~> 0.10)
+      nokogiri (~> 1.8)
     coderay (1.1.2)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
@@ -250,6 +257,7 @@ GEM
       minitest (>= 3.0)
     i18n (1.1.0)
       concurrent-ruby (~> 1.0)
+    io-like (0.3.0)
     ipaddress (0.8.3)
     jaro_winkler (1.5.1)
     jbuilder (2.7.0)
@@ -384,6 +392,7 @@ GEM
       rubocop (~> 0.56)
     ruby-progressbar (1.10.0)
     ruby_dep (1.5.0)
+    rubyzip (1.2.2)
     sass (3.5.7)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
@@ -401,6 +410,9 @@ GEM
     sdoc (0.4.2)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    selenium-webdriver (3.14.0)
+      childprocess (~> 0.5)
+      rubyzip (~> 1.2)
     shellany (0.0.1)
     shoulda-matchers (3.1.2)
       activesupport (>= 4.0.0)
@@ -462,6 +474,7 @@ DEPENDENCIES
   byebug
   capybara (>= 2.15)
   carrierwave (= 0.11.2)
+  chromedriver-helper
   coffee-rails
   database_cleaner
   factory_bot_rails (~> 4.0)
@@ -488,6 +501,7 @@ DEPENDENCIES
   rubocop-rails_config
   sass-rails (>= 3.2)
   sdoc (~> 0.4.0)
+  selenium-webdriver
   shoulda-matchers (~> 3.1)
   simplecov (~> 0.16.1)
   spring
