@@ -3,7 +3,7 @@
 # require "selenium-webdriver"
 
 require "simplecov"
-SimpleCov.start "rails"
+SimpleCov.start
 
 require "./spec/helpers/authentication_helper.rb"
 
