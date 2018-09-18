@@ -4,6 +4,7 @@ class EventsController < ApplicationController
   before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy]
 
   def index
+    @categories = Category.all
     if params[:category]
       @events =  Event.search(params).paginate(page: params[:page], per_page: 12)
     else
@@ -65,10 +66,10 @@ class EventsController < ApplicationController
     redirect_to current_user
   end
 
-  def attendees
-    @event = Event.find(params[:id])
-    @users = @event.attendees.paginate(page: params[:page])
-  end
+# def attendees
+#   @event = Event.find(params[:id])
+#   @users = @event.attendees.paginate(page: params[:page])
+# end
 
 private
 

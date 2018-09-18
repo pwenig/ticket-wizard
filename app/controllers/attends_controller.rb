@@ -5,19 +5,17 @@ class AttendsController < ApplicationController
 
   def create
     @event = Event.find(params[:attended_event_id])
-    current_user.attend(@event)
-    respond_to do |format|
-      format.html { redirect_to @event }
-      format.js
+    if current_user.attend(@event)
+      flash[:success] = "Confirmed. Enjoy #{@event.title} on #{@event.date.to_formatted_s(:long)}"
+      redirect_to user_path(current_user)
     end
   end
 
   def destroy
     @event = Attend.find(params[:id]).attended_event
-    current_user.unattend(@event)
-    respond_to do |format|
-      format.html { redirect_to @event }
-      format.js
+    if current_user.unattend(@event)
+      flash[:success] = "Confirmed. You are no longer attending #{@event.title}"
+      redirect_to user_path(current_user)
     end
   end
 end

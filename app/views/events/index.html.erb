@@ -15,7 +15,7 @@
           <p class="help-block"></p>
 
           <%= label_tag :category, "Category: " %><br>
-          <%= select_tag :category, options_for_select([["All", "0"], ["Arts", "1"], ["Business", "2"], ["Charity", "3"], ["Education", "4"], ["Fashion", "5"], ["Film & Media", "6"], ["Food & Drink", "7"], ["Health", "8"], ["Hobbies", "9"], ["Holiday", "10"], ["Music", "11"], ["Science & Tech", "12"], ["Spirituality", "13"], ["Sports & Fitness", "14"], ["Travel & Outdoor", "15"], ["Other", "16"]], params[:category] ), class: "form-control" %>
+          <%= select_tag :category, options_for_select(@categories.map{ |c| [c.name, c.id] }, params[:category] ), class: "form-control" %>
           <p class="help-block"></p>
 
           <%= submit_tag "Search", name: nil, class: "btn btn-primary" %>

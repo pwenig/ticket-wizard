@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   has_many :events, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :active_attends, class_name: "Attend", foreign_key: "attendee_id", dependent: :destroy
   has_many :attending, through: :active_attends, source: :attended_event
 
-  validates :name, presence: true, length: { maximum: 50 }
-  validates :email, presence: true, length: { maximum: 50 }, uniqueness: { case_sensitive: false }
+  validates_presence_of :name, length: { maximum: 50 }
+  validates_presence_of :email, length: { maximum: 50 }, uniqueness: { case_sensitive: false }
   has_secure_password
   validates :password, length: { minimum: 6 }, presence: true, on: :create
   validates :password_confirmation, length: { minimum: 6 }, on: :create
@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   before_save :downcase_email
 
   # Returns the hash digest of the given string.
-  def User.digest(string)
+  def digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
   end
@@ -58,7 +58,7 @@ private
     self.name = name.downcase.titleize
   end
 
-  def blank_password?
-    self.password = nil if self.password.blank?
-  end
+  # def blank_password?
+  #   self.password = nil if self.password.blank?
+  # end
 end

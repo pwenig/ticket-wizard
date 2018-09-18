@@ -18,20 +18,20 @@
             <h4><b>Account</b></h4>
             <div class="list-group">
               <%= link_to "Edit Account", edit_user_path, class: "list-group-item" %>
-              <%= link_to "Logout",logout_path, method: "delete", class: "list-group-item" %>
+              <%= link_to "Sign Out",logout_path, method: "delete", class: "list-group-item" %>
             </div>
           <% end %>
         <% end %>
         <h4><b>Filter Events by Condition</b></h4>
         <div class="list-group">
           <%= form_tag @user, method: :get do %>
-            <%= submit_tag "#{@display_name} Upcoming Events", name: "timeline", id: "timeline", class: "list-group-item" %>
-            <%= submit_tag "#{@display_name} Past Events", name: "timeline", id: "timeline", class: "list-group-item" %>    
+            <%= submit_tag "Upcoming Events", name: "timeline", id: "timeline", class: "list-group-item" %>
+            <%= submit_tag "Past Events", name: "timeline", id: "timeline", class: "list-group-item" %>    
             <% if @special %>
               <%= submit_tag "Events #{@special} Attending", name: "timeline", id: "timeline", class: "list-group-item" %>    
             <% else %>
               <% @display_name = "#{@user.name} is" if @display_name == "#{@user.name}'s" %>
-              <%= submit_tag "Events #{@display_name} Attending", name: "timeline", id: "timeline", class: "list-group-item" %>  
+              <%= submit_tag "Events Attending", name: "timeline", id: "timeline", class: "list-group-item" %>  
               <%  @display_name = "#{@user.name}'s" %>
             <% end %>
           <% end %>

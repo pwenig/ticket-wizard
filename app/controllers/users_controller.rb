@@ -19,23 +19,17 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-
-    if current_user && @user.id == current_user.id
-      @display_name = "Your"
-      @special = "You're"
-    else
-      @display_name = "#{@user.name}'s"
-    end
-
-    if params[:timeline] == "#{@display_name} Upcoming Events"
+    authorized?(@user)
+    @display_name = "#{@user.name}'s"
+    if params[:timeline] == "Upcoming Events"
       @title = params[:timeline]
       @events = @user.upcoming_events.paginate(page: params[:page], per_page: 12)
-    elsif params[:timeline] == "#{@display_name} Past Events"
+    elsif params[:timeline] == "Past Events"
       @title = params[:timeline]
       @events = @user.past_events.paginate(page: params[:page], per_page: 12)
     else
       @display_name = "#{@user.name} is" if @display_name == "#{@user.name}'s"
-      @special ? @title = "Events #{@special} Attending" : @title = "Events #{@display_name} Attending"
+      @title = "Events You're Attending"
       @events = @user.attending.where("date > ?", Time.now).paginate(page: params[:page], per_page: 12)
       @display_name = "#{@user.name}'s" if @display_name == "#{@user.name} is"
     end

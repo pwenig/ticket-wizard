@@ -4,7 +4,7 @@
 
 * Ruby version - 2.4
 
-* Rails version - 5.0.2
+* Rails version - 5.2
 
 * Database - Postgres
 
@@ -15,6 +15,6 @@
 
 Once you have the repo on your local machine
 
-1) Run `rake db:migrate RAILS_ENV=test` to migrate the testing enviroment database
+1) Run `rake db:migrate RAILS_ENV=test` to migrate the testing environment database
 
-2) Run `rake test` to verify everything is ok =)
+2) Run `rspec` to verify everything is ok =)
