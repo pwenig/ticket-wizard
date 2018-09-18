@@ -31,6 +31,23 @@ RSpec.feature "User Signup", type: :feature do
     expect(page.text).to include("The form contains 1 error")
   end
 
+  it "should allow a user to login with valid email/password" do
+    sign_in_user(user)
+    expect(current_path).to eq(user_path(user))
+  end
+
+  it "should show not allow a user to login with invalid email/password" do
+    invalid_user = user
+    User.last.destroy!
+    sign_in_user(invalid_user)
+    expect(page.text).to include("Invalid Email or Password")
+  end
+
+  it "should log a user out" do
+    sign_in_user(user)
+    click_on "signout_link"
+    expect(current_path).to eq(root_path)
+  end
 
   it "should edit a user profile" do
     sign_in_user(user)
