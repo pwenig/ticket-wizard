@@ -60,7 +60,6 @@ group :test do
   gem "simplecov", "~> 0.16.1"
   gem "shoulda-matchers", "~> 3.1"
   gem "selenium-webdriver"
-  gem "chromedriver-helper"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
