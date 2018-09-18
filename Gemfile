@@ -59,7 +59,7 @@ group :test do
   gem "guard-minitest",           "2.4.4"
   gem "simplecov", "~> 0.16.1"
   gem "shoulda-matchers", "~> 3.1"
-  gem "selenium-webdriver"
+  # gem "selenium-webdriver"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

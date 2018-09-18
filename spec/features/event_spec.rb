@@ -65,12 +65,4 @@ RSpec.describe "Events", type: :feature do
     click_on "edit_button"
     expect(page.text).to include("Event date must be 1 or more days ahead from now")
   end
-
-  it "should delete an event", js: true do
-    visit event_path(upcoming_event)
-    accept_alert do
-      click_on "delete_event_button"
-    end
-    expect(page.text).to_not include(upcoming_event.title)
-  end
 end
