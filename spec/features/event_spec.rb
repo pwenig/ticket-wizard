@@ -27,7 +27,6 @@ RSpec.describe "Events", type: :feature do
     expect(page.text).to_not include("Folk Festival")
   end
 
-
   it "should create an event" do
     visit new_event_path
     fill_in("event_title", with: "Heavy Metal Concert")
@@ -35,7 +34,9 @@ RSpec.describe "Events", type: :feature do
     fill_in("txtautocomplete", with: "Boulder Theater")
     select("2019", from: "event_date_1i")
     click_on "create_button"
-    expect(page.text).to include("Heavy Metal Concert")
+    event = Event.last
+    expect(page.text).to include("Event Created")
+    expect(current_path).to eq(new_event_ticket_path(event))
   end
 
   it "should not create an event with invalid date" do

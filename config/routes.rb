@@ -21,6 +21,7 @@ Rails.application.routes.draw do
 
   resources :events do
     resources :comments
+    resources :tickets
     member do
       get :attendees
     end

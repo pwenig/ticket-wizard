@@ -4,6 +4,7 @@ class Event < ActiveRecord::Base
   default_scope -> { order(date: :asc) }
   mount_uploader :picture, PictureUploader
   belongs_to :user
+  has_many :tickets, dependent: :destroy
   has_many :passive_attends, class_name: "Attend", foreign_key: "attended_event_id", dependent: :destroy
   has_many :attendees, through: :passive_attends, source: :attendee
   has_many :comments, dependent: :destroy
@@ -32,6 +33,9 @@ class Event < ActiveRecord::Base
   def has_valid_date?
     self.date < Time.now.advance(days: 1) ? false : true
   end
+
+  # Add a guid with before_create and use that for the :id
+  #Stub google api query
 
   def self.search(params)
     params[:category].to_i != 0 ? events = Event.where(category_id: params[:category].to_i) : events = Event.all

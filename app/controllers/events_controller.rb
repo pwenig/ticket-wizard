@@ -22,7 +22,9 @@ class EventsController < ApplicationController
     if @event.save && @event.has_valid_date?
       current_user.attend(@event)
       flash[:success] = "Event Created"
-      redirect_to @event
+
+      redirect_to new_event_ticket_path(@event)
+      # redirect_to @event
     else
       flash.now[:danger] = "Event date must be 1 or more days ahead from now" if !@event.has_valid_date?
       render :new

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2017_06_23_233700) do
+ActiveRecord::Schema.define(version: 2018_09_18_213113) do
 
   create_table "attends", force: :cascade do |t|
     t.integer "attendee_id"
@@ -51,6 +51,23 @@ ActiveRecord::Schema.define(version: 2017_06_23_233700) do
     t.integer "category_id"
     t.index ["category_id"], name: "index_events_on_category_id"
     t.index ["user_id"], name: "index_events_on_user_id"
+  end
+
+  create_table "tickets", force: :cascade do |t|
+    t.string "title"
+    t.decimal "price", precision: 8, scale: 2
+    t.integer "qty_available"
+    t.text "description"
+    t.datetime "onsale_start"
+    t.datetime "onsale_end"
+    t.string "ticket_guid"
+    t.boolean "redeemed", default: false
+    t.integer "event_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_tickets_on_event_id"
+    t.index ["user_id"], name: "index_tickets_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

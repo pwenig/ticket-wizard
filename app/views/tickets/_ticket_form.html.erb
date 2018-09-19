@@ -1,0 +1,52 @@
+
+<%= form_for(@ticket, url: url, html: { multipart: true }) do |f| %> 
+      <%= render "shared/error_messages", object: f.object %>
+      <div class="row">
+        <div class="col-lg-6 col-lg-offset-3">
+          <%= f.label :title, "Title"%><span id="required">*</span>
+          <%= f.text_field :title, class: "form-control", placeholder: "Ex. General Admission" %>
+          <p class="help-block"></p>
+        </div> 
+      </div> 
+
+      <div class="container col-lg-offset-3">
+        <div class="row">
+          <div class="col-lg-3">
+            <%= f.label :price, "Ticket Price"%><span id="required">*</span>
+            <%= f.text_field :price, class: "form-control", placeholder: "Ex. 25.99" %>
+            <p class="help-block"></p>
+          </div>
+          <div class="col-lg-3">
+            <%= f.label :qty_available, "Available Quantity"%>
+            <%= f.text_field :qty_available, class: "form-control", placeholder: "Ex. 100 (Leave blank if unlimited)" %>
+            <p class="help-block"></p>
+          </div> 
+        </div> 
+      </div>
+
+      <div class="row">
+        <div class="col-lg-6 col-lg-offset-3">
+          <%= f.label :description, "Description"%>
+          <%= f.text_field :description, class: "form-control" %>
+          <p class="help-block"></p>
+        </div> 
+      </div> 
+
+      <div class="container col-lg-offset-3">
+        <div class="row">
+          <div class="col-lg-3">
+            <%= f.label :onsale_start, "Start Sale On"%>
+            <%= f.date_field :onsale_start, class: "form-control"%>
+            <p class="help-block"></p>
+          </div>
+          <div class="col-lg-3">
+            <%= f.label :onsale_end, "End Sale On"%>
+            <%= f.date_field :onsale_end, class: "form-control"%>
+            <p class="help-block"></p>
+          </div> 
+        </div> 
+      </div>
+
+      <%= f.submit button, class: "btn btn-primary", style: "margin-top: 30px;", id: id %>
+
+    <% end %>

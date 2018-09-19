@@ -3,7 +3,7 @@
 class PagesController < ApplicationController
   def index
     # Enable if we want to feature events nearby
-    
+
     # # Test geocoding services locally by hardcoding latitude and longitude
     # if Rails.env.development? || Rails.env.test?
     #   visitor_latitude = 34.05223
