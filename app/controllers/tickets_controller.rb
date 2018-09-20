@@ -14,13 +14,13 @@ class TicketsController < ApplicationController
   end
 
   def create
+    @event = Event.find(params[:event_id])
     @ticket = current_user.tickets.build(ticket_params)
     @ticket.event_id = params[:event_id].to_i
-    if @ticket.save!
+    if @ticket.save
       flash[:success] = "Ticket Created"
       redirect_to event_tickets_path(params[:event_id])
     else
-      flash.now[:danger] = "Onsale date must be ahead of today's date"
       render :new
     end
   end
@@ -36,14 +36,14 @@ class TicketsController < ApplicationController
   end
 
   def update
+    @event = Event.find(params[:event_id])
     @ticket = Ticket.find(params[:id])
     authorized?(@ticket.event)
     if @ticket.update(ticket_params)
       flash[:success] = "Ticket Updated!"
       redirect_to event_tickets_path
     else
-      flash.now[:danger] = "Ticket Not Updated"
-      redirect_to event_tickets_path
+      render :edit
     end
   end
 

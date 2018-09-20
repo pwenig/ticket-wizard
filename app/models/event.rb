@@ -13,6 +13,7 @@ class Event < ActiveRecord::Base
   validates_presence_of :address
   validates_presence_of :category_id
   validate :picture_size
+  validate :event_date
   before_save :normalize_title
   before_save :exclude_united_states_text_from_address
   geocoded_by :address
@@ -26,16 +27,17 @@ class Event < ActiveRecord::Base
     Event.where("date < ?", Time.now)
   end
 
-  def self.featured(visitor_latitude, visitor_longitude)
-    Event.upcoming.near([visitor_latitude, visitor_longitude], 20).limit(6)
-  end
+  # def self.featured(visitor_latitude, visitor_longitude)
+  #   Event.upcoming.near([visitor_latitude, visitor_longitude], 20).limit(6)
+  # end
 
   def has_valid_date?
-    self.date < Time.now.advance(days: 1) ? false : true
+    if self.date
+      self.date < Time.now.advance(days: 1) ? false : true
+    end 
   end
 
   # Add a guid with before_create and use that for the :id
-  # Stub google api query
 
   def self.search(params)
     params[:category].to_i != 0 ? events = Event.where(category_id: params[:category].to_i) : events = Event.all
@@ -50,6 +52,12 @@ private
   def picture_size
     if picture.size > 5.megabytes
       errors.add(:picture, "should be less than 5MB")
+    end
+  end
+
+  def event_date
+    if !has_valid_date?
+      errors.add(:date, "must be 1 or more days ahead from now")
     end
   end
 

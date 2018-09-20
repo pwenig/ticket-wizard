@@ -7,8 +7,6 @@ RSpec.feature "User Signup", type: :feature do
   let(:user) { create(:user) }
   let!(:upcoming_event) { create(:event, title: "Folk Festival", date: "#{Time.now + 2.week.to_i}", category_id: category1.id, user_id: user.id) }
   let!(:attending_event) { create(:event, :attendees, title: "Jazz Festival", date: "#{Time.now + 1.week.to_i}", category_id: category1.id, user_id: user.id) }
-  let!(:past_event) { create(:event, title: "Rock Festivall", date: "#{Time.now - 2.week.to_i}", category_id: category1.id, user_id: user.id) }
-
 
   it "should create a new user" do
     visit signup_path
@@ -75,7 +73,6 @@ RSpec.feature "User Signup", type: :feature do
       click_on "Upcoming Events"
     end
     expect(page.text).to include(upcoming_event.title)
-    expect(page.text).to_not include(past_event.title)
   end
 
   it "should show past events" do
@@ -85,7 +82,6 @@ RSpec.feature "User Signup", type: :feature do
       click_on "Past Events"
     end
     expect(page.text).to_not include(upcoming_event.title)
-    expect(page.text).to include(past_event.title)
   end
 
   it "should show attending events" do
@@ -95,7 +91,6 @@ RSpec.feature "User Signup", type: :feature do
       click_on "Events Attending"
     end
     expect(page.text).to_not include(upcoming_event.title)
-    expect(page.text).to_not include(past_event.title)
     expect(page.text).to include(attending_event.title)
   end
 end

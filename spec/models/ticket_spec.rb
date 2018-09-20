@@ -41,4 +41,10 @@ RSpec.describe Ticket, type: :model do
     regex = /^[a-zA-Z0-9]{0,6}$/
     expect(ticket.ticket_guid).to match(regex)
   end
+
+  it 'returns an error if qty_available it not a number' do 
+    ticket2 =  build(:ticket, title: "VIP", qty_available: "foo", onsale_end: "#{Time.now - 2.week.to_i}", user_id: user.id, event_id: event.id)
+    expect(ticket2).to_not be_valid
+    expect(ticket2.errors.full_messages).to eq ['Qty available is not a number']
+  end
 end

@@ -47,7 +47,7 @@ RSpec.describe "Events", type: :feature do
     fill_in("txtautocomplete", with: "Boulder Theater")
     select(current_day, from: "event_date_3i")
     click_on "create_button"
-    expect(page.text).to include("Event date must be 1 or more days ahead from now")
+    expect(page.text).to include("Date must be 1 or more days ahead from now")
   end
 
   it "should edit an event" do
@@ -64,6 +64,6 @@ RSpec.describe "Events", type: :feature do
     expect(page.text).to include("Edit Event")
     select(current_day, from: "event_date_3i")
     click_on "edit_button"
-    expect(page.text).to include("Event date must be 1 or more days ahead from now")
+    expect(page.text).to include("Date must be 1 or more days ahead from now")
   end
 end

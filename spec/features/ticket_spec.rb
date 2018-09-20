@@ -27,6 +27,22 @@ RSpec.describe "Tickets", type: :feature do
     expect(page.text).to include("General Admission")
   end
 
+  it "should not create a ticket for an event with errors" do
+    visit event_tickets_path(event)
+    expect(page.text).to include(event.title)
+    expect(page.text).to include("Create Tickets")
+    click_on("create-ticket-button")
+    expect(page.text).to include("Create Tickets for:")
+    expect(page.text).to include(event.title)
+    fill_in("ticket_title", with: "General Admission")
+    fill_in("ticket_price", with: 25.00)
+    fill_in("ticket_qty_available", with: "foo")
+    click_on("create_button")
+    expect(current_path).to eq(event_tickets_path(event))
+    expect(page.text).to include("Qty available is not a number")
+  end
+
+
   it "should show details of a ticket" do
     visit event_tickets_path(event)
     expect(page.text).to include("VIP")
@@ -47,4 +63,16 @@ RSpec.describe "Tickets", type: :feature do
     expect(page.text).to include("$45.00")
     expect(current_path).to eq(event_tickets_path(vip_ticket.event))
   end
+
+  it "should not edit a ticket with errors" do
+    visit event_tickets_path(event)
+    expect(page.text).to include("VIP")
+    click_on("ticket_edit")
+    expect(current_path).to eq(edit_event_ticket_path(vip_ticket.event, vip_ticket))
+    expect(page.text).to include("Edit Ticket")
+    fill_in("ticket_price", with: "foo")
+    click_on("edit_button")
+    expect(page.text).to include("Price is not a number")
+  end
+
 end

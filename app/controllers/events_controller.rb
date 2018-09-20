@@ -25,7 +25,6 @@ class EventsController < ApplicationController
       redirect_to new_event_ticket_path(@event)
       # redirect_to @event
     else
-      flash.now[:danger] = "Event date must be 1 or more days ahead from now" if !@event.has_valid_date?
       render :new
     end
   end
@@ -50,7 +49,6 @@ class EventsController < ApplicationController
       flash[:success] = "Event Updated!"
       redirect_to @event
     else
-      flash.now[:danger] = "Event date must be 1 or more days ahead from now" if !@event.has_valid_date?
       render :edit
     end
   end

@@ -1,4 +1,8 @@
 
+<% content_for :head do %>
+  <%= javascript_include_tag 'google-places.js' %>
+<% end %>
+
     <%= form_for(@event, url: url, html: { multipart: true }) do |f| %> 
       <%= render "shared/error_messages", object: f.object %>
       <div class="row">
