@@ -35,7 +35,6 @@ class EventsController < ApplicationController
     @category = Category.find(@event.category_id).name
     @comments = @event.comments
     @comment = Comment.new
-    end
   end
 
   def edit
