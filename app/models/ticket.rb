@@ -3,6 +3,10 @@
 class Ticket < ActiveRecord::Base
   include RandomGuid
 
+  validates_presence_of :title, length: { maximum: 100 }
+  # work on validations
+  validates_presence_of :price, numericality: true
+
   before_create :generate_guid
 
   belongs_to :user

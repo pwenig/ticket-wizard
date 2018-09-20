@@ -12,7 +12,7 @@
         <p class="lead center">Created by: <%= link_to @event.user.name, @event.user %></p>
         <br>
         <% if (current_user.id == @event.user_id) && (@event.date > Time.now) %>
-          <p class="lead center" ><%= link_to "Create Tickets", new_event_ticket_path(@event), class: "btn btn-primary", id: "show-edit-button" %></p>
+          <p class="lead center" ><%= link_to "Create Tickets", new_event_ticket_path(@event), class: "btn btn-primary", id: "create-ticket-button" %></p>
         <% end %>
         <% if @tickets.empty? %>
           <h3 class="center" class="wrap"> No Tickets</h3>

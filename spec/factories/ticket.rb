@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :ticket do
-    title { "General Admission" }
+    title { "VIP" }
     price { 10.00 }
     description { "All ages" }
     qty_available { 100 }

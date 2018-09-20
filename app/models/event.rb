@@ -35,7 +35,7 @@ class Event < ActiveRecord::Base
   end
 
   # Add a guid with before_create and use that for the :id
-  #Stub google api query
+  # Stub google api query
 
   def self.search(params)
     params[:category].to_i != 0 ? events = Event.where(category_id: params[:category].to_i) : events = Event.all

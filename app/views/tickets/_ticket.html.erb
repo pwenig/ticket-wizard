@@ -6,8 +6,8 @@
       <h4 class="center"><%= number_to_currency(ticket.price, :precision => 2) %></h4>
       <br>
       <div class="btn-group#tickets center">
-        <%= link_to "Details", event_ticket_path(ticket.event.id, ticket.id), :class => "btn btn-primary" %>
-        <%= link_to "Edit", edit_event_ticket_path(ticket.event.id, ticket.id), :class => "btn btn-primary" %>
+        <%= link_to "Details", event_ticket_path(ticket.event, ticket), :class => "btn btn-primary", :id => "ticket_detail" %>
+        <%= link_to "Edit", edit_event_ticket_path(ticket.event, ticket), :class => "btn btn-primary", :id => "ticket_edit" %>
       </div>
     </div>
   </div>

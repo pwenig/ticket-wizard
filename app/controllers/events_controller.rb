@@ -22,7 +22,6 @@ class EventsController < ApplicationController
     if @event.save && @event.has_valid_date?
       current_user.attend(@event)
       flash[:success] = "Event Created"
-
       redirect_to new_event_ticket_path(@event)
       # redirect_to @event
     else
@@ -36,9 +35,6 @@ class EventsController < ApplicationController
     @category = Category.find(@event.category_id).name
     @comments = @event.comments
     @comment = Comment.new
-    @hash = Gmaps4rails.build_markers(@event) do |event, marker|
-      marker.lat event.latitude
-      marker.lng event.longitude
     end
   end
 
@@ -52,7 +48,7 @@ class EventsController < ApplicationController
     authorized?(@event)
     @event.category_id = params[:category_id].to_i
     if @event.update(event_params) && @event.has_valid_date?
-      flash[:success] = "Event Updated"
+      flash[:success] = "Event Updated!"
       redirect_to @event
     else
       flash.now[:danger] = "Event date must be 1 or more days ahead from now" if !@event.has_valid_date?
@@ -68,13 +64,7 @@ class EventsController < ApplicationController
     redirect_to current_user
   end
 
-# def attendees
-#   @event = Event.find(params[:id])
-#   @users = @event.attendees.paginate(page: params[:page])
-# end
-
 private
-
   def event_params
     params.require(:event).permit(:title, :description, :date, :category_id, :picture, :address, :latitude, :longitude)
   end
