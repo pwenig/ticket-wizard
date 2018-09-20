@@ -8,6 +8,7 @@
       <div class="btn-group#tickets center">
         <%= link_to "Details", event_ticket_path(ticket.event, ticket), :class => "btn btn-primary", :id => "ticket_detail" %>
         <%= link_to "Edit", edit_event_ticket_path(ticket.event, ticket), :class => "btn btn-primary", :id => "ticket_edit" %>
+        <%= link_to "Delete", event_ticket_path(ticket.event, ticket), method: :delete, data: { confirm: "Are you sure?" }, :class => "btn btn-primary", :id => "delete_ticket" %>
       </div>
     </div>
   </div>

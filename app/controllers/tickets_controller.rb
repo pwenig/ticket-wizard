@@ -47,7 +47,14 @@ class TicketsController < ApplicationController
     end
   end
 
-  # Do I need delete? If no purchaes
+  # Add check to see if tickets have been sold
+  def destroy
+    @ticket = Ticket.find(params[:id])
+    authorized?(@ticket)
+    @ticket.destroy
+    flash[:success] = "Ticket Deleted"
+    redirect_to event_tickets_path
+  end
 
   private
 
