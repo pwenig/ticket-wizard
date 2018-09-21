@@ -2,6 +2,7 @@
 
 class EventsController < ApplicationController
   before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy]
+  before_action :store_location, only: [:show]
 
   def index
     @categories = Category.all
@@ -26,6 +27,11 @@ class EventsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def store_location
+    # store last url as long as it isn't a /users path
+    session[:previous_url] = request.fullpath unless request.fullpath =~ /\/users/
   end
 
   def show
