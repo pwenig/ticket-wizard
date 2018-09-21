@@ -1,4 +1,4 @@
-<div class="col-sm-4 col-lg-4 col-md-4" onclick="document.location='<%= event_path(event.id)%>'" style="cursor: pointer;">
+<div class="col-sm-4 col-lg-4 col-md-4" onclick="document.location='<%= event_path(event.id, :key => event.event_guid) %>'" style="cursor: pointer;">
             <div class="thumbnail">
               <% if event.picture? %>
                 <%= image_tag event.picture.thumb.url, class: "img-responsive", id: "event-thumbnail", alt: event.picture %>
@@ -6,7 +6,7 @@
                 <%= image_tag "event-index-default.jpg", alt: "default-image", id: "event-thumbnail" %>
               <% end %>
               <div class="caption">
-                <h4 class="wrap"><%= link_to event.title, event_path(event.id) %></h4>
+                <h4 class="wrap"><%= link_to event.title, event_path(event.id, :key => event.event_guid) %></h4>
                 <p>Created by: <%= link_to event.user.name, event.user %><br>
                 <%= event.date.strftime("Date: %a, %b %d %Y") %><br>
                 <%= event.date.strftime("Time: %I : %M %p") %><br>

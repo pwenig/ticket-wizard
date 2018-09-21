@@ -51,7 +51,7 @@ RSpec.describe "Events", type: :feature do
   end
 
   it "should edit an event" do
-    visit edit_event_path(upcoming_event)
+    visit edit_event_path(upcoming_event, key: upcoming_event.event_guid)
     expect(page.text).to include("Edit Event")
     fill_in("event_title", with: "Folk Festival Updated")
     click_on "edit_button"
@@ -60,10 +60,20 @@ RSpec.describe "Events", type: :feature do
 
   it "should not edit an event with invalid date" do
     current_day = Date.today.strftime("%d")
-    visit edit_event_path(upcoming_event)
+    visit edit_event_path(upcoming_event, key: upcoming_event.event_guid)
     expect(page.text).to include("Edit Event")
     select(current_day, from: "event_date_3i")
     click_on "edit_button"
     expect(page.text).to include("Date must be 1 or more days ahead from now")
+  end
+
+  it "should redirect to root path with invalid event key - show" do
+    visit event_path(upcoming_event, key: "foo")
+    expect(current_path).to eq(root_path)
+  end
+
+  it "should redirect to root path with invalid event key - edit" do
+    visit edit_event_path(upcoming_event, key: "foo")
+    expect(current_path).to eq(root_path)
   end
 end

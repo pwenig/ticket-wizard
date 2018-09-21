@@ -12,7 +12,7 @@ RSpec.describe "Tickets", type: :feature do
   end
 
   it "should create a ticket for an event" do
-    visit event_tickets_path(event)
+    visit event_tickets_path(event, key: event.event_guid)
     expect(page.text).to include(event.title)
     expect(page.text).to include("Create Tickets")
     click_on("create-ticket-button")
@@ -28,7 +28,7 @@ RSpec.describe "Tickets", type: :feature do
   end
 
   it "should not create a ticket for an event with errors" do
-    visit event_tickets_path(event)
+    visit event_tickets_path(event, key: event.event_guid)
     expect(page.text).to include(event.title)
     expect(page.text).to include("Create Tickets")
     click_on("create-ticket-button")
@@ -44,7 +44,7 @@ RSpec.describe "Tickets", type: :feature do
 
 
   it "should show details of a ticket" do
-    visit event_tickets_path(event)
+    visit event_tickets_path(event, key: event.event_guid)
     expect(page.text).to include("VIP")
     click_on("ticket_detail")
     expect(current_path).to eq(event_ticket_path(vip_ticket.event, vip_ticket))
@@ -53,7 +53,7 @@ RSpec.describe "Tickets", type: :feature do
   end
 
   it "should edit a ticket" do
-    visit event_tickets_path(event)
+    visit event_tickets_path(event, key: event.event_guid)
     expect(page.text).to include("VIP")
     click_on("ticket_edit")
     expect(current_path).to eq(edit_event_ticket_path(vip_ticket.event, vip_ticket))
@@ -65,7 +65,7 @@ RSpec.describe "Tickets", type: :feature do
   end
 
   it "should not edit a ticket with errors" do
-    visit event_tickets_path(event)
+    visit event_tickets_path(event, key: event.event_guid)
     expect(page.text).to include("VIP")
     click_on("ticket_edit")
     expect(current_path).to eq(edit_event_ticket_path(vip_ticket.event, vip_ticket))
@@ -75,4 +75,23 @@ RSpec.describe "Tickets", type: :feature do
     expect(page.text).to include("Price is not a number")
   end
 
+  it "should redirect to root path with invalid event key - index" do
+    visit event_tickets_path(event, key: "foo")
+    expect(current_path).to eq(root_path)
+  end
+
+  it "should redirect to root path with invalid event key - show" do
+    visit event_ticket_path(event, vip_ticket, key: "foo")
+    expect(current_path).to eq(root_path)
+  end
+
+  it "should redirect to root path with invalid event key - edit" do
+    visit edit_event_ticket_path(event, vip_ticket, key: "foo")
+    expect(current_path).to eq(root_path)
+  end
+
+  it "should redirect to root path with invalid event key - new" do
+    visit new_event_ticket_path(event, vip_ticket, key: "foo")
+    expect(current_path).to eq(root_path)
+  end
 end

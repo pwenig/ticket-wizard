@@ -17,7 +17,7 @@ RSpec.describe RandomGuid, type: :concern do
   describe "#create_guid" do
     let(:model) { sample_class.new }
     it "generates a random guid" do
-      regex = /^[a-zA-Z0-9]{0,6}$/
+      regex = /^[a-zA-Z0-9]{0,8}$/
       result = model.create_guid
       expect(result).to match(regex)
     end

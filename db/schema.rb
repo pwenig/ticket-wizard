@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_18_213113) do
+ActiveRecord::Schema.define(version: 2018_09_20_200446) do
 
   create_table "attends", force: :cascade do |t|
     t.integer "attendee_id"
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 2018_09_18_213113) do
     t.float "longitude"
     t.string "address"
     t.integer "category_id"
+    t.string "event_guid"
     t.index ["category_id"], name: "index_events_on_category_id"
     t.index ["user_id"], name: "index_events_on_user_id"
   end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Geocoder.configure(
 #   # Geocoding options
 #   timeout: 7,           # geocoding service timeout (secs)

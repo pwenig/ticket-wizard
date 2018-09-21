@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Event < ActiveRecord::Base
+  include RandomGuid
+
   default_scope -> { order(date: :asc) }
   mount_uploader :picture, PictureUploader
   belongs_to :user
@@ -18,6 +20,7 @@ class Event < ActiveRecord::Base
   before_save :exclude_united_states_text_from_address
   geocoded_by :address
   before_save :geocode, if: :address_changed?
+  before_create :generate_guid
 
   def self.upcoming
     Event.where("date > ?", Time.now)
@@ -34,7 +37,7 @@ class Event < ActiveRecord::Base
   def has_valid_date?
     if self.date
       self.date < Time.now.advance(days: 1) ? false : true
-    end 
+    end
   end
 
   # Add a guid with before_create and use that for the :id
@@ -67,5 +70,9 @@ private
 
   def exclude_united_states_text_from_address
     self.address = address.gsub!(/(united states)/i, " ").strip!.chomp!(",") if address.downcase.include?("united states")
+  end
+
+  def generate_guid
+    self.event_guid = create_guid
   end
 end

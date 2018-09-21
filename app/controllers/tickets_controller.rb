@@ -4,13 +4,21 @@ class TicketsController < ApplicationController
   before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy]
 
   def index
-    @event = Event.find(params[:event_id])
-    @tickets = @event.tickets.paginate(page: params[:page], per_page: 12)
+    @event = Event.where(id: params[:event_id], event_guid: params[:key]).first
+    if @event
+      @tickets = @event.tickets.paginate(page: params[:page], per_page: 12)
+    else
+      redirect_to root_path
+    end
   end
 
   def new
-    @event = Event.find(params[:event_id])
-    @ticket = Ticket.new
+    @event = Event.where(id: params[:event_id], event_guid: params[:key]).first
+    if @event
+      @ticket = Ticket.new
+    else
+      redirect_to root_path
+    end
   end
 
   def create
@@ -19,20 +27,30 @@ class TicketsController < ApplicationController
     @ticket.event_id = params[:event_id].to_i
     if @ticket.save
       flash[:success] = "Ticket Created"
-      redirect_to event_tickets_path(params[:event_id])
+      redirect_to event_tickets_path(params[:event_id], key: @event.event_guid)
     else
       render :new
     end
   end
 
   def show
-    @ticket = Ticket.find(params[:id])
-    @ticket.onsale_start ? @days_remaining = (@ticket.onsale_end - @ticket.onsale_start).to_i / 86400 : 0
+    @event = Event.where(id: params[:event_id], event_guid: params[:key]).first
+    if @event
+      @ticket = Ticket.find(params[:id])
+      @ticket.onsale_start ? @days_remaining = (@ticket.onsale_end - @ticket.onsale_start).to_i / 86400 : 0
+    else
+      redirect_to root_path
+    end
   end
 
   def edit
-    @ticket = Ticket.find(params[:id])
-    authorized?(@ticket.event)
+    @event = Event.where(id: params[:event_id], event_guid: params[:key]).first
+    if @event
+      @ticket = Ticket.find(params[:id])
+      authorized?(@ticket.event)
+    else
+      redirect_to root_path
+    end
   end
 
   def update
@@ -41,7 +59,7 @@ class TicketsController < ApplicationController
     authorized?(@ticket.event)
     if @ticket.update(ticket_params)
       flash[:success] = "Ticket Updated!"
-      redirect_to event_tickets_path
+      redirect_to event_tickets_path(params[:event_id], key: @event.event_guid)
     else
       render :edit
     end
@@ -53,7 +71,7 @@ class TicketsController < ApplicationController
     authorized?(@ticket)
     @ticket.destroy
     flash[:success] = "Ticket Deleted"
-    redirect_to event_tickets_path
+    redirect_to event_tickets_path(params[:event_id], key: params[:key])
   end
 
   private

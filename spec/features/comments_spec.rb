@@ -25,10 +25,10 @@ RSpec.describe "Comments", type: :feature do
     click_on "Folk Festival"
     fill_in("comment_body", with: "This is going to be great!")
     click_on "Submit"
-    visit event_path(upcoming_event.id)
+    visit event_path(upcoming_event.id, key: upcoming_event.event_guid)
     expect(page.text).to include("This is going to be great!")
     click_on "Delete"
-    visit event_path(upcoming_event.id)
+    visit event_path(upcoming_event.id, key: upcoming_event.event_guid)
     expect(page.text).to_not include("This is going to be great!")
   end
 end
