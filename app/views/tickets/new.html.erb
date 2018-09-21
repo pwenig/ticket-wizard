@@ -1,0 +1,13 @@
+  <% provide(:title, "Create Tickets") %> 
+  
+  <div class="container text-center">
+    <div class="row">
+      <h2>Create Tickets for: </h2>
+      <h3><%= @event.title %></h3>
+      <h3><%= @event.date.strftime("%A %b. %e, %Y %l:%M %p") %></h3>
+      <h3><%= @event.address %></h3>
+
+      <hr> 
+    </div> 
+    <%= render "ticket_form", url: event_tickets_path, button: "Create Ticket", id: "create_button" %>
+  </div>

@@ -11,7 +11,7 @@
  	* file per style scope.
  	*
  	*= require_tree .
- 	*= require_self
+	*= require_self
  	*/
 
  	@import "font-awesome-sprockets";
@@ -36,4 +36,19 @@
 	}
 	textarea{
 	  resize: none;
+	}
+
+	img.img-responsive {
+			display: inline;
+	}
+
+	p.lead.wrap {
+		margin-left: 150px;
+	}
+	.thumbnail.ticket {
+		background-color: lightgreen;
+	}
+
+	.caption.ticket {
+		height: 250px;
 	}

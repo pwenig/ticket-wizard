@@ -1,0 +1,9 @@
+ <% provide(:title, "Edit Ticket") %> 
+
+  <div class="container text-center">
+    <div class="row">
+      <h3>Edit Ticket</h3>
+      <hr> 
+    </div> 
+    <%= render "ticket_form", url: event_ticket_path, button: "Edit Ticket", id: 'edit_button' %>
+  </div>

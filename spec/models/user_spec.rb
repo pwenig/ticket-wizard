@@ -6,7 +6,6 @@ RSpec.describe User, type: :model do
   let(:user) { create(:user, name: "New User") }
   let(:category) { create(:category) }
   let(:event) { create(:event, category_id: category.id, user_id: user.id) }
-  let(:past_event) { create(:event, date: "#{Time.now - 2.week.to_i}", category_id: category.id, user_id: user.id) }
 
   it "creates a user" do
     expect(user.name).to eq("New User")
@@ -72,11 +71,5 @@ RSpec.describe User, type: :model do
     expect(user.active_attends.length).to eq(1)
     upcoming_events = user.upcoming_events
     expect(upcoming_events).to eq([event])
-  end
-
-  it "returns past events for a user" do
-    user.attend(past_event)
-    past_events = user.past_events
-    expect(past_events).to eq([past_event])
   end
 end

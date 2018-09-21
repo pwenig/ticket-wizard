@@ -13,4 +13,3 @@
 //= require rails-ujs
 //= require bootstrap
 //= require underscore
-//= require gmaps/google

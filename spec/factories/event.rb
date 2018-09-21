@@ -6,6 +6,7 @@ FactoryBot.define do
     description { "Great rock show" }
     address { "1400 Pearl St, Boulder, CO" }
     date { "#{Time.now + 2.week.to_i}" }
+    event_guid { SecureRandom.base64.delete("/+=")[0, 8] }
     category
     user
 
