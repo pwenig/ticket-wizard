@@ -101,7 +101,8 @@ aside {
   background-color: transparent;
 }
 #mainNav{
-  background-color: #F05F40;
+  background-image: url(<%= asset_path 'background_image.png' %>);
+  background-size: cover;
 }
 
 header {
@@ -295,8 +296,8 @@ fieldset[disabled] .btn-default.active {
 }
 .btn-primary {
   color: white;
-  background-color: #F05F40;
-  border-color: #F05F40;
+  background-color: #772E86;
+  border-color: #772E86;
   -webkit-transition: all 0.35s;
   -moz-transition: all 0.35s;
   transition: all 0.35s;
@@ -308,8 +309,8 @@ fieldset[disabled] .btn-default.active {
 .btn-primary.active,
 .open > .dropdown-toggle.btn-primary {
   color: white;
-  background-color: #ee4b28;
-  border-color: #ed431f;
+  background-color: #984CA4;
+  border-color: #984CA4;
 }
 .btn-primary:active,
 .btn-primary.active,
@@ -380,6 +381,7 @@ body {
 }
 #copyright, #social-links{
   margin-top: 20px;
+  margin-left: 20px;
 }
 #social-links{
   margin-bottom: 30px;

@@ -44,6 +44,7 @@ class User < ApplicationRecord
   end
 
   # Returns user's past events
+  # UPDATE THIS TO INCLUDE PAST ATTENDED? CREATED?
   def past_events
     events.where("date < ?", Time.now)
   end
