@@ -1,15 +1,15 @@
+# frozen_string_literal: true
 
 require "rails_helper"
 
 RSpec.describe Comment, type: :model do
-
-  it "belongs to a user" do 
+  it "belongs to a user" do
     should belong_to(:user)
-  end 
+  end
 
-  it "belongs to an event" do 
+  it "belongs to an event" do
     should belong_to(:event)
-  end 
+  end
 
   it "should validate :user_id required" do
     should validate_presence_of(:user_id)
