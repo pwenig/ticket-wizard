@@ -19,7 +19,7 @@ RSpec.describe "Events", type: :feature do
     expect(page.text).to include("Folk Festival")
   end
 
-  it "should display filteredevents" do
+  it "should display filtered events" do
     visit events_path
     select("Art", from: "Category")
     click_on "Search"

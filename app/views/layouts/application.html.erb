@@ -4,7 +4,7 @@
 
   <%= favicon_link_tag 'favicon.ico' %>
 
-  <title>Ticket Weeb | <%= yield(:title) %></title>
+  <title>Ticket Wizard | <%= yield(:title) %></title>
 
   <!-- Meta Tags -->
   <meta charset="utf-8">
@@ -39,13 +39,13 @@
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
           <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
         </button>
-        <%= link_to "Ticket Weeb", root_path, class: "navbar-brand page-scroll", style: "color: white;" %>
+        <%= link_to "Ticket-Wizard", root_path, class: "navbar-brand page-scroll", style: "color: white;" %>
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
           <li><%= link_to "Home", root_path %></li>
-          <li><%= link_to "Events", events_path %></li>
           <% if current_user %>
+            <%# link_to "Events", events_path %>
             <li><%= link_to "Create Event", create_event_path %></li>
             <li><%= link_to "Profile", current_user %></li>
             <li><%= link_to "Sign Out", logout_path, method: "delete", id: 'signout_link' %></li>
@@ -63,9 +63,9 @@
   <%= yield %>
 
   <!-- Footer -->
-  <div class="container">
+  <div class="container#footer">
     <footer>
-      <div class="navbar-header" id="copyright">
+      <div class="navbar-footer" id="copyright">
         Copyright © <a href="http://www.sugarmountain-software.com/" target="blank" >Sugar Mountain Software</a>, All Rights Reserved
       </div>
     </footer>

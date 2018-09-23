@@ -30,6 +30,14 @@ class Event < ActiveRecord::Base
     Event.where("date < ?", Time.now)
   end
 
+  def self.user_created_events(user)
+    Event.where(user_id: user.id)
+  end
+
+  def self.user_events(user)
+    Event.all.select{ |x| x.attendees.include?(user)}
+  end   
+
   # def self.featured(visitor_latitude, visitor_longitude)
   #   Event.upcoming.near([visitor_latitude, visitor_longitude], 20).limit(6)
   # end
@@ -39,8 +47,6 @@ class Event < ActiveRecord::Base
       self.date < Time.now.advance(days: 1) ? false : true
     end
   end
-
-  # Add a guid with before_create and use that for the :id
 
   def self.search(params)
     params[:category].to_i != 0 ? events = Event.where(category_id: params[:category].to_i) : events = Event.all

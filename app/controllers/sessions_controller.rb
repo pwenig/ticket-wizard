@@ -19,6 +19,7 @@ class SessionsController < ApplicationController
 
   def destroy
     log_out
+    session[:previous_url] = nil
     redirect_to root_path
   end
 end

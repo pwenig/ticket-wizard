@@ -10,9 +10,8 @@ RSpec.describe "Comments", type: :feature do
 
   it "should create a comment" do
     sign_in_user(user)
-    visit events_path
+    visit event_path(upcoming_event, key: upcoming_event.event_guid)
     expect(page.text).to include("Folk Festival")
-    click_on "Folk Festival"
     fill_in("comment_body", with: "This is going to be great!")
     click_on "Submit"
     expect(page.text).to include("This is going to be great!")
@@ -20,11 +19,11 @@ RSpec.describe "Comments", type: :feature do
 
   it "should delete a comment" do
     sign_in_user(user)
-    visit events_path
+    visit event_path(upcoming_event, key: upcoming_event.event_guid)
     expect(page.text).to include("Folk Festival")
-    click_on "Folk Festival"
     fill_in("comment_body", with: "This is going to be great!")
     click_on "Submit"
+    expect(page.text).to include("This is going to be great!")
     visit event_path(upcoming_event.id, key: upcoming_event.event_guid)
     expect(page.text).to include("This is going to be great!")
     click_on "Delete"

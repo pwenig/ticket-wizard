@@ -10,10 +10,7 @@ RSpec.describe "Event Attending", type: :feature do
 
   it "should attend an event" do
     sign_in_user(user)
-    visit events_path
-    expect(page.text).to include("Upcoming Events")
-    expect(page.text).to include("Folk Festival")
-    click_on "Folk Festival"
+    visit event_path(upcoming_event, key: upcoming_event.event_guid)
     click_on "Attend Event"
     expect(page.text).to include("Confirmed.")
     expect(page.text).to include ("Events You're Attending")
@@ -22,18 +19,15 @@ RSpec.describe "Event Attending", type: :feature do
 
   it "should unattend an event" do
     sign_in_user(user)
-    visit events_path
-    expect(page.text).to include("Upcoming Events")
-    expect(page.text).to include("Folk Festival")
-    click_on "Folk Festival"
+    visit event_path(upcoming_event, key: upcoming_event.event_guid)
     click_on "Attend Event"
-    expect(page.text).to include("Confirmed")
+    expect(page.text).to include("Confirmed.")
     expect(page.text).to include ("Events You're Attending")
     expect(page.text).to include("Folk Festival")
     click_on "Folk Festival"
     click_on "Unattend Event"
     expect(page.text).to include("Confirmed. You are no longer attending Folk Festival")
-    expect(page.text).to include ("Events You're Attending")
+    expect(page.text).to_not include ("Events You're Attending")
     visit user_path(user.id)
     expect(page.text).to_not include("Folk Festival")
   end

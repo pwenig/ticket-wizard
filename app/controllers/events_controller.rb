@@ -4,12 +4,14 @@ class EventsController < ApplicationController
   before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy]
   before_action :store_location, only: [:show]
 
+  # Remove this if the link is removed
   def index
     @categories = Category.all
     if params[:category]
       @events =  Event.search(params).paginate(page: params[:page], per_page: 12)
     else
-      @events =  Event.upcoming.paginate(page: params[:page], per_page: 12)
+      @created_events = Event.user_created_events(current_user).paginate(page: params[:page], per_page: 12)
+      @events = Event.user_events(current_user).paginate(page: params[:page], per_page: 12)
     end
   end
 

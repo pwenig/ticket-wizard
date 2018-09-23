@@ -32,6 +32,7 @@ class UsersController < ApplicationController
       @title = "Events You're Attending"
       @events = @user.attending.where("date > ?", Time.now).paginate(page: params[:page], per_page: 12)
       @display_name = "#{@user.name}'s" if @display_name == "#{@user.name} is"
+      @created_events = Event.user_created_events(@user).paginate(page: params[:page], per_page: 12)
     end
   end
 
