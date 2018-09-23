@@ -1,14 +1,10 @@
 # frozen_string_literal: true
 
 class Ticket < ActiveRecord::Base
-  include RandomGuid
-
   validates :title, presence: true
   validates :price, presence: true
   validates :price, numericality: { only_number: true }
   validate :qty_amount
-  before_create :generate_guid
-  belongs_to :user
   belongs_to :event
 
   def onsale?
@@ -17,10 +13,6 @@ class Ticket < ActiveRecord::Base
 
   def offsale?
     Time.now > self.onsale_end
-  end
-
-  def generate_guid
-    self.ticket_guid = create_guid
   end
 
   def qty_amount

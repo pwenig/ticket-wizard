@@ -2,7 +2,6 @@
 
 class User < ApplicationRecord
   has_many :events, dependent: :destroy
-  has_many :tickets, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :active_attends, class_name: "Attend", foreign_key: "attendee_id", dependent: :destroy
   has_many :attending, through: :active_attends, source: :attended_event

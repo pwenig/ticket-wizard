@@ -18,8 +18,8 @@ class Event < ActiveRecord::Base
   validate :event_date
   before_save :normalize_title
   before_save :exclude_united_states_text_from_address
-  geocoded_by :address
-  before_save :geocode, if: :address_changed?
+  # geocoded_by :address
+  # before_save :geocode, if: :address_changed?
   before_create :generate_guid
 
   def self.upcoming
@@ -35,8 +35,8 @@ class Event < ActiveRecord::Base
   end
 
   def self.user_events(user)
-    Event.all.select{ |x| x.attendees.include?(user)}
-  end   
+    Event.all.select { |x| x.attendees.include?(user) }
+  end
 
   # def self.featured(visitor_latitude, visitor_longitude)
   #   Event.upcoming.near([visitor_latitude, visitor_longitude], 20).limit(6)

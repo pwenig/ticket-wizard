@@ -10,7 +10,7 @@ class AttendsController < ApplicationController
       redirect_to user_path(current_user)
     end
   end
-  
+
   def destroy
     @event = Attend.find(params[:id]).attended_event
     if current_user.unattend(@event)

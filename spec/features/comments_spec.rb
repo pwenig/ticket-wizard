@@ -6,7 +6,7 @@ RSpec.describe "Comments", type: :feature do
   let(:category1) { create(:category) }
   let(:user) { create(:user) }
   let(:user2) { create(:user) }
-  let!(:upcoming_event) { create(:event, title: "Folk Festival", date: "#{Time.now + 2.week.to_i}", category_id: category1.id, user_id: user2.id) }
+  let!(:upcoming_event) { create(:event, title: "Folk Festival", date: "#{Time.now + 2.week.to_i}", category_id: category1.id) }
 
   it "should create a comment" do
     sign_in_user(user)

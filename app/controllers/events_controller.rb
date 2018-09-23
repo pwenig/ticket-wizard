@@ -8,7 +8,7 @@ class EventsController < ApplicationController
   def index
     @categories = Category.all
     if params[:category]
-      @events =  Event.search(params).paginate(page: params[:page], per_page: 12)
+      @events = Event.search(params).paginate(page: params[:page], per_page: 12)
     else
       @created_events = Event.user_created_events(current_user).paginate(page: params[:page], per_page: 12)
       @events = Event.user_events(current_user).paginate(page: params[:page], per_page: 12)
