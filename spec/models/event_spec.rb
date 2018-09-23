@@ -25,6 +25,14 @@ RSpec.describe Event, type: :model do
     should have_many(:attendees)
   end
 
+  it "should have many tickets" do
+    should have_many(:tickets)
+  end
+
+  it "should have many purchased_tickets" do
+    should have_many(:purchased_tickets)
+  end
+
   it "should have many comments" do
     should have_many(:comments)
   end

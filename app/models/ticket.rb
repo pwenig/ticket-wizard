@@ -6,6 +6,7 @@ class Ticket < ActiveRecord::Base
   validates :price, numericality: { only_number: true }
   validate :qty_amount
   belongs_to :event
+  has_many :purchased_tickets, dependent: :destroy
 
   def onsale?
     self.onsale_start < Time.now

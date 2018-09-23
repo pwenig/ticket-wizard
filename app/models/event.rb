@@ -7,6 +7,7 @@ class Event < ActiveRecord::Base
   mount_uploader :picture, PictureUploader
   belongs_to :user
   has_many :tickets, dependent: :destroy
+  has_many :purchased_tickets, dependent: :destroy
   has_many :passive_attends, class_name: "Attend", foreign_key: "attended_event_id", dependent: :destroy
   has_many :attendees, through: :passive_attends, source: :attendee
   has_many :comments, dependent: :destroy
