@@ -4,6 +4,7 @@ class EventsController < ApplicationController
   before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy]
   before_action :store_location, only: [:show]
 
+  # Remove this if the link is removed
   def index
     @categories = Category.all
     if params[:category]
