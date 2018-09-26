@@ -3,6 +3,9 @@
 class AttendsController < ApplicationController
   before_action :logged_in_user
 
+  # May not need this if PurchasedTicktets Controller and views are used.
+
+  # http://localhost:3000/events/12?key=CbPXPkHE
   def create
     @event = Event.find(params[:attended_event_id])
     if current_user.attend(@event)

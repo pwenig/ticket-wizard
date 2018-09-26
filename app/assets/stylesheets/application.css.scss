@@ -52,3 +52,12 @@
 	.caption.ticket {
 		height: 250px;
 	}
+
+	section#tickets.container {
+		background-color: lightgray;
+	}
+
+	form#new_purchased_ticket {
+		margin-top: 20px;
+		font-size: 18px;
+	}

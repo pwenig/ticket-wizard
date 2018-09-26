@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   resources :events do
     resources :comments
     resources :tickets
+    resources :purchased_tickets, :path => 'get-tickets'
     member do
       get :attendees
     end
