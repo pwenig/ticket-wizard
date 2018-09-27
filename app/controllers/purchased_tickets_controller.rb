@@ -1,5 +1,6 @@
-class PurchasedTicketsController < ApplicationController
+# frozen_string_literal: true
 
+class PurchasedTicketsController < ApplicationController
   def new
     @event = Event.where(id: params[:event_id], event_guid: params[:key]).first
     if @event
@@ -10,7 +11,5 @@ class PurchasedTicketsController < ApplicationController
   end
 
   def create
-
-  end 
-
-end 
+  end
+end

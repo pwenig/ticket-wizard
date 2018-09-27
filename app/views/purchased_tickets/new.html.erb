@@ -10,7 +10,7 @@
   <br>
   <div class="row">
      <div class="col-lg-6 col-lg-offset-3">
-      <%= form_for(@purchased_ticket, url: event_purchased_tickets_path, html: { multipart: true }) do |f| %> 
+      <%= form_for(@purchased_ticket, url: new_charge_path, html: { multipart: true }) do |f| %> 
         <div class="row center">
           <div class="table">
             <tbody>
@@ -24,7 +24,8 @@
                     
                     <%= number_to_currency(ticket.price, :precision => 2) || 0 %>
                       <span style="margin-left: 10px">
-                        <%= select("#{ticket.title}", "ticket_qty", 0..30, {:include_blank => true}) %>
+                      <%= label "Ticket Quantity", "" %>
+                        <%= select_tag "ticket_id_#{ticket.id}", options_for_select(0..30), :selected => 0 %>
                       </span>
                     </span>
                   </td>
@@ -34,6 +35,7 @@
                     </td>
                   <br>
                 </tr>
+                <%= hidden_field_tag 'event_id', @event.id %>
                 <hr>
               <% end %>
               <%= f.submit "Next", class: "btn btn-primary" %>

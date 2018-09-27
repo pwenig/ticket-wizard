@@ -31,7 +31,7 @@
         <% elsif @event.date > Time.now %>  
           <div id="attend_form" >
             <% if current_user.attending?(@event) %>
-            <p>Link to Ticket Info</p>
+            <p>Link to Ticket Info -- CHANGE THIS</p>
               <%= render "unattend" %>
             <% else %>
               <p class="lead center" ><%= link_to "Get Tickets", new_event_purchased_ticket_path(@event, :key => @event.event_guid), class: "btn btn-primary", id: "get-tickets-button" %></p>

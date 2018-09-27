@@ -1,0 +1,46 @@
+<section id="tickets" class="container">
+
+  <div class="row">
+      <div class="col-lg-6 col-lg-offset-3">
+        <h1 class="center"><%= @total_tickets %> <%= @ticket %> for: </h1>
+        <h2 class="center"><%= @event.title %></h2>
+        <h3 class="center"><%= @event.address %></h3>
+        <h3 class="center"><%= @event.date.strftime("%a, %b %d %Y %I : %M %p") %></h3>
+      </div>
+    </div>
+  <div class="row">
+     <div class="col-lg-6 col-lg-offset-3">
+        <div class="row center">
+          <div class="table">
+            <tbody>
+              <%= form_tag charges_path do %>
+              <article>
+                <% if flash[:error].present? %>
+                  <div id="error_explanation">
+                    <p><%= flash[:error] %></p>
+                  </div>
+                <% end %>
+                <label class="amount">
+                  <h3>Total Amount: <%= number_to_currency(@total_price, :precision => 2) %></h3>
+                </label>
+              </article>
+
+              <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                      data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                      data-description="Tickets"
+                      data-amount=""
+                      data-locale="auto"></script>
+            <% end %>
+
+            </tbody>
+          </div>
+        </div>
+  </div>
+</section>
+
+
+
+
+
+
+
