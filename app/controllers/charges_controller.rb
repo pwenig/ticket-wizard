@@ -22,8 +22,13 @@ class ChargesController < ApplicationController
         description: "Tickets for #{event.title}",
         currency: "usd"
       )
-      
-      # Create the PurchasedTicket
+      purchased_tickets = session[:purchased_tickets]
+      ticket_details = {
+        user: current_user,
+        event: event,
+        tickets: purchased_tickets
+      }
+      PurchasedTicket.create_ticket(ticket_details)
       current_user.attend(event)
       # Send email with tickets
 
@@ -46,14 +51,17 @@ class ChargesController < ApplicationController
   def calculate
     prices = []
     amounts = []
+    purchased_tickets = []
     @event = Event.find(params[:event_id])
     tickets = @event.tickets
     tickets.each do |ticket|
       if params["ticket_id_#{ticket.id}"] != "0"
+        purchased_tickets << params.to_unsafe_h.slice("ticket_id_#{ticket.id}")
         amounts << params["ticket_id_#{ticket.id}"].to_i
         prices << (params["ticket_id_#{ticket.id}"].to_i * ticket.price).to_i
       end
     end
+    session[:purchased_tickets] = purchased_tickets
     @total_price = prices.inject(0, :+)
     @total_tickets = amounts.inject(0, :+)
     if @total_tickets == 0
@@ -71,5 +79,6 @@ class ChargesController < ApplicationController
     session.delete(:price)
     session.delete(:total_price)
     session.delete(:event)
+    session.delete(:purchased_tickets)
   end
 end
