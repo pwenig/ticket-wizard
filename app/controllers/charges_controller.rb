@@ -1,14 +1,11 @@
 # frozen_string_literal: true
 
 class ChargesController < ApplicationController
-
   def new
   end
 
-  # http://localhost:3000/events/12?key=CbPXPkHE
-
   def create
-    event = Event.find(session[:event]['id'])
+    event = Event.find(session[:event]["id"])
     Charge.set_user_keys
     begin
       amount = session[:price]

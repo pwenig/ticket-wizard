@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 2018_09_23_182024) do
   create_table "purchased_tickets", force: :cascade do |t|
     t.string "ticket_guid"
     t.boolean "redeemed", default: false, null: false
+    t.string "barcode"
     t.integer "event_id"
     t.integer "ticket_id"
     t.integer "user_id"

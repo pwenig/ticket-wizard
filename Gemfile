@@ -26,6 +26,7 @@ gem "gmaps4rails"
 gem "i18n"
 gem "rubocop-rails_config"
 gem "stripe"
+gem "rqrcode"
 
 # Suite of testing facilities supporting TDD, BDD, mocking, and benchmarking
 gem "minitest", "~> 5.10", "!= 5.10.2"

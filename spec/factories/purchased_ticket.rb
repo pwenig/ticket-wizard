@@ -4,6 +4,7 @@ FactoryBot.define do
   factory :purchased_ticket do
     ticket_guid { SecureRandom.base64.delete("/+=")[0, 8] }
     redeemed { false }
+    barcode { nil }
     event
     ticket
     user
