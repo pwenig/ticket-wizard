@@ -5,7 +5,7 @@ class PurchasedTicket < ActiveRecord::Base
 
   include RandomGuid
 
-  # has_one_attached :barcode
+  has_one_attached :barcode
   belongs_to :user
   belongs_to :event
   belongs_to :ticket
@@ -20,8 +20,10 @@ class PurchasedTicket < ActiveRecord::Base
       ticket.values.first.to_i.times do |t|
         purchased_ticket = PurchasedTicket.new
         guid = purchased_ticket.create_guid
-        barcode_file_path = create_qr_code(guid)
-        PurchasedTicket.create!(event_id: ticket_details[:event].id, ticket_id: ticket_id, user_id: user = ticket_details[:user].id, ticket_guid: guid, barcode: barcode_file_path)
+        barcode_file = create_qr_code(guid)
+        purchased_ticket = PurchasedTicket.create!(event_id: ticket_details[:event].id, ticket_id: ticket_id, user_id: user = ticket_details[:user].id, ticket_guid: guid)
+        purchased_ticket.barcode.attach(io: File.open(barcode_file), filename: "#{guid}.png")
+        File.delete(barcode_file)
       end
     end
   end
@@ -38,10 +40,7 @@ class PurchasedTicket < ActiveRecord::Base
       module_px_size: 6,
       file: nil # path to write
       )
-    file_path = "tmp/qrcodes/#{guid}.png"
-    File.open(file_path, "wb") do |file|
-      file.write(png.to_s)
-    end
-    file_path
+    barcode_file = png.save("#{guid}.png", :interlace => true)
+    barcode_file
   end
 end

@@ -42,7 +42,7 @@ RSpec.describe PurchasedTicket, type: :model do
     expect(purchased_ticket.redeemed).to eq(false)
   end
 
-  it "should create a purchased ticket by calling #create_ticet" do
+  it "should create a purchased ticket by calling #create_ticket" do
     tickets = [{ "ticket_id_#{ticket.id}" => "1" }]
     ticket_details = {
         user: user,
@@ -52,14 +52,14 @@ RSpec.describe PurchasedTicket, type: :model do
     PurchasedTicket.create_ticket(ticket_details)
     result = PurchasedTicket.last
     expect(result.event.title).to eq(event.title)
-    File.delete(result.barcode)
+    FileUtils.rm_rf(Rails.root.join('tmp', 'storage'))
   end
 
-  it "should return a file path for the qrcode by calling #create_qr_code" do
+  it "should return a file for the qrcode by calling #create_qr_code" do
     purchased_ticket = PurchasedTicket.new
     guid = purchased_ticket.create_guid
     result = PurchasedTicket.create_qr_code(guid)
-    expect(result).to eq("tmp/qrcodes/#{guid}.png")
-    File.delete("tmp/qrcodes/#{guid}.png")
+    expect(result.path).to eq("#{guid}.png")
+    File.delete(result)
   end
 end

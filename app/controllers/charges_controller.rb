@@ -7,18 +7,43 @@ class ChargesController < ApplicationController
   def create
     event = Event.find(session[:event]["id"])
     Charge.set_user_keys
-    begin
-      amount = session[:price]
-      customer = Stripe::Customer.create(
-        email: params[:stripeEmail],
-        source: params[:stripeToken]
-      )
-      charge = Stripe::Charge.create(
-        customer: customer.id,
-        amount: amount,
-        description: "Tickets for #{event.title}",
-        currency: "usd"
-      )
+    if session[:price] > 0
+      begin
+        amount = session[:price]
+        customer = Stripe::Customer.create(
+          email: params[:stripeEmail],
+          source: params[:stripeToken]
+        )
+        charge = Stripe::Charge.create(
+          customer: customer.id,
+          amount: amount,
+          description: "Tickets for #{event.title}",
+          currency: "usd"
+        )
+        purchased_tickets = session[:purchased_tickets]
+        ticket_details = {
+          user: current_user,
+          event: event,
+          tickets: purchased_tickets
+        }
+        PurchasedTicket.create_ticket(ticket_details)
+        # Send email with tickets
+
+        flash[:success] = "Thank you. Your tickets will be emailed shortly. You paid $#{session[:total_amount]}."
+        redirect_to user_path(current_user)
+        clear_sessions
+      rescue Stripe::AuthenticationError
+        flash[:error] = "There was an error with the Stripe settings"
+        redirect_to new_charge_path
+      rescue Stripe::CardError => e
+        flash[:error] = "There was a problem with your credit card."
+        redirect_to new_charge_path
+      rescue => exception
+        flash[:error] = "There was an error"
+        redirect_to new_charge_path
+      else
+      end
+    else 
       purchased_tickets = session[:purchased_tickets]
       ticket_details = {
         user: current_user,
@@ -26,23 +51,11 @@ class ChargesController < ApplicationController
         tickets: purchased_tickets
       }
       PurchasedTicket.create_ticket(ticket_details)
-      current_user.attend(event)
-      # Send email with tickets
-
-      flash[:success] = "Thank you. Your tickets will be emailed shortly. You paid $#{session[:total_amount]}."
+      flash[:success] = "Thank you. Your tickets will be emailed shortly."
       redirect_to user_path(current_user)
+      # Send email with tickets
       clear_sessions
-    rescue Stripe::AuthenticationError
-      flash[:error] = "There was an error with the Stripe settings"
-      redirect_to new_charge_path
-    rescue Stripe::CardError => e
-      flash[:error] = "There was a problem with your credit card."
-      redirect_to new_charge_path
-    rescue => exception
-      flash[:error] = "There was an error"
-      redirect_to new_charge_path
-    else
-    end
+    end 
   end
 
   def calculate
