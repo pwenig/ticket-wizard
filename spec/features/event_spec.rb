@@ -45,7 +45,7 @@ RSpec.describe "Events", type: :feature do
     fill_in("event_title", with: "Heavy Metal Concert")
     fill_in("event_description", with: "Loud event")
     fill_in("txtautocomplete", with: "Boulder Theater")
-    select(current_day, from: "event_date_3i")
+    select(current_day.to_i, from: "event_date_3i")
     click_on "create_button"
     expect(page.text).to include("Date must be 1 or more days ahead from now")
   end
@@ -64,7 +64,7 @@ RSpec.describe "Events", type: :feature do
     visit edit_event_path(upcoming_event, key: upcoming_event.event_guid)
     expect(page.text).to include("Edit Event")
     select(current_month, from: "event_date_2i")
-    select(current_day, from: "event_date_3i")
+    select(current_day.to_i, from: "event_date_3i")
     click_on "edit_button"
     expect(page.text).to include("Date must be 1 or more days ahead from now")
   end
