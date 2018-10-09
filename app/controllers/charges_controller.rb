@@ -43,7 +43,7 @@ class ChargesController < ApplicationController
         redirect_to new_charge_path
       else
       end
-    else 
+    else
       purchased_tickets = session[:purchased_tickets]
       ticket_details = {
         user: current_user,
@@ -55,7 +55,7 @@ class ChargesController < ApplicationController
       redirect_to user_path(current_user)
       # Send email with tickets
       clear_sessions
-    end 
+    end
   end
 
   def calculate

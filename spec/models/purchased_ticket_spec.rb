@@ -52,7 +52,7 @@ RSpec.describe PurchasedTicket, type: :model do
     PurchasedTicket.create_ticket(ticket_details)
     result = PurchasedTicket.last
     expect(result.event.title).to eq(event.title)
-    FileUtils.rm_rf(Rails.root.join('tmp', 'storage'))
+    FileUtils.rm_rf(Rails.root.join("tmp", "storage"))
   end
 
   it "should return a file for the qrcode by calling #create_qr_code" do

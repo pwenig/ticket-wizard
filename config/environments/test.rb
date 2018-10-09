@@ -15,7 +15,7 @@ Rails.application.configure do
   config.eager_load = false
 
 
-# Store uploaded files on the local file system in a temporary directory.
+  # Store uploaded files on the local file system in a temporary directory.
   config.active_storage.service = :test
 
   # Configure static file server for tests with Cache-Control for performance.

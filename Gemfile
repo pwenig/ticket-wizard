@@ -28,7 +28,7 @@ gem "rubocop-rails_config"
 gem "stripe"
 gem "rqrcode"
 gem "aws-sdk-s3", require: false
-gem 'chunky_png', '~> 1.3', '>= 1.3.10'
+gem "chunky_png", "~> 1.3", ">= 1.3.10"
 
 # Suite of testing facilities supporting TDD, BDD, mocking, and benchmarking
 gem "minitest", "~> 5.10", "!= 5.10.2"

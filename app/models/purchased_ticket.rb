@@ -40,7 +40,7 @@ class PurchasedTicket < ActiveRecord::Base
       module_px_size: 6,
       file: nil # path to write
       )
-    barcode_file = png.save("#{guid}.png", :interlace => true)
+    barcode_file = png.save("#{guid}.png", interlace: true)
     barcode_file
   end
 end

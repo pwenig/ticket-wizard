@@ -6,10 +6,3 @@ Rails.configuration.stripe = {
 }
 
 Stripe.api_key = Rails.configuration.stripe[:secret_key]
-
-
-
-# Add Stripe
-# ENV['PUBLISHABLE_KEY_STRIPE_TEST'],
-# ENV['SECRET_KEY_STRIPE_TEST']
-# Currency to user
