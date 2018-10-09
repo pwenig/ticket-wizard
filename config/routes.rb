@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   resources :events do
     resources :comments
     resources :tickets
+    resources :purchased_tickets, path: "get-tickets"
     member do
       get :attendees
     end
@@ -31,4 +32,6 @@ Rails.application.routes.draw do
   resources :events
   resources :attends, only: [:create, :destroy]
   resources :comments, only: [:create, :destroy]
+  resources :charges
+  post "/charges/new", to: "charges#calculate"
 end

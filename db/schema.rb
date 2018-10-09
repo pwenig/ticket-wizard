@@ -10,7 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_20_200446) do
+ActiveRecord::Schema.define(version: 2018_10_08_195610) do
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.integer "record_id", null: false
+    t.integer "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
 
   create_table "attends", force: :cascade do |t|
     t.integer "attendee_id"
@@ -54,6 +75,20 @@ ActiveRecord::Schema.define(version: 2018_09_20_200446) do
     t.index ["user_id"], name: "index_events_on_user_id"
   end
 
+  create_table "purchased_tickets", force: :cascade do |t|
+    t.string "ticket_guid"
+    t.boolean "redeemed", default: false, null: false
+    t.string "barcode"
+    t.integer "event_id"
+    t.integer "ticket_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_purchased_tickets_on_event_id"
+    t.index ["ticket_id"], name: "index_purchased_tickets_on_ticket_id"
+    t.index ["user_id"], name: "index_purchased_tickets_on_user_id"
+  end
+
   create_table "tickets", force: :cascade do |t|
     t.string "title"
     t.decimal "price", precision: 8, scale: 2
@@ -61,14 +96,10 @@ ActiveRecord::Schema.define(version: 2018_09_20_200446) do
     t.text "description"
     t.datetime "onsale_start"
     t.datetime "onsale_end"
-    t.string "ticket_guid"
-    t.boolean "redeemed", default: false
     t.integer "event_id"
-    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_tickets_on_event_id"
-    t.index ["user_id"], name: "index_tickets_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

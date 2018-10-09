@@ -6,7 +6,7 @@ RSpec.describe "Tickets", type: :feature do
   let(:category) { create(:category) }
   let(:user) { create(:user) }
   let!(:event) { create(:event, title: "Folk Festival", date: "#{Time.now + 4.day.to_i}", category_id: category.id, user_id: user.id) }
-  let!(:vip_ticket) { create(:ticket, event_id: event.id, user_id: user.id) }
+  let!(:vip_ticket) { create(:ticket, event_id: event.id) }
   before do
     sign_in_user(user)
   end

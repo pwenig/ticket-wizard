@@ -3,6 +3,8 @@
 class AttendsController < ApplicationController
   before_action :logged_in_user
 
+  # May not need this if PurchasedTicktets Controller and views are used.
+
   def create
     @event = Event.find(params[:attended_event_id])
     if current_user.attend(@event)
@@ -10,7 +12,7 @@ class AttendsController < ApplicationController
       redirect_to user_path(current_user)
     end
   end
-  
+
   def destroy
     @event = Attend.find(params[:id]).attended_event
     if current_user.unattend(@event)

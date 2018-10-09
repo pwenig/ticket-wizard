@@ -6,8 +6,8 @@ RSpec.describe Event, type: :model do
   let(:category1) { create(:category) }
   let(:category2) { create(:category) }
   let(:user) { create(:user) }
-  let!(:upcoming_event) { create(:event, title: "Folk Festival", date: "#{Time.now + 2.week.to_i}", category_id: category1.id, user_id: user.id) }
-  let!(:upcoming_event_SF) { create(:event, title: "Jazz Festival", address: "San Francisco, CA", date: "#{Time.now + 3.week.to_i}", category_id: category2.id, user_id: user.id) }
+  let!(:upcoming_event) { create(:event, title: "Folk Festival", date: "#{Time.now + 2.week.to_i}", category_id: category1.id) }
+  let!(:upcoming_event_SF) { create(:event, title: "Jazz Festival", address: "San Francisco, CA", date: "#{Time.now + 3.week.to_i}", category_id: category2.id) }
 
   it "creates an event" do
     expect(upcoming_event.title).to eq("Folk Festival")
@@ -23,6 +23,14 @@ RSpec.describe Event, type: :model do
 
   it "should have many attendees" do
     should have_many(:attendees)
+  end
+
+  it "should have many tickets" do
+    should have_many(:tickets)
+  end
+
+  it "should have many purchased_tickets" do
+    should have_many(:purchased_tickets)
   end
 
   it "should have many comments" do

@@ -8,9 +8,6 @@ FactoryBot.define do
     qty_available { 100 }
     onsale_start { "#{Time.now}" }
     onsale_end { "#{Time.now + 2.week.to_i}" }
-    ticket_guid { nil }
-    redeemed { false }
-    user
     event
   end
 end

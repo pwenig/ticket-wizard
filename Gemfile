@@ -21,10 +21,14 @@ gem "font-awesome-sass"
 gem "carrierwave", "0.11.2"
 gem "mini_magick", "4.5.1"
 gem "fog", "1.38.0"
-gem "geocoder", "~> 1.5"
+# gem "geocoder", "~> 1.5"
 gem "gmaps4rails"
 gem "i18n"
 gem "rubocop-rails_config"
+gem "stripe"
+gem "rqrcode"
+gem "aws-sdk-s3", require: false
+gem "chunky_png", "~> 1.3", ">= 1.3.10"
 
 # Suite of testing facilities supporting TDD, BDD, mocking, and benchmarking
 gem "minitest", "~> 5.10", "!= 5.10.2"

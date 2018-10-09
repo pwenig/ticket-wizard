@@ -7,6 +7,7 @@ class Event < ActiveRecord::Base
   mount_uploader :picture, PictureUploader
   belongs_to :user
   has_many :tickets, dependent: :destroy
+  has_many :purchased_tickets, dependent: :destroy
   has_many :passive_attends, class_name: "Attend", foreign_key: "attended_event_id", dependent: :destroy
   has_many :attendees, through: :passive_attends, source: :attendee
   has_many :comments, dependent: :destroy
@@ -18,8 +19,8 @@ class Event < ActiveRecord::Base
   validate :event_date
   before_save :normalize_title
   before_save :exclude_united_states_text_from_address
-  geocoded_by :address
-  before_save :geocode, if: :address_changed?
+  # geocoded_by :address
+  # before_save :geocode, if: :address_changed?
   before_create :generate_guid
 
   def self.upcoming
@@ -35,8 +36,8 @@ class Event < ActiveRecord::Base
   end
 
   def self.user_events(user)
-    Event.all.select{ |x| x.attendees.include?(user)}
-  end   
+    Event.all.select { |x| x.attendees.include?(user) }
+  end
 
   # def self.featured(visitor_latitude, visitor_longitude)
   #   Event.upcoming.near([visitor_latitude, visitor_longitude], 20).limit(6)

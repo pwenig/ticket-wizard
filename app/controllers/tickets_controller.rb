@@ -23,7 +23,7 @@ class TicketsController < ApplicationController
 
   def create
     @event = Event.find(params[:event_id])
-    @ticket = current_user.tickets.build(ticket_params)
+    @ticket = Ticket.create(ticket_params)
     @ticket.event_id = params[:event_id].to_i
     if @ticket.save
       flash[:success] = "Ticket Created"

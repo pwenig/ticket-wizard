@@ -30,7 +30,10 @@ class UsersController < ApplicationController
     else
       @display_name = "#{@user.name} is" if @display_name == "#{@user.name}'s"
       @title = "Events You're Attending"
-      @events = @user.attending.where("date > ?", Time.now).paginate(page: params[:page], per_page: 12)
+      user_purchased_event_ids = PurchasedTicket.where(user_id: current_user.id).pluck(:event_id).uniq
+      events = Event.where(id: user_purchased_event_ids)
+      current_events = events.where("date > ?", Time.now)
+      @events = current_events.paginate(page: params[:page], per_page: 12)
       @display_name = "#{@user.name}'s" if @display_name == "#{@user.name} is"
       @created_events = Event.user_created_events(@user).paginate(page: params[:page], per_page: 12)
     end
