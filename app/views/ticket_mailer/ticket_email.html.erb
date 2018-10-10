@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <div style="margin-left: 50px;">
+      <h3>Hi, <%= @user.name %></h3>
+      <p>
+        Your order for <strong><%= params[:ticket_details].first.event.title %> </strong> was successful.
+      </p>
+      <p>
+        Your tickets are attached to this email. You can also view your order and download your 
+        tickets at: NEED TO ADD THIS LINK.
+      </p>
+
+      <h4>Order Details</h4>
+      <ul>
+        <li>
+          Order Reference: NEED TO ADD THIS
+        </li>
+        <li>
+          Order Name: <%= @user.name %>
+        </li>
+        <li>
+          Order Date: <%= params[:ticket_details].first.created_at.strftime("%a, %b %d %Y") %>
+        </li>
+      </ul>
+      <h4>
+        Order Items
+      </h4>
+      <table style="background-color: lightgrey; width: 50%; padding: 10px;">
+        <tr>
+          <th style="text-align: left; padding-bottom: 10px;">
+            Ticket
+          </th>
+          <th style="text-align: left; padding-bottom: 10px;">
+            Price
+          </th>
+        </tr>
+        <% params[:ticket_details].each do |ticket| %>
+          <tr>
+            <td style="padding-bottom: 10px;">
+              <%= ticket.ticket.title %>
+            </td>
+            <td style="padding-bottom: 10px;">
+              <%= number_to_currency(ticket.ticket.price, :precision => 2) %>
+            </td>
+          </tr>
+        <% end %>
+        <tr>
+          <td style="float:right;">
+            Total
+          </td>
+          <td>
+            <%= number_to_currency(params[:order_amount], :precision => 2) %>
+          </td>
+        </tr>
+      </table>
+      <p>Thank you</p>
+    </div>
+  </body>
+</html>

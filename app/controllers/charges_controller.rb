@@ -26,9 +26,7 @@ class ChargesController < ApplicationController
           event: event,
           tickets: purchased_tickets
         }
-        PurchasedTicket.create_ticket(ticket_details)
-        # Send email with tickets
-
+        PurchasedTicket.create_ticket(ticket_details, session[:price])
         flash[:success] = "Thank you. Your tickets will be emailed shortly. You paid $#{session[:total_amount]}."
         redirect_to user_path(current_user)
         clear_sessions
@@ -50,10 +48,9 @@ class ChargesController < ApplicationController
         event: event,
         tickets: purchased_tickets
       }
-      PurchasedTicket.create_ticket(ticket_details)
+      PurchasedTicket.create_ticket(ticket_details, session[:price])
       flash[:success] = "Thank you. Your tickets will be emailed shortly."
       redirect_to user_path(current_user)
-      # Send email with tickets
       clear_sessions
     end
   end
