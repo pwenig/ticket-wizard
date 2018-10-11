@@ -9,13 +9,21 @@ RSpec.describe TicketMailer, :type => :mailer do
     let(:purchased_ticket) { create(:purchased_ticket, user_id: user.id, event_id: event.id, ticket_id: ticket.id) }
     let(:mail) { TicketMailer.with(ticket_details: [purchased_ticket], order_amount: ticket.price).ticket_email }
 
+    before do 
+      guid = purchased_ticket.create_guid
+      @barcode_file = PurchasedTicket.create_qr_code(guid)
+      purchased_ticket.barcode.attach(io: File.open(@barcode_file), filename: "#{guid}.png")
+    end 
+
     it "renders the headers" do
       expect(mail.subject).to eq("Your Tickets")
       expect(mail.from).to eq(["tickets@ticket-ninja.com"])
+      File.delete(@barcode_file)
     end
 
     it "renders the body" do
       expect(mail.body.encoded).to match("Hi")
+      File.delete(@barcode_file)
     end
   end
 end

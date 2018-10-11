@@ -53,8 +53,13 @@ Rails.application.configure do
     address:              'smtp.gmail.com',
     port:                 587,
     domain:               'example.com',
-    user_name:            ENV["GMAIL_EMAIL"],
+    user_name:            ENV["GMAIL_USERNAME"],
     password:             ENV["GMAIL_PASSWORD"],
     authentication:       'plain',
     enable_starttls_auto: true }
+
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  # Send email in development mode.
+  config.action_mailer.perform_deliveries = true
+
 end
