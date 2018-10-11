@@ -29,7 +29,7 @@ gem "stripe"
 gem "rqrcode"
 gem "aws-sdk-s3", require: false
 gem "chunky_png", "~> 1.3", ">= 1.3.10"
-gem 'mail', '~> 2.7'
+gem "mail", "~> 2.7"
 
 group :production do
   gem "rails_12factor"
