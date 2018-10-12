@@ -23,13 +23,12 @@ class PurchasedTicket < ActiveRecord::Base
         guid = purchased_ticket.create_guid
         barcode_file = create_qr_code(guid)
         purchased_ticket = PurchasedTicket.create!(event_id: ticket_details[:event].id, ticket_id: ticket_id, user_id: user = ticket_details[:user].id, ticket_guid: guid)
-        purchased_ticket.barcode.attach(io: File.open(barcode_file), filename: "#{guid}.png")
+        # purchased_ticket.barcode.attach(io: File.open(barcode_file), filename: "#{guid}.png")
         tickets << purchased_ticket
         File.delete(barcode_file)
       end
     end
     # Send email with tickets
-    binding.pry
     TicketMailer.with(ticket_details: tickets, order_amount: order_amount).ticket_email.deliver_now
   end
 
