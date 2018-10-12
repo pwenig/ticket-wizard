@@ -8,7 +8,7 @@ test:
  
 amazon:
   service: S3
-  access_key_id: ""
-  secret_access_key: ""
-  bucket: ""
-  region: "" # e.g. 'us-east-1'
+  access_key_id: ENV["ACCESS_KEY_ID"]
+  secret_access_key: ENV["SECRET_ACCESS_KEY"]
+  bucket: ENV["BUCKET"]
+  region: "us-west-1"
