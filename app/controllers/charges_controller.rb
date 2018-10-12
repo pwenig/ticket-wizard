@@ -26,8 +26,8 @@ class ChargesController < ApplicationController
           event: event,
           tickets: purchased_tickets
         }
-        PurchasedTicket.create_ticket(ticket_details, session[:price])
-        flash[:success] = "Thank you. Your tickets will be emailed shortly. You paid $#{session[:total_amount]}."
+        PurchasedTicket.create_ticket(ticket_details, session[:total_price])
+        flash[:success] = "Thank you. Your tickets will be emailed shortly. You paid $#{session[:total_price]}."
         redirect_to user_path(current_user)
         clear_sessions
       rescue Stripe::AuthenticationError
@@ -48,7 +48,7 @@ class ChargesController < ApplicationController
         event: event,
         tickets: purchased_tickets
       }
-      PurchasedTicket.create_ticket(ticket_details, session[:price])
+      PurchasedTicket.create_ticket(ticket_details, session[:total_price])
       flash[:success] = "Thank you. Your tickets will be emailed shortly."
       redirect_to user_path(current_user)
       clear_sessions
