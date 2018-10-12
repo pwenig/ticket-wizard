@@ -12,11 +12,14 @@
 
 ActiveRecord::Schema.define(version: 2018_10_08_195610) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.integer "record_id", null: false
-    t.integer "blob_id", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
@@ -33,7 +36,7 @@ ActiveRecord::Schema.define(version: 2018_10_08_195610) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "attends", force: :cascade do |t|
+  create_table "attends", id: :serial, force: :cascade do |t|
     t.integer "attendee_id"
     t.integer "attended_event_id"
     t.datetime "created_at", null: false
@@ -43,13 +46,13 @@ ActiveRecord::Schema.define(version: 2018_10_08_195610) do
     t.index ["attendee_id"], name: "index_attends_on_attendee_id"
   end
 
-  create_table "categories", force: :cascade do |t|
+  create_table "categories", id: :serial, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "comments", force: :cascade do |t|
+  create_table "comments", id: :serial, force: :cascade do |t|
     t.string "user_id"
     t.text "body"
     t.integer "event_id"
@@ -58,7 +61,7 @@ ActiveRecord::Schema.define(version: 2018_10_08_195610) do
     t.index ["event_id"], name: "index_comments_on_event_id"
   end
 
-  create_table "events", force: :cascade do |t|
+  create_table "events", id: :serial, force: :cascade do |t|
     t.string "title"
     t.string "description"
     t.datetime "date"
@@ -79,9 +82,9 @@ ActiveRecord::Schema.define(version: 2018_10_08_195610) do
     t.string "ticket_guid"
     t.boolean "redeemed", default: false, null: false
     t.string "barcode"
-    t.integer "event_id"
-    t.integer "ticket_id"
-    t.integer "user_id"
+    t.bigint "event_id"
+    t.bigint "ticket_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_purchased_tickets_on_event_id"
@@ -96,13 +99,13 @@ ActiveRecord::Schema.define(version: 2018_10_08_195610) do
     t.text "description"
     t.datetime "onsale_start"
     t.datetime "onsale_end"
-    t.integer "event_id"
+    t.bigint "event_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_tickets_on_event_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :serial, force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.string "password_digest"
@@ -110,4 +113,10 @@ ActiveRecord::Schema.define(version: 2018_10_08_195610) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "comments", "events"
+  add_foreign_key "events", "users"
+  add_foreign_key "purchased_tickets", "events"
+  add_foreign_key "purchased_tickets", "tickets"
+  add_foreign_key "purchased_tickets", "users"
+  add_foreign_key "tickets", "events"
 end

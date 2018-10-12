@@ -71,7 +71,7 @@ RSpec.describe Event, type: :model do
   end
 
   it "should return matching event - search category" do
-    search_params = { category: "1" }
+    search_params = { category: category1.id.to_s }
     results = Event.search(search_params)
     event_titles = results.pluck(:title)
     expect(event_titles).to include(upcoming_event.title)
