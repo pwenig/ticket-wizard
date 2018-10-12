@@ -29,6 +29,7 @@ class PurchasedTicket < ActiveRecord::Base
       end
     end
     # Send email with tickets
+    binding.pry
     TicketMailer.with(ticket_details: tickets, order_amount: order_amount).ticket_email.deliver_now
   end
 
