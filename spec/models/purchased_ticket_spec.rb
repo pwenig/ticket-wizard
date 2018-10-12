@@ -49,7 +49,7 @@ RSpec.describe PurchasedTicket, type: :model do
         event: event,
         tickets: tickets
       }
-    PurchasedTicket.create_ticket(ticket_details)
+    PurchasedTicket.create_ticket(ticket_details, 0)
     result = PurchasedTicket.last
     expect(result.event.title).to eq(event.title)
     FileUtils.rm_rf(Rails.root.join("tmp", "storage"))

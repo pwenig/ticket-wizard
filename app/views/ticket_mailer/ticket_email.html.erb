@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <div style="margin-left: 50px;">
+      <h3>Hi, <%= @user.name %></h3>
+      <p>
+        Your order for <strong><%= params[:ticket_details].first.event.title %> </strong> was successful.
+      </p>
+      <p>
+        Your tickets are below. You can also view your order and download your 
+        tickets at: NEED TO ADD THIS LINK.
+      </p>
+
+      <h4>Order Details</h4>
+      <ul>
+        <li>
+          Order Reference: NEED TO ADD THIS
+        </li>
+        <li>
+          Order Name: <%= @user.name %>
+        </li>
+        <li>
+          Order Date: <%= params[:ticket_details].first.created_at.strftime("%a, %b %d %Y") %>
+        </li>
+      </ul>
+      <h4>
+        Order Items
+      </h4>
+      <table style="background-color:lightgrey; width: 50%; padding: 10px;">
+        <tr>
+          <th style="text-align: left; padding-bottom: 10px;">
+            Ticket
+          </th>
+          <th style="text-align: left; padding-bottom: 10px;">
+            Price
+          </th>
+        </tr>
+        <% params[:ticket_details].each do |ticket| %>
+          <tr>
+            <td style="padding-bottom: 10px;">
+              <%= ticket.ticket.title %>
+            </td>
+            <td style="padding-bottom: 10px;">
+              <%= number_to_currency(ticket.ticket.price, :precision => 2) %>
+            </td>
+          </tr>
+        <% end %>
+        <tr>
+          <td style="float:right;">
+            Total
+          </td>
+          <td>
+            <%= number_to_currency(params[:order_amount], :precision => 2) %>
+          </td>
+        </tr>
+      </table>
+      <p>Thank you</p>
+      <hr>
+    </div>
+
+    <div class="pagebreak"></div>
+
+    <div style="margin-left: 50px; margin-top: 50px;">
+      <% params[:ticket_details].each do |ticket| %>
+        <table style="width: 60%; padding: 10px; border: 2px solid">
+          <tr>
+            <th style="text-align: left;">
+              EVENT
+            </th>
+            <th style="text-align: left;">
+              NAME
+            </th>
+          </tr>
+          <tr>
+            <td style="padding-bottom: 10px";>
+              <%= ticket.event.title%>
+            </td>
+            <td style="padding-bottom: 10px";>
+              <%= ticket.user.name%>
+            </td>
+          </tr>
+          <tr>
+            <th style="text-align: left;">
+              LOCATION
+            </th>
+            <th style="text-align: left;">
+              TICKET TYPE
+            </th>
+          </tr>
+          <tr>
+            <td style="padding-bottom: 10px";>
+              <%= ticket.event.address %>
+            </td>
+            <td style="padding-bottom: 10px";>
+              <%= ticket.ticket.title %>
+            </td>
+          </tr>
+          <tr>
+            <th style="text-align:left;">
+              DATE
+            </th>
+            <th style="text-align:left;">
+              ORDER REF.
+            </th>
+          </tr>
+          <tr>
+            <td style="padding-bottom: 10px";>
+              <%= ticket.event.date.strftime("%a, %b %d %Y %I:%M %p") %>
+            </td>
+            <td style="padding-bottom: 10px";>
+              ORDER REF TO COME
+            </td>
+          </tr>
+          <tr>
+            <th style="text-align:left;">
+            TICKET REF.
+            </th>
+            <th style="text-align: left">
+              TICKET PRICE
+            </th>
+          </tr>
+          <tr>
+          <td style="text-align:left;">
+             <%= ticket.ticket_guid %>
+          </td>
+            <td>
+              <%= number_to_currency(ticket.ticket.price, :precision => 2) %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= image_tag(url_for(ticket.barcode)) %>
+            </td>
+          </tr>
+        </table>
+        <br>
+        <div class="pagebreak"></div>
+      <% end %>
+    </div>
+  </body>
+</html>

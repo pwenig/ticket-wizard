@@ -1,0 +1,40 @@
+  Hi, <%= @user.name %>
+  Your order for <strong><%= params[:ticket_details].first.event.title %> </strong> was successful.
+
+  Your tickets are attached to this email. You can also view your order and download your tickets at: NEED TO ADD THIS LINK.
+
+  ***
+  Order Details
+  ------------
+  Order Reference: NEED TO ADD THIS
+  Order Name: <%= @user.name %>
+  Order Date: <%= params[:ticket_details].first.created_at.strftime("%a, %b %d %Y") %>
+
+  ****
+  Order Items
+  -----------
+  <% params[:ticket_details].each do |ticket| %>
+  <%= ticket.ticket.title %> - <%= number_to_currency(ticket.ticket.price, :precision => 2) %>
+  <% end %>
+  Total: <%= number_to_currency(params[:order_amount], :precision => 2) %>
+  -----
+
+  Thank you
+
+  *******
+
+<% params[:ticket_details].each do |ticket| %>
+  ------------------------------------------------------------------------------
+  EVENT: <%= ticket.event.title%>
+  NAME:  <%= ticket.user.name%>
+  LOCATION: <%= ticket.event.address %>
+  TICKET TYPE: <%= ticket.ticket.title %>
+  DATE: <%= ticket.event.date.strftime("%a, %b %d %Y %I:%M %p") %>
+  ORDER REF. ORDER REF TO COME
+  TICKET REF.: <%= ticket.ticket_guid %>
+  TICKET PRICE: <%= number_to_currency(ticket.ticket.price, :precision => 2) %>
+<% end %>
+
+
+
+
