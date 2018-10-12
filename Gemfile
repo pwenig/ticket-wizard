@@ -30,6 +30,7 @@ gem "rqrcode"
 gem "aws-sdk-s3", require: false
 gem "chunky_png", "~> 1.3", ">= 1.3.10"
 gem "mail", "~> 2.7"
+gem "pry"
 
 group :production do
   gem "rails_12factor"
@@ -37,7 +38,6 @@ end
 
 group :development, :test do
   gem "byebug"
-  gem "pry"
   # Use sqlite3 as the database for Active Record
   gem "sqlite3"
 end
