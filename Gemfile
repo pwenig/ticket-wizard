@@ -37,9 +37,9 @@ end
 
 group :development, :test do
   gem "byebug"
-  gem "pry"
   # Use sqlite3 as the database for Active Record
   gem "sqlite3"
+  gem "pry"
 end
 
 group :development do
