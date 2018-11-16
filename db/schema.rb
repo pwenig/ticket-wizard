@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_08_195610) do
+ActiveRecord::Schema.define(version: 2018_11_03_232050) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -111,6 +111,9 @@ ActiveRecord::Schema.define(version: 2018_10_08_195610) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "admin", default: false
+    t.string "stripe_publishable_key"
+    t.string "stripe_secret_key"
   end
 
   add_foreign_key "comments", "events"
