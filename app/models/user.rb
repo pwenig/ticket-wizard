@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class User < ApplicationRecord
+class User < ActiveRecord::Base
   has_many :events, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :active_attends, class_name: "Attend", foreign_key: "attendee_id", dependent: :destroy

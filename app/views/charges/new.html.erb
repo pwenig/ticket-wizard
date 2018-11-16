@@ -26,7 +26,7 @@
                 </article>
                 <% if @total_price > 0 %>
                   <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                          data-key="<%= @event.user.stripe_publishable_key %>"
                           data-description="Tickets"
                           data-amount=""
                           data-locale="auto">

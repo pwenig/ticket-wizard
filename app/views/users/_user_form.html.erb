@@ -27,6 +27,21 @@
           <%= f.password_field :password_confirmation, class: "form-control" %><br>
         </div>
       </div>
+      <% if current_user && current_user.admin? %>
+        <div class="row">
+          <div class="col-lg-4 col-lg-offset-4">
+            <%= f.label :stripe_publishable_key, 'Stripe Publishable Key' %><br>
+            <%= f.text_field :stripe_publishable_key, class: "form-control" %><br>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-4 col-lg-offset-4">
+            <%= f.label :stripe_secret_key, 'Stripe Secret Key' %><br>
+            <%= f.text_field :stripe_secret_key, class: "form-control" %><br>
+          </div>
+        </div>
+      <% end %>
 
       <%= f.submit button_text, class: "btn btn-primary", id: "submit" %><br><br>
     <% end %>

@@ -6,7 +6,7 @@ class ChargesController < ApplicationController
 
   def create
     event = Event.find(session[:event]["id"])
-    Charge.set_user_keys
+    Charge.set_user_keys(event.user)
     if session[:price] > 0
       begin
         amount = session[:price]
@@ -32,13 +32,13 @@ class ChargesController < ApplicationController
         clear_sessions
       rescue Stripe::AuthenticationError
         flash[:error] = "There was an error with the Stripe settings"
-        redirect_to new_charge_path
+        redirect_to root_path
       rescue Stripe::CardError => e
         flash[:error] = "There was a problem with your credit card."
-        redirect_to new_charge_path
+        redirect_to root_path
       rescue => exception
         flash[:error] = "There was an error"
-        redirect_to new_charge_path
+        redirect_to root_path
       else
       end
     else

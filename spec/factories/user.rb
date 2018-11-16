@@ -6,5 +6,8 @@ FactoryBot.define do
     sequence(:email)  { |n| "test#{n}@test.com" }
     password { "password" }
     password_confirmation { "password" }
+    admin { false }
+    stripe_publishable_key {'1234'}
+    stripe_secret_key {'abcd'}
   end
 end

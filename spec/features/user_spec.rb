@@ -57,6 +57,15 @@ RSpec.feature "User Signup", type: :feature do
     expect(page.text).to include("Updated Successfully")
   end
 
+  it "should edit stripe keys for an admin user" do 
+    user.update(admin: true)
+    sign_in_user(user)
+    visit edit_user_path(user.id)
+    expect(page.text).to include("Stripe Publishable Key")
+    expect(page.text).to include("Stripe Secret Key")
+    expect(page.text).to include("Edit Admin Account")
+  end 
+
   it "should display error with incomplete user profile" do
     sign_in_user(user)
     visit edit_user_path(user.id)
