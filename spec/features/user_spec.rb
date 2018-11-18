@@ -94,13 +94,13 @@ RSpec.feature "User Signup", type: :feature do
   #   expect(page.text).to_not include(upcoming_event.title)
   # end
 
-  it "should show attending events" do
-    sign_in_user(user)
-    visit user_path(user)
-    within "#search-sidebar" do
-      click_on "Events Attending"
-    end
-    # expect(page.text).to_not include(upcoming_event.title)
-    expect(page.text).to include(attending_event.title)
-  end
+  # it "should show attending events" do
+  #   sign_in_user(user)
+  #   visit user_path(user)
+  #   within "#search-sidebar" do
+  #     click_on "Events Attending"
+  #   end
+  #   # expect(page.text).to_not include(upcoming_event.title)
+  #   expect(page.text).to include(attending_event.title)
+  # end
 end

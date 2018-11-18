@@ -48,7 +48,7 @@ class User < ActiveRecord::Base
 
   # Returns true if the current user is attending the event
   def attending?(event)
-    attending.include?(event)
+    purchased_tickets.pluck(:event_id).include?(event.id)
   end
 
   # Returns user's upcoming events
