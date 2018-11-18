@@ -17,6 +17,19 @@ class User < ActiveRecord::Base
   before_save :normalize_name
   before_save :downcase_email
 
+  def self.from_omniauth(auth)
+    where(auth.slice("provider", "uid")).first || create_from_omniauth(auth)
+  end
+
+  def self.create_from_omniauth(auth)
+    create! do |user|
+      user.provider = auth["provider"]
+      user.uid = auth["uid"]
+      user.name = auth["info"]["nickname"]
+      user.admin = true
+    end
+  end 
+
   # Returns the hash digest of the given string.
   def digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost

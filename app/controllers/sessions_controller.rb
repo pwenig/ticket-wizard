@@ -7,7 +7,12 @@ class SessionsController < ApplicationController
   end
 
   def create
-    binding.pry
+    user = User.from_omniauth(env["omniauth.auth"])
+    session[:user_id] = user.id
+    redirect_to user, notice: "Signed in!"
+  end
+
+  def login
     user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
       log_in user
