@@ -1,0 +1,10 @@
+{
+    "manifest": "1",
+    "version": "1.2",
+    "locale": "",
+    "client_id" : "899383677",
+    "callback_url" : "https://ticket-wizard.com/weebly/authorize",
+    "scopes": ["read:site"],
+    "oauth_final_destination" : "https://ticket-wizard.com",
+    ...
+}

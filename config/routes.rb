@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   post "/create-event",  to: "events#create"
   patch "/create-event",  to: "events#create"
 
+  get 'auth/:provider/callback', to: 'sessions#create'
+
   resources :users do
     resources :comments
     member do
