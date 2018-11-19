@@ -59,7 +59,7 @@ RSpec.describe PurchasedTicket, type: :model do
     purchased_ticket = PurchasedTicket.new
     guid = purchased_ticket.create_guid
     result = PurchasedTicket.create_qr_code(guid)
-    expect(result.path).to eq("#{guid}.png")
+    expect(result).to eq("./public/temp/#{guid}.png")
     File.delete(result)
   end
 end

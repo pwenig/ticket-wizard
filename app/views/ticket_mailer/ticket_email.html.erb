@@ -66,6 +66,12 @@
     <div style="margin-left: 50px; margin-top: 50px;">
       <% params[:ticket_details].each do |ticket| %>
         <table style="width: 60%; padding: 10px; border: 2px solid">
+        <tr>
+        <td>
+          <%= image_tag ticket.barcode, class: "img-responsive", id: "event-thumbnail" %>
+        </td>
+        </tr>
+
           <tr>
             <th style="text-align: left;">
               EVENT

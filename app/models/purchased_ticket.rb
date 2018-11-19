@@ -21,14 +21,13 @@ class PurchasedTicket < ActiveRecord::Base
       ticket.values.first.to_i.times do |t|
         purchased_ticket = PurchasedTicket.new
         guid = purchased_ticket.create_guid
-        # barcode_file = create_qr_code(guid)
+        barcode_file = create_qr_code(guid)
         purchased_ticket = PurchasedTicket.create!(event_id: ticket_details[:event].id, ticket_id: ticket_id, user_id: user = ticket_details[:user].id, ticket_guid: guid)
-        # purchased_ticket.barcode.attach(io: File.open(barcode_file), filename: "#{guid}.png")
+        purchased_ticket.barcode.attach(io: File.open(barcode_file), filename: "#{guid}.png", content_type: 'image/png')
         tickets << purchased_ticket
-        # File.delete(barcode_file)
+        File.delete(barcode_file)
       end
     end
-    # Send email with tickets
     TicketMailer.with(ticket_details: tickets, order_amount: order_amount).ticket_email.deliver_now
   end
 
@@ -44,7 +43,7 @@ class PurchasedTicket < ActiveRecord::Base
       module_px_size: 6,
       file: nil # path to write
       )
-    barcode_file = png.save("#{guid}.png", interlace: true)
-    barcode_file
+    barcode_file = png.save("./public/temp/#{guid}.png", interlace: true)
+    barcode_file.path
   end
 end
