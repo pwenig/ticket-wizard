@@ -4,7 +4,7 @@
 
   <%= favicon_link_tag 'favicon.ico' %>
 
-  <title>Ticket Wizard | <%= yield(:title) %></title>
+  <title>Ticket Wizard</title>
 
   <!-- Meta Tags -->
   <meta charset="utf-8">
@@ -46,7 +46,9 @@
           <li><%= link_to "Home", root_path %></li>
           <% if current_user %>
             <%# link_to "Events", events_path %>
-            <li><%= link_to "Create Event", create_event_path %></li>
+            <% if current_user.admin? %>
+              <li><%= link_to "Create Event", create_event_path %></li>
+            <% end %>
             <li><%= link_to "Profile", current_user %></li>
             <li><%= link_to "Sign Out", logout_path, method: "delete", id: 'signout_link' %></li>
           <% else %>                

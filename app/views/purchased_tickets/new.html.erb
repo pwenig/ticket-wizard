@@ -1,6 +1,6 @@
 <section id="tickets" class="container">
   <div class="row">
-    <div class="col-lg-6 col-lg-offset-3">
+    <div class="col-lg-8 col-lg-offset-1">
       <h1 class="center">Tickets for: </h1>
       <h2 class="center"><%= @event.title %></h2>
       <h3 class="center"><%= @event.address %></h3>
@@ -9,7 +9,7 @@
   </div>
   <br>
   <div class="row">
-     <div class="col-lg-6 col-lg-offset-3">
+     <div class="col-lg-8 col-lg-offset-1">
       <%= form_for(@purchased_ticket, url: new_charge_path, html: { multipart: true }) do |f| %> 
         <div class="row center">
           <div class="table">
@@ -20,13 +20,28 @@
                     <span><%= ticket.title %></span>
                     </td>
                     <td>
-                    <span class="ticket-pricing" style="margin-left: 200px">
-                    
-                    <%= number_to_currency(ticket.price, :precision => 2) || 0 %>
-                      <span style="margin-left: 10px">
-                      <%= label "Ticket Quantity", "" %>
-                        <%= select_tag "ticket_id_#{ticket.id}", options_for_select(0..30), :selected => 0 %>
-                      </span>
+                    <span class="ticket-pricing" style="margin-left: 50px">
+                      <%= number_to_currency(ticket.price, :precision => 2) || 0 %>
+
+                      <% if ticket.soldout? %>
+                        <span style="margin-left: 10px">
+                        Sold Out
+                        </span>
+                      <% elsif ticket.offsale? %>
+                        <span style="margin-left: 10px">
+                        Tickets are no longer available
+                        </span>
+                      <% elsif ticket.onsale? %>
+                        <span style="margin-left: 10px">
+                        <%= label "Ticket Quantity", "" %>
+                          <%= select_tag "ticket_id_#{ticket.id}", options_for_select(0..30), :selected => 0 %>
+                        </span>
+                      <% elsif !ticket.onsale? && !ticket.offsale? %>
+                        <span style="margin-left: 10px">
+                        Onsale: <%= ticket.onsale_start.strftime("%a, %b %d %Y %I : %M %p") %>
+                        </span>
+                      <% end %>
+
                     </span>
                   </td>
                   <br>

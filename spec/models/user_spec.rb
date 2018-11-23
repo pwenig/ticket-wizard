@@ -4,8 +4,11 @@ require "rails_helper"
 
 RSpec.describe User, type: :model do
   let(:user) { create(:user, name: "New User") }
+  let(:user2) { create(:user)}
   let(:category) { create(:category) }
   let(:event) { create(:event, category_id: category.id, user_id: user.id) }
+  let(:ticket) { create(:ticket, title: "VIP", price: 100, event_id: event.id) }
+  let!(:purchased_ticket) { create(:purchased_ticket, user_id: user2.id, event_id: event.id, ticket_id: ticket.id) }
 
   it "creates a user" do
     expect(user.name).to eq("New User")
@@ -64,9 +67,7 @@ RSpec.describe User, type: :model do
   end
 
   it "returns true if a user is attending an event" do
-    user.attend(event)
-    expect(user.active_attends.length).to eq(1)
-    result = user.attending?(event)
+    result = user2.attending?(event)
     expect(result).to eq(true)
   end
 
