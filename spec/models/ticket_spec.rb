@@ -6,7 +6,8 @@ RSpec.describe Ticket, type: :model do
   let(:category1) { create(:category) }
   let(:user) { create(:user) }
   let(:event) { create(:event, title: "Folk Festival", date: "#{Time.now + 2.week.to_i}", category_id: category1.id, user_id: user.id) }
-  let(:ticket) { create(:ticket, title: "VIP", event_id: event.id) }
+  let(:ticket) { create(:ticket, title: "VIP", event_id: event.id, qty_available: 1) }
+  let!(:purchased_ticket) { create(:purchased_ticket, user_id: user.id, event_id: event.id, ticket_id: ticket.id) }
 
   it "creates a ticket" do
     expect(ticket.title).to eq("VIP")
@@ -32,6 +33,11 @@ RSpec.describe Ticket, type: :model do
     result = ticket2.offsale?
     expect(result).to eq(true)
   end
+
+  it "returns true if tickets are sold out" do 
+    result = ticket.soldout?
+    expect(result).to eq(true)
+  end 
 
   it "returns an error if qty_available it not a number" do
     ticket2 = build(:ticket, title: "VIP", qty_available: "foo", onsale_end: "#{Time.now - 2.week.to_i}", event_id: event.id)

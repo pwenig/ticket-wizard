@@ -21,21 +21,27 @@
                     </td>
                     <td>
                     <span class="ticket-pricing" style="margin-left: 50px">
-                    <%= number_to_currency(ticket.price, :precision => 2) || 0 %>
-                    <% if ticket.offsale? %>
-                      <span style="margin-left: 10px">
-                       Tickets are no longer available
-                      </span>
-                    <% elsif ticket.onsale? %>
-                      <span style="margin-left: 10px">
-                      <%= label "Ticket Quantity", "" %>
-                        <%= select_tag "ticket_id_#{ticket.id}", options_for_select(0..30), :selected => 0 %>
-                      </span>
-                    <% elsif !ticket.onsale? && !ticket.offsale? %>
-                      <span style="margin-left: 10px">
-                       Onsale: <%= ticket.onsale_start.strftime("%a, %b %d %Y %I : %M %p") %>
-                      </span>
-                    <% end %>
+                      <%= number_to_currency(ticket.price, :precision => 2) || 0 %>
+
+                      <% if ticket.soldout? %>
+                        <span style="margin-left: 10px">
+                        Sold Out
+                        </span>
+                      <% elsif ticket.offsale? %>
+                        <span style="margin-left: 10px">
+                        Tickets are no longer available
+                        </span>
+                      <% elsif ticket.onsale? %>
+                        <span style="margin-left: 10px">
+                        <%= label "Ticket Quantity", "" %>
+                          <%= select_tag "ticket_id_#{ticket.id}", options_for_select(0..30), :selected => 0 %>
+                        </span>
+                      <% elsif !ticket.onsale? && !ticket.offsale? %>
+                        <span style="margin-left: 10px">
+                        Onsale: <%= ticket.onsale_start.strftime("%a, %b %d %Y %I : %M %p") %>
+                        </span>
+                      <% end %>
+
                     </span>
                   </td>
                   <br>

@@ -16,6 +16,10 @@ class Ticket < ActiveRecord::Base
     !onsale_end.nil? && Time.now > onsale_end
   end
 
+  def soldout?
+    !qty_available.nil? && PurchasedTicket.where(ticket_id: id).length >= qty_available
+  end 
+
   def qty_amount
     if !self.qty_available.nil? && self.qty_available == 0
       errors.add(:qty_available, "is not a number")
