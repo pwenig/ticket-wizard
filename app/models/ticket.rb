@@ -9,11 +9,11 @@ class Ticket < ActiveRecord::Base
   has_many :purchased_tickets, dependent: :destroy
 
   def onsale?
-    self.onsale_start < Time.now
+    onsale_start.nil? || onsale_start < Time.now
   end
 
   def offsale?
-    Time.now > self.onsale_end
+    !onsale_end.nil? && Time.now > onsale_end
   end
 
   def qty_amount
