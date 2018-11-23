@@ -80,8 +80,8 @@ Rails.application.configure do
   config.i18n.fallbacks = true
 
   config.cache_classes = true
-  config.serve_static_assets = true
   config.assets.digest = true
+  config.assets.compile = false
 
   # Send deprecation notices to registered listeners.
   config.active_support.deprecation = :notify
