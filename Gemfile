@@ -33,7 +33,7 @@ gem "mail", "~> 2.7"
 gem 'omniauth', '~> 1.6', '>= 1.6.1'
 gem 'omniauth-weebly'
 
-group :production do
+group :production, :staging do
   gem "rails_12factor"
 end
 
