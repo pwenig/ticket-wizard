@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get "/login", to: "sessions#new"
   post "/login", to: "sessions#login"
   delete "/logout", to: "sessions#destroy"
+  get '/logout', to: 'sessions#destroy'
   get "/create-event",  to: "events#new"
   post "/create-event",  to: "events#create"
   patch "/create-event",  to: "events#create"
@@ -36,4 +37,6 @@ Rails.application.routes.draw do
   resources :comments, only: [:create, :destroy]
   resources :charges
   post "/charges/new", to: "charges#calculate"
+
+  match '*path' => 'pages#index', via: :all
 end
