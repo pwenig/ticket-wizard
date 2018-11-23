@@ -18,3 +18,4 @@ Once you have the repo on your local machine
 1) Run `rake db:migrate RAILS_ENV=test` to migrate the testing environment database
 
 2) Run `rspec` to verify everything is ok =)
+
