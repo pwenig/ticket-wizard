@@ -8,7 +8,7 @@ require "rails/all"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
-Bundler.require(:default, :assets, Rails.env)
+Bundler.require(*Rails.groups)
 
 module PrivateEvents
   class Application < Rails::Application
@@ -26,7 +26,7 @@ module PrivateEvents
     # config.i18n.default_locale = :de
 
     # Include the authenticity token in remote forms.
-    config.assets.enabled = true
+    # config.assets.enabled = true
     config.action_view.embed_authenticity_token_in_remote_forms = true
   end
 end

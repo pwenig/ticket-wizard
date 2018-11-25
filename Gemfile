@@ -32,7 +32,10 @@ gem "chunky_png", "~> 1.3", ">= 1.3.10"
 gem "mail", "~> 2.7"
 gem 'omniauth', '~> 1.6', '>= 1.6.1'
 gem 'omniauth-weebly'
-gem "rails_12factor"
+
+group :production, :staging do 
+  gem "rails_12factor"
+end 
 
 group :development, :test do
   gem "byebug"
