@@ -58,6 +58,11 @@ RSpec.describe "Events", type: :feature do
     expect(page.text).to include("Folk Festival Updated")
   end
 
+  it "should show copy to clipboard button" do 
+    visit event_path(upcoming_event, key: upcoming_event.event_guid)
+    expect(page.text).to include("Copy Event URL")
+  end 
+
   it "should not edit an event with invalid date" do
     current_day = Date.today.strftime("%d")
     current_month = Date.today.strftime("%B")
