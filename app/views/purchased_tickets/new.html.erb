@@ -53,7 +53,9 @@
                 <%= hidden_field_tag 'event_id', @event.id %>
                 <hr>
               <% end %>
-              <%= f.submit "Next", class: "btn btn-primary" %>
+              <% if show_action?(@event) %>
+                <%= f.submit "Next", class: "btn btn-primary" %>
+              <% end %>
             </tbody>
           </div>
         </div>
