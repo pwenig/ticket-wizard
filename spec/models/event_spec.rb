@@ -8,6 +8,8 @@ RSpec.describe Event, type: :model do
   let(:user) { create(:user) }
   let!(:upcoming_event) { create(:event, title: "Folk Festival", date: "#{Time.now + 2.week.to_i}", category_id: category1.id) }
   let!(:upcoming_event_SF) { create(:event, title: "Jazz Festival", address: "San Francisco, CA", date: "#{Time.now + 3.week.to_i}", category_id: category2.id) }
+  let(:ticket) { create(:ticket, title: "VIP", price: 100, event_id: upcoming_event_SF.id) }
+  let!(:purchased_ticket) { create(:purchased_ticket, user_id: user.id, event_id: upcoming_event_SF.id, ticket_id: ticket.id) }
 
   it "creates an event" do
     expect(upcoming_event.title).to eq("Folk Festival")
@@ -93,4 +95,15 @@ RSpec.describe Event, type: :model do
     expect(event_titles).to_not include(upcoming_event.title)
     expect(event_titles).to_not include(upcoming_event_SF.title)
   end
+
+  it "should return true if no tickets have been sold" do 
+    result = upcoming_event.tickets_not_sold?
+    expect(result).to eq(true)
+  end 
+
+  it "should return false if tickets have been sold" do 
+    result = upcoming_event_SF.tickets_not_sold?
+    expect(result).to eq(false)
+  end 
+
 end
