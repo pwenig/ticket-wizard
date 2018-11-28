@@ -30,6 +30,7 @@
           <p class="lead center" >
             <button class="clipboard-btn btn btn-primary" data-clipboard-text=<%= request.original_url %> >Copy Event URL</button>
             <%= link_to "Tickets", event_tickets_path(@event, :key => @event.event_guid), class: "btn btn-primary", id: "show-edit-button" %>
+            <%= link_to "Event Dashboard", event_dashboard_index_path(@event, :key => @event.event_guid), class: "btn btn-primary", id: "show-edit-button" %>
             <%= link_to "Edit Event", edit_event_path(@event, :key => @event.event_guid), class: "btn btn-primary", id: "show-edit-button" %>
             <% if @event.tickets_not_sold? %>
              <%= link_to "Delete Event", @event, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-primary", id: "delete_event_button" %>
