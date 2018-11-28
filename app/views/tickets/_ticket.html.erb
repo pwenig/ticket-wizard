@@ -6,9 +6,10 @@
       <h4 class="center"><%= number_to_currency(ticket.price, :precision => 2) %></h4>
       <br>
       <div class="btn-group#tickets center">
-        <%= link_to "Details", event_ticket_path(ticket.event, ticket, :key => ticket.event.event_guid), :class => "btn btn-primary", :id => "ticket_detail" %>
         <%= link_to "Edit", edit_event_ticket_path(ticket.event, ticket, :key => ticket.event.event_guid), :class => "btn btn-primary", :id => "ticket_edit" %>
-        <%= link_to "Delete", event_ticket_path(ticket.event, ticket, :key => ticket.event.event_guid), method: :delete, data: { confirm: "Are you sure?" }, :class => "btn btn-primary", :id => "delete_ticket" %>
+        <% if ticket.tickets_not_sold? %>
+          <%= link_to "Delete", event_ticket_path(ticket.event, ticket, :key => ticket.event.event_guid), method: :delete, data: { confirm: "Are you sure?" }, :class => "btn btn-primary", :id => "delete_ticket" %>
+        <% end %>
       </div>
     </div>
   </div>

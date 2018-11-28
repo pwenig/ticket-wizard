@@ -42,16 +42,6 @@ RSpec.describe "Tickets", type: :feature do
     expect(page.text).to include("Qty available is not a number")
   end
 
-
-  it "should show details of a ticket" do
-    visit event_tickets_path(event, key: event.event_guid)
-    expect(page.text).to include("VIP")
-    click_on("ticket_detail")
-    expect(current_path).to eq(event_ticket_path(vip_ticket.event, vip_ticket))
-    expect(page.text).to include("Total Available Tickets")
-    expect(page.text).to include("Onsale Start")
-  end
-
   it "should edit a ticket" do
     visit event_tickets_path(event, key: event.event_guid)
     expect(page.text).to include("VIP")
@@ -77,11 +67,6 @@ RSpec.describe "Tickets", type: :feature do
 
   it "should redirect to root path with invalid event key - index" do
     visit event_tickets_path(event, key: "foo")
-    expect(current_path).to eq(root_path)
-  end
-
-  it "should redirect to root path with invalid event key - show" do
-    visit event_ticket_path(event, vip_ticket, key: "foo")
     expect(current_path).to eq(root_path)
   end
 
