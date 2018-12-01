@@ -33,16 +33,6 @@ class TicketsController < ApplicationController
     end
   end
 
-  # def show
-  #   @event = Event.where(id: params[:event_id], event_guid: params[:key]).first
-  #   if @event
-  #     @ticket = Ticket.find(params[:id])
-  #     @ticket.onsale_start ? @days_remaining = (@ticket.onsale_end - @ticket.onsale_start).to_i / 86400 : 0
-  #   else
-  #     redirect_to root_path
-  #   end
-  # end
-
   def edit
     @event = Event.where(id: params[:event_id], event_guid: params[:key]).first
     if @event
