@@ -3,7 +3,6 @@
   </a>
   <div class="media-body">
     <h4 class="media-heading">
-      <a href="/users/<%= comment.user_id %>">
         <%= User.find(comment.user_id).name %>
       </a>
       <small><%= comment.created_at.to_formatted_s(:long_ordinal) %></small>
