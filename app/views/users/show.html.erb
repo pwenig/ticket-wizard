@@ -3,7 +3,7 @@
   <!-- Page Content -->
   <div class="container">
     <div class="row">
-      <div class="col-md-9 col-md-offset-3 text-center">
+      <div class="col-md-12 text-center">
         <h1><%= @display_name  %> Profile</h1>
         <hr>
       </div>
@@ -39,12 +39,12 @@
         </div> -->
       </div>
 
-      <div class="col-md-9 text-center">
+      <div class="col-md-9">
         <% if @created_events&.any? %>
           <div class="row">
             <h3 id="events">Upcoming Events <span><%= current_user.name %></span> Created</h3>
-              <div>(<%= page_entries_info(@created_events) %>)</div>
-            <hr>
+              <div class="page-entries">(<%= page_entries_info(@created_events) %>)</div>
+            <hr class="event-break">
               <%= will_paginate(@created_events) %><br>
               <%= render @created_events %>
           </div>

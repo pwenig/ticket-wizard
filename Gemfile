@@ -34,6 +34,8 @@ gem 'omniauth', '~> 1.6', '>= 1.6.1'
 gem 'omniauth-weebly'
 gem 'clipboard-rails'
 gem 'jquery-turbolinks'
+gem 'chartkick', '~> 1.4', '>= 1.4.1'
+gem 'groupdate', '~> 4.1'
 
 group :production, :staging do 
   gem "rails_12factor"

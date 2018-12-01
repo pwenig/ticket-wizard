@@ -56,6 +56,10 @@ class Event < ActiveRecord::Base
     params[:timeline] == "Past Events" ? events.past : events.upcoming
   end
 
+  def tickets_not_sold?
+    PurchasedTicket.where(event_id: id).length == 0
+  end 
+
 private
 
   # Validates the size of an uploaded picture.

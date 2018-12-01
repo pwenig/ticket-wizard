@@ -20,6 +20,10 @@ class Ticket < ActiveRecord::Base
     !qty_available.nil? && PurchasedTicket.where(ticket_id: id).length >= qty_available
   end 
 
+  def tickets_not_sold?
+    PurchasedTicket.where(ticket_id: id).length == 0
+  end
+
   def qty_amount
     if !self.qty_available.nil? && self.qty_available == 0
       errors.add(:qty_available, "is not a number")

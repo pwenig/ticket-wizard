@@ -24,8 +24,9 @@ Rails.application.routes.draw do
 
   resources :events do
     resources :comments
-    resources :tickets
+    resources :tickets, except: [:show]
     resources :purchased_tickets, path: "get-tickets"
+    resources :dashboard, only: [:index]
     member do
       get :attendees
     end

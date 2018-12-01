@@ -1,7 +1,9 @@
-
-<% content_for :head do %>
-  <%= javascript_include_tag 'google-places.js' %>
-<% end %>
+<script>
+  google.maps.event.addDomListener(window, 'load', initialize);
+  function initialize() {
+  var autocomplete = new google.maps.places.Autocomplete(document.getElementById("txtautocomplete"));
+  };
+</script>
 
     <%= form_for(@event, url: url, html: { multipart: true }) do |f| %> 
       <%= render "shared/error_messages", object: f.object %>

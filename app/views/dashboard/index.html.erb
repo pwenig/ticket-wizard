@@ -1,0 +1,41 @@
+<div class="container">
+  <h2 class="dashboard-title"><%= @event.title%> Dashboard</h2>
+  <div class="row dashboard">
+    <div class="col-sm-4">
+      <div class="stat-box">
+        <h3><%= number_to_currency(@event_sales_volume, :precision => 2) || 0 %></h3>
+        <span>Sales Volume</span>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="stat-box">
+        <h3><%= @event_tickets %></h3>
+        <span>Tickets Sold</span>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="stat-box">
+        <h3><%= @event_time_remaining %></h3>
+        <span>Time Remaining</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row dashboard">
+    <div class="col-sm-6">
+      <div class="stat-box">
+        <%= pie_chart @ticket_types %>
+        <span>Sales by Ticket Type</span>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="stat-box">
+        <%= line_chart @tickets_by_day %>
+        <span>Tickets Sold by Date</span>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+

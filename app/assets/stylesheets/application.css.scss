@@ -15,8 +15,39 @@
  	*/
 
  	@import "font-awesome-sprockets";
- 	@import "font-awesome";
+	 @import "font-awesome";
+	 
+	 .container {
+		margin-left: 50px;
+		margin-right: 50px;
+		background-color: #F7F7F7;
+		width: 90%;
+	}
 
+	.container.homepage {
+		background-color: black;
+	}
+
+	.navbar-footer {
+		color: white;
+	}
+
+	h3#events {
+		margin-left: 100px;
+	}
+
+	.page-entries {
+		margin-left: 200px;
+	}
+	
+	hr.event-break {
+		margin-left: 265px;
+	}
+
+	.password-note {
+		margin-bottom: 10px;
+	}
+	
 	#social-links{
 	  text-align: center;
 	  list-style: none;

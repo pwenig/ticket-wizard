@@ -17,4 +17,6 @@
 //= require bootstrap
 //= require underscore
 //= require clipboard
+//= require Chart.bundle
+//= require chartkick
 //= require_tree
