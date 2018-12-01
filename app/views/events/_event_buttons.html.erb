@@ -1,0 +1,24 @@
+<% if current_user%>
+  <% if (current_user.id == event.user_id) && (event.date > Time.now)  %>
+    <p class="lead center" >
+      <button class="clipboard-btn btn btn-primary" data-clipboard-text=<%= request.original_url %> >Copy Event URL</button>
+      <%= link_to "Tickets", event_tickets_path(event, :key => event.event_guid), class: "btn btn-primary", id: "show-edit-button" %>
+      <%= link_to "Event Dashboard", event_dashboard_index_path(event, :key => event.event_guid), class: "btn btn-primary", id: "show-edit-button" %>
+      <%= link_to "Edit Event", edit_event_path(event, :key => event.event_guid), class: "btn btn-primary", id: "show-edit-button" %>
+      <% if event.tickets_not_sold? %>
+        <%= link_to "Delete Event", event, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-primary", id: "delete_event_button" %>
+      <% end %>
+    </p>
+  <% elsif event.date > Time.now %>  
+    <div id="attend_form" >
+      <% if current_user.attending?(event) %>
+      <% else %>
+        <p class="lead center" ><%= link_to "Get Tickets", new_event_purchased_ticket_path(event, :key => event.event_guid), class: "btn btn-primary", id: "get-tickets-button" %></p>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="center">Event has ended</p>
+  <% end %>
+<% else %> 
+  <h4 class="lead center" >(Please <%= link_to "Log In", login_path %> or  <%= link_to "Sign Up", signup_path %> to attend and comment on this event)</h4>
+<% end %><br>
