@@ -5,11 +5,7 @@
     <div class="header-content">
       <div class="header-content-inner">
         <h1 id="homeHeading">Tickets. Made. Easy.</h1>
-        <hr>
-        <% if current_user %>
-          <!-- <h2>Check Out Upcoming Events By Clicking Below</h2><br>
-          <%= link_to "Browse All Events", events_path, class: "btn btn-primary btn-xl" %> -->
-        <% else %>
+        <% if !current_user %>
           <h2>Sign Up Now!</h2><br>
           <%= link_to "Sign Up!", signup_path, class: "btn btn-primary btn-xl" %>
         <% end %>
