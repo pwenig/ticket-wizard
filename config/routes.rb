@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     resources :tickets, except: [:show]
     resources :purchased_tickets, path: "get-tickets"
     resources :dashboard, only: [:index]
+    resources :orders, only: [:index]
     member do
       get :attendees
     end
