@@ -1,10 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
 
 Category.create(name: "Arts")
 Category.create(name: "Business")
@@ -22,4 +15,20 @@ Category.create(name: "Spirituality")
 Category.create(name: "Sports & Fitness")
 Category.create(name: "Travel & Outdoor")
 Category.create(name: "Other")
-User.create(name: 'Paul Wenig', email: 'pwenig@gmail.com', password: 'password', password_confirmation: 'password')
+admin = User.create!(name: 'Paul Wenig', email: 'pwenig@gmail.com', password: 'password', password_confirmation: 'password', admin: true)
+user2 = User.create!(name: 'Joe Customer', email: 'pwenig+10@gmail.com', password: 'password', password_confirmation: 'password')
+user3 = User.create!(name: 'Mary Customer', email: 'pwenig+20@gmail.com', password: 'password', password_confirmation: 'password')
+event = Event.create!(title: 'Rock Concert', description: 'Rock Concert', address: '1400 Pearl St, Boulder, CO',  date: "#{Time.now + 4.day.to_i}", category_id: Category.first.id, user_id: admin.id)
+ticket = Ticket.create!(title: "VIP", price: 100, event_id: event.id)
+ticket2 = Ticket.create!(title: "GA", price: 50, event_id: event.id)
+
+10.times do
+  guid = SecureRandom.base64.delete("/+=")[0, 8]
+  PurchasedTicket.create!(user_id: user2.id, event_id: event.id, ticket_id: ticket.id, ticket_guid: guid, created_at: "#{Time.now - 4.day.to_i}")
+end
+8.times do
+  guid = SecureRandom.base64.delete("/+=")[0, 8]
+  PurchasedTicket.create!(user_id: user3.id, event_id: event.id, ticket_id: ticket2.id, ticket_guid: guid, created_at: "#{Time.now - 10.day.to_i}")
+end 
+
+
