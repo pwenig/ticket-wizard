@@ -11,6 +11,7 @@ class Event < ActiveRecord::Base
   has_many :passive_attends, class_name: "Attend", foreign_key: "attended_event_id", dependent: :destroy
   has_many :attendees, through: :passive_attends, source: :attendee
   has_many :comments, dependent: :destroy
+  has_many :orders, dependent: :destroy
   validates_presence_of :title, length: { maximum: 100 }
   validates_presence_of :description, length: { maximum: 1000 }
   validates_presence_of :address

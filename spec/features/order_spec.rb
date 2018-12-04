@@ -11,7 +11,6 @@ RSpec.describe "Event Order Pages", type: :feature do
     FactoryBot.create_list(:purchased_ticket, 5, user_id: user2.id, event_id: event.id, ticket_id: ticket.id )
   end 
 
-
   describe "Authorized User" do 
     before do 
       sign_in_user(user)
@@ -24,18 +23,15 @@ RSpec.describe "Event Order Pages", type: :feature do
     
   end 
 
-describe "Unauthorized User" do 
-  before do 
-    sign_in_user(user2)
-    visit event_orders_path(event, key: event.event_guid)
+  describe "Unauthorized User" do 
+    before do 
+      sign_in_user(user2)
+      visit event_orders_path(event, key: event.event_guid)
+    end 
+
+    it "does renders the index page and redirects to root" do 
+      expect(text).to_not include('Event Orders')
+      expect(current_path).to eq '/'
+    end 
   end 
-
-  it "does renders the index page and redirects to root" do 
-    expect(text).to_not include('Event Orders')
-    expect(current_path).to eq '/'
-   end 
-end 
-
- 
-
 end 

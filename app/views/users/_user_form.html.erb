@@ -16,7 +16,9 @@
 
       <div class="row">
         <div class="col-lg-4 col-lg-offset-4">
-        <div class="password-note">(Leave password fields blank if not changing)</div>
+        <% if current_user %>
+          <div class="password-note">(Leave password fields blank if not changing)</div>
+        <% end %>
           <%= f.label :password %><br>
           <%= f.password_field :password, class: "form-control" %><br>
         </div>

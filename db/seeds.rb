@@ -24,11 +24,15 @@ ticket2 = Ticket.create!(title: "GA", price: 50, event_id: event.id)
 
 10.times do
   guid = SecureRandom.base64.delete("/+=")[0, 8]
-  PurchasedTicket.create!(user_id: user2.id, event_id: event.id, ticket_id: ticket.id, ticket_guid: guid, created_at: "#{Time.now - 4.day.to_i}")
+  purchased_ticket = PurchasedTicket.create!(user_id: user2.id, event_id: event.id, ticket_id: ticket.id, ticket_guid: guid, created_at: "#{Time.now - 4.day.to_i}")
+  guid2 = SecureRandom.base64.delete("/+=")[0, 8]
+  Order.create(user_id: user2.id, event_id: event.id, amount: purchased_ticket.ticket.price, order_ref: guid2, purchased_ticket_ids: [purchased_ticket.id])
 end
 8.times do
   guid = SecureRandom.base64.delete("/+=")[0, 8]
-  PurchasedTicket.create!(user_id: user3.id, event_id: event.id, ticket_id: ticket2.id, ticket_guid: guid, created_at: "#{Time.now - 10.day.to_i}")
+  purchased_ticket_2 = PurchasedTicket.create!(user_id: user3.id, event_id: event.id, ticket_id: ticket2.id, ticket_guid: guid, created_at: "#{Time.now - 10.day.to_i}")
+  guid3 = SecureRandom.base64.delete("/+=")[0, 8]
+  Order.create(user_id: user3.id, event_id: event.id, amount: purchased_ticket_2.ticket.price, order_ref: guid3, purchased_ticket_ids: [purchased_ticket_2.id])
 end 
 
 
