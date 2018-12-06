@@ -62,7 +62,7 @@
     </tr>
     <tr>
     <td style="text-align:left;">
-      <%= order.event.title %>
+      <%= link_to order.event.title, event_path(order.event.id, key: order.event.event_guid) %>
     </td>
       <td>
         <%= order.event.date.strftime("%a, %b %d %Y %I:%M %p") %>
