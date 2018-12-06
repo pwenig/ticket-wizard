@@ -33,12 +33,12 @@
         <%= number_to_currency(order.amount, :precision => 2) %>
       </td>
       <td style="padding-bottom: 10px";>
-        <%= order.created_at.strftime("%a, %b %d %Y %I:%M %p") %>
+        <%= order.created_at.strftime("%a, %b %d %Y") %>
       </td>
     </tr>
     <tr>
       <th style="text-align:left;">
-        ORDER DATE
+        EVENT
       </th>
       <th style="text-align:left;">
         ORDER REF.
@@ -46,26 +46,10 @@
     </tr>
     <tr>
       <td style="padding-bottom: 10px";>
-        <%= order.created_at.strftime("%a, %b %d %Y") %>
+        <%= link_to order.event.title, event_path(order.event.id, key: order.event.event_guid) %> on <%= order.event.date.strftime("%a, %b %d %Y %I:%M %p") %>
       </td>
       <td style="padding-bottom: 10px";>
         <%= order.order_ref %>
-      </td>
-    </tr>
-    <tr>
-      <th style="text-align:left;">
-      EVENT
-      </th>
-      <th style="text-align: left">
-        EVENT DATE
-      </th>
-    </tr>
-    <tr>
-    <td style="text-align:left;">
-      <%= link_to order.event.title, event_path(order.event.id, key: order.event.event_guid) %>
-    </td>
-      <td>
-        <%= order.event.date.strftime("%a, %b %d %Y %I:%M %p") %>
       </td>
     </tr>
   </table>

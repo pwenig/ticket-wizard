@@ -28,6 +28,8 @@ Rails.application.routes.draw do
     resources :purchased_tickets, path: "get-tickets"
     resources :dashboard, only: [:index]
     resources :orders, only: [:index, :show]
+    get '/user_order', to: 'orders#customer_order'
+
     member do
       get :attendees
     end

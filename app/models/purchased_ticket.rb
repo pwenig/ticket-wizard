@@ -31,7 +31,7 @@ class PurchasedTicket < ActiveRecord::Base
       end
     end
     order.save!
-    TicketMailer.with(ticket_details: tickets, order_amount: order_amount).ticket_email.deliver_now
+    TicketMailer.with(ticket_details: tickets, order_amount: order_amount, event: ticket_details[:event], order: order ).ticket_email.deliver_now
   end
 
  

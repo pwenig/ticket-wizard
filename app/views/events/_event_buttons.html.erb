@@ -13,7 +13,7 @@
   <% elsif event.date > Time.now %>  
       <% if current_user.attending?(event) %>
       <p class="lead center">
-        <%= link_to "View Order", event_orders_path(event, :key => event.event_guid), class: "btn btn-primary", id: "show-edit-button" %>
+        <%= link_to "View Orders", event_user_order_path(event), class: "btn btn-primary", id: "show-edit-button" %>
         <%= link_to "Get Tickets", new_event_purchased_ticket_path(event, :key => event.event_guid), class: "btn btn-primary", id: "get-tickets-button" %>
       </p>
       <% else %>

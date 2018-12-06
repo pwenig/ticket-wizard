@@ -11,13 +11,13 @@
           Your order for <strong><%= params[:ticket_details].first.event.title %> </strong> was successful. Your ticket details are below. 
         </p>
         <p>
-          You can also view your order at: NEED TO ADD THIS LINK.
+          You can also view your order at: <%= link_to 'Order Details', event_user_order_url(params[:event][:id]) %>.
         </p>
 
         <h4>Order Details</h4>
         <ul>
           <li>
-            Order Reference: NEED TO ADD THIS
+              Order Reference: <%= link_to params[:order][:order_ref], event_user_order_url(params[:event][:id]) %>
           </li>
           <li>
             Order Name: <%= @user.name %>
@@ -120,7 +120,8 @@
                 <%= ticket.event.date.strftime("%a, %b %d %Y %I:%M %p") %>
               </td>
               <td style="padding-bottom: 10px";>
-                ORDER REF TO COME
+                <%= link_to params[:order][:order_ref], event_user_order_url(params[:event][:id]) %>
+
               </td>
             </tr>
             <tr>

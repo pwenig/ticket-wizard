@@ -24,9 +24,31 @@ RSpec.describe "Event Order Pages", type: :feature do
       expect(page.text).to include "Order: #{order.order_ref}"
       expect(page.text).to include event.title
       expect(page.text).to include ticket.title
-
     end 
-    
+  end 
+
+  describe 'Authorized Customer' do 
+    before do 
+      sign_in_user(user2)
+      visit event_user_order_path(event)
+    end 
+
+    it 'renders the customer order show page' do 
+      expect(page.text).to include "Order: #{order.order_ref}"
+      expect(page.text).to include event.title
+      expect(page.text).to include ticket.title
+    end 
+  end 
+
+  describe 'Invalid Event' do 
+    before do 
+      sign_in_user(user2)
+      visit event_user_order_path(5)
+    end 
+
+    it 'redirects to root path' do 
+      expect(page.text).to_not include "Order: #{order.order_ref}"
+    end 
   end 
 
   describe "Unauthorized User" do 
