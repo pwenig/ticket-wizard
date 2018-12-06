@@ -70,81 +70,80 @@
     <div style="margin-left: 50px; margin-top: 50px;">
       <% params[:ticket_details].each do |ticket| %>
         <table style="width: 60%; padding: 10px; border: 2px solid">
-        <tr>
-        <td>
-         <!-- barcode image will go here -->
-        </td>
-        </tr>
-
-          <tr>
-            <th style="text-align: left;">
-              EVENT
-            </th>
-            <th style="text-align: left;">
-              NAME
-            </th>
-          </tr>
-          <tr>
-            <td style="padding-bottom: 10px";>
-              <%= ticket.event.title%>
-            </td>
-            <td style="padding-bottom: 10px";>
-              <%= ticket.user.name%>
-            </td>
-          </tr>
-          <tr>
-            <th style="text-align: left;">
-              LOCATION
-            </th>
-            <th style="text-align: left;">
-              TICKET TYPE
-            </th>
-          </tr>
-          <tr>
-            <td style="padding-bottom: 10px";>
-              <%= ticket.event.address %>
-            </td>
-            <td style="padding-bottom: 10px";>
-              <%= ticket.ticket.title %>
-            </td>
-          </tr>
-          <tr>
-            <th style="text-align:left;">
-              DATE
-            </th>
-            <th style="text-align:left;">
-              ORDER REF.
-            </th>
-          </tr>
-          <tr>
-            <td style="padding-bottom: 10px";>
-              <%= ticket.event.date.strftime("%a, %b %d %Y %I:%M %p") %>
-            </td>
-            <td style="padding-bottom: 10px";>
-              ORDER REF TO COME
-            </td>
-          </tr>
-          <tr>
-            <th style="text-align:left;">
-            TICKET REF.
-            </th>
-            <th style="text-align: left">
-              TICKET PRICE
-            </th>
-          </tr>
-          <tr>
-          <td style="text-align:left;">
-             <%= ticket.ticket_guid %>
-          </td>
-            <td>
-              <%= number_to_currency(ticket.ticket.price, :precision => 2) %>
-            </td>
-          </tr>
           <tr>
             <td>
+            <!-- barcode image will go here -->
             </td>
           </tr>
-        </table>
+            <tr>
+              <th style="text-align: left;">
+                EVENT
+              </th>
+              <th style="text-align: left;">
+                NAME
+              </th>
+            </tr>
+            <tr>
+              <td style="padding-bottom: 10px";>
+                <%= ticket.event.title%>
+              </td>
+              <td style="padding-bottom: 10px";>
+                <%= ticket.user.name%>
+              </td>
+            </tr>
+            <tr>
+              <th style="text-align: left;">
+                LOCATION
+              </th>
+              <th style="text-align: left;">
+                TICKET TYPE
+              </th>
+            </tr>
+            <tr>
+              <td style="padding-bottom: 10px";>
+                <%= ticket.event.address %>
+              </td>
+              <td style="padding-bottom: 10px";>
+                <%= ticket.ticket.title %>
+              </td>
+            </tr>
+            <tr>
+              <th style="text-align:left;">
+                DATE
+              </th>
+              <th style="text-align:left;">
+                ORDER REF.
+              </th>
+            </tr>
+            <tr>
+              <td style="padding-bottom: 10px";>
+                <%= ticket.event.date.strftime("%a, %b %d %Y %I:%M %p") %>
+              </td>
+              <td style="padding-bottom: 10px";>
+                ORDER REF TO COME
+              </td>
+            </tr>
+            <tr>
+              <th style="text-align:left;">
+              TICKET REF.
+              </th>
+              <th style="text-align: left">
+                TICKET PRICE
+              </th>
+            </tr>
+            <tr>
+            <td style="text-align:left;">
+              <%= ticket.ticket_guid %>
+            </td>
+              <td>
+                <%= number_to_currency(ticket.ticket.price, :precision => 2) %>
+              </td>
+            </tr>
+            <tr>
+              <td>
+              </td>
+            </tr>
+          </table>
         <br>
         <div class="pagebreak"></div>
       <% end %>

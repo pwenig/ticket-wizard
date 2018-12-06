@@ -11,10 +11,12 @@ class OrdersController < ApplicationController
   end 
 
   def show
-    @event = Event.find(params[:event_id])
+    # Add specs
+    @event = Event.where(params[:event_id])
     if @event
       authorized?(@event)
-      @order = Order.find(params[:id])
+      @order = Order.where(order_ref: params[:id]).first
+      @tickets = PurchasedTicket.find(@order.purchased_ticket_ids)
     end 
   end 
 

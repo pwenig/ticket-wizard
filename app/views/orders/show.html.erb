@@ -1,0 +1,12 @@
+<div class="container">
+
+<div class="row title">
+  <h2 class="order-title">Order: <%= @order.order_ref %></h2>
+</div>
+
+<%= render 'order-review', order: @order %>
+
+<%= render 'order-items', order: @order %>
+
+
+</div>

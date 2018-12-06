@@ -1,0 +1,72 @@
+<div class="col-md-12">
+  <div class="row">
+    <h3 class="order-review">Order Review</h3>
+  </div>
+  <table
+   class="order-review">
+    <tr>
+      <th style="text-align: left;">
+        NAME
+      </th>
+      <th style="text-align: left;">
+        EMAIL
+      </th>
+    </tr>
+    <tr>
+      <td style="padding-bottom: 10px";>
+        <%= order.user.name %>
+      </td>
+      <td style="padding-bottom: 10px";>
+        <%= order.user.email %>
+      </td>
+    </tr>
+    <tr>
+      <th style="text-align: left;">
+        AMOUNT
+      </th>
+      <th style="text-align: left;">
+        ORDER DATE
+      </th>
+    </tr>
+    <tr>
+      <td style="padding-bottom: 10px";>
+        <%= number_to_currency(order.amount, :precision => 2) %>
+      </td>
+      <td style="padding-bottom: 10px";>
+        <%= order.created_at.strftime("%a, %b %d %Y %I:%M %p") %>
+      </td>
+    </tr>
+    <tr>
+      <th style="text-align:left;">
+        ORDER DATE
+      </th>
+      <th style="text-align:left;">
+        ORDER REF.
+      </th>
+    </tr>
+    <tr>
+      <td style="padding-bottom: 10px";>
+        <%= order.created_at.strftime("%a, %b %d %Y") %>
+      </td>
+      <td style="padding-bottom: 10px";>
+        <%= order.order_ref %>
+      </td>
+    </tr>
+    <tr>
+      <th style="text-align:left;">
+      EVENT
+      </th>
+      <th style="text-align: left">
+        EVENT DATE
+      </th>
+    </tr>
+    <tr>
+    <td style="text-align:left;">
+      <%= order.event.title %>
+    </td>
+      <td>
+        <%= order.event.date.strftime("%a, %b %d %Y %I:%M %p") %>
+      </td>
+    </tr>
+  </table>
+</div>

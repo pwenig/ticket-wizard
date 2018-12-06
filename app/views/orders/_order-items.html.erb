@@ -1,0 +1,29 @@
+<div class="col-md-12">
+  <div class="row">
+    <h3 class="order-review">Order Items</h3>
+  </div>
+
+  <table class="order-review">
+    <tr class="order-items">
+      <th>TICKET</th>
+      <th>QUANTITY</th>
+      <th>PRICE</th>
+      <th>TOTAL</th>
+    </tr>
+    <% @tickets.each do |ticket| %>
+      <tr class="order-items">
+        <td><%= ticket.ticket.title %></td>
+        <td>1</td>
+        <td><%= number_to_currency(ticket.ticket.price, :precision => 2)%></td>
+        <td><%= number_to_currency(ticket.ticket.price, :precision => 2)%></td>
+      </tr>
+      <tr>
+        <td class="total"></td>
+        <td class="total"></td>
+        <td class="total-total">Total</td>
+        <td class="total">$100</td>
+      </tr>
+    <% end %>
+  </table>
+
+  </div>

@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-md-12">
       <table class="orders">
-        <tr>
+        <tr class="orders">
           <th>Order Ref.</th>
           <th>Order Date</th>
           <th>Name</th>
@@ -12,13 +12,13 @@
           <td></td>
         </tr>
         <% @orders.each do |order| %>
-        <tr>
+        <tr class="orders">
           <td><%= order.order_ref %></td>
           <td><%= order.created_at.strftime("%a, %b %d %Y") %></td>
           <td><%= order.user.name %></td>
           <td><%= order.user.email %></td>
           <td><%= number_to_currency(order.amount, :precision => 2) %></td>
-          <td><%= link_to "Details", event_order_path(@event, order), class: "btn btn-primary", id: "show-edit-button" %></td>
+          <td><%= link_to "Details", event_order_path(@event, order.order_ref), class: "btn btn-primary", id: "show-edit-button" %></td>
         </tr>
         <% end %>
 
