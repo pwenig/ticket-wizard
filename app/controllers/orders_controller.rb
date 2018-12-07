@@ -25,7 +25,7 @@ class OrdersController < ApplicationController
     if @event
       @order = Order.where(user_id: current_user.id, event_id: params[:event_id]).first
       if @order
-        @tickets = PurchasedTicket.find(@order.purchased_ticket_ids)
+        @tickets = PurchasedTicket.where(id: @order.purchased_ticket_ids)
         render template: 'orders/show'
       else
         redirect_to root_path

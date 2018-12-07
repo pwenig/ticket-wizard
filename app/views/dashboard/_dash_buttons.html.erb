@@ -1,0 +1,20 @@
+<script>
+  $(document).ready(function(){  
+  var clipboard = new Clipboard('.clipboard-btn');
+});
+</script>
+
+<% if current_user%>
+  <% if (current_user.id == event.user_id) && (event.date > Time.now)  %>
+    <p class="lead center">
+      <button class="clipboard-btn btn btn-primary" data-clipboard-text=<%= @event_url %>>Copy Event URL</button>
+      <%= link_to "Tickets", event_tickets_path(event, :key => event.event_guid), class: "btn btn-primary", id: "show-edit-button" %>
+      <%= link_to "Orders", event_orders_path(event, :key => event.event_guid), class: "btn btn-primary", id: "show-edit-button" %>
+      <%= link_to "Event", event_path(event, :key => event.event_guid), class: "btn btn-primary", id: "show-edit-button" %>
+      <%= link_to "Edit Event", edit_event_path(event, :key => event.event_guid), class: "btn btn-primary", id: "show-edit-button" %>
+      <% if event.tickets_not_sold? %>
+        <%= link_to "Delete Event", event, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-primary", id: "delete_event_button" %>
+      <% end %>
+    </p>
+  <% end %>
+<% end %>  
