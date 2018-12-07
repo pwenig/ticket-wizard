@@ -22,7 +22,7 @@
 
 
   <!-- Google Maps API -->
-   <script src="//maps.google.com/maps/api/js?key=AIzaSyBZ7ZhwVIUYWElrUzcGPx9bPUe3-2RhKXU&libraries=places"></script>
+   <script src="//maps.google.com/maps/api/js?key=<%= ENV['MAP_API_KEY']%>&libraries=places"></script>
   <script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
 
   <!-- Google Fonts -->
@@ -47,7 +47,7 @@
           <% if current_user %>
             <%# link_to "Events", events_path %>
             <% if current_user.admin? %>
-              <li><%= link_to "Create Event", create_event_path %></li>
+              <li><%= link_to "Create Event", new_event_path %></li>
             <% end %>
             <li><%= link_to "Profile", current_user %></li>
             <li><%= link_to "Sign Out", logout_path, method: "delete", id: 'signout_link' %></li>
