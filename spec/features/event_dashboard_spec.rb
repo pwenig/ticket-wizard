@@ -37,6 +37,10 @@ RSpec.describe "Event Dashboard", type: :feature do
       expect(page.text).to include("Time Remaining")
       expect(page.text).to include("4 days")
     end 
+
+    it "should show copy to clipboard button" do 
+      expect(page.text).to include("Copy Event URL")
+    end 
   end 
 
   describe "Unauthorized user" do 
