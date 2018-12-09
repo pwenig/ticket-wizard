@@ -34,7 +34,7 @@
                       <% elsif ticket.onsale? %>
                         <span style="margin-left: 10px">
                         <%= label "Ticket Quantity", "" %>
-                          <%= select_tag "ticket_id_#{ticket.id}", options_for_select(0..30), :selected => 0 %>
+                          <%= select_tag "ticket_id_#{ticket.id}", options_for_select(ticket.ticket_qty_options), :selected => 0 %>
                         </span>
                       <% elsif !ticket.onsale? && !ticket.offsale? %>
                         <span style="margin-left: 10px">
