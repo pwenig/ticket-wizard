@@ -9,9 +9,6 @@ Rails.application.routes.draw do
   post "/login", to: "sessions#login"
   delete "/logout", to: "sessions#destroy"
   get '/logout', to: 'sessions#destroy'
-  # get "/create-event",  to: "events#new"
-  # post "/create-event",  to: "events#create"
-  # patch "/create-event",  to: "events#create"
 
   get 'auth/:provider/callback', to: 'sessions#create'
 
