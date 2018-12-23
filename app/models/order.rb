@@ -3,6 +3,7 @@ class Order < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :event
+  # belongs_to :purchased_ticket
 
   def self.create_order(order_amount, ticket_details)
     order = Order.new

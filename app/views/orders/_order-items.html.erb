@@ -1,4 +1,4 @@
-<div class="col-md-12">
+<div class="col-md-12 order-items">
   <div class="row">
     <h3 class="order-review">Order Items</h3>
   </div>
@@ -10,7 +10,7 @@
       <th>PRICE</th>
       <th>TOTAL</th>
     </tr>
-    <% @tickets.each do |ticket| %>
+    <% order.user.purchased_tickets.where(id: order.purchased_ticket_ids).each do |ticket| %>
       <tr class="order-items">
         <td><%= ticket.ticket.title %></td>
         <td>1</td>

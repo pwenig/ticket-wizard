@@ -14,8 +14,9 @@ class OrdersController < ApplicationController
     @event = Event.find(params[:event_id])
     if @event
       authorized?(@event)
-      @order = Order.where(order_ref: params[:id]).first
-      @tickets = PurchasedTicket.find(@order.purchased_ticket_ids)
+      @orders = Order.where(order_ref: params[:id])
+      # @tickets = PurchasedTicket.find(@order.purchased_ticket_ids)
+      # @orders.first.user.purchased_tickets
     end 
   end 
 
@@ -23,9 +24,8 @@ class OrdersController < ApplicationController
     # Add template so it can handle multiple orders
     @event = Event.where(id: params[:event_id]).first
     if @event
-      @order = Order.where(user_id: current_user.id, event_id: params[:event_id]).first
-      if @order
-        @tickets = PurchasedTicket.where(id: @order.purchased_ticket_ids)
+      @orders = Order.where(user_id: current_user.id, event_id: params[:event_id])
+      if @orders
         render template: 'orders/show'
       else
         redirect_to root_path
