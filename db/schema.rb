@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_18_020608) do
+ActiveRecord::Schema.define(version: 2018_12_04_024429) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,6 +78,18 @@ ActiveRecord::Schema.define(version: 2018_11_18_020608) do
     t.index ["user_id"], name: "index_events_on_user_id"
   end
 
+  create_table "orders", force: :cascade do |t|
+    t.decimal "amount", precision: 8, scale: 2
+    t.string "order_ref"
+    t.bigint "user_id"
+    t.bigint "event_id"
+    t.integer "purchased_ticket_ids", default: [], array: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_orders_on_event_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
   create_table "purchased_tickets", force: :cascade do |t|
     t.string "ticket_guid"
     t.boolean "redeemed", default: false, null: false
@@ -120,6 +132,8 @@ ActiveRecord::Schema.define(version: 2018_11_18_020608) do
 
   add_foreign_key "comments", "events"
   add_foreign_key "events", "users"
+  add_foreign_key "orders", "events"
+  add_foreign_key "orders", "users"
   add_foreign_key "purchased_tickets", "events"
   add_foreign_key "purchased_tickets", "tickets"
   add_foreign_key "purchased_tickets", "users"

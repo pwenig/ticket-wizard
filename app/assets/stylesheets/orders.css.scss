@@ -1,0 +1,48 @@
+h2.order-title {
+  text-align: center;
+}
+
+h3.order-review {
+  margin-left: 80px;
+}
+
+table.orders {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr.order-items:nth-last-child(2) {
+  border: 1px solid #dddddd;
+  border-bottom: 2px solid darkgrey;
+
+}
+
+td.total, td.total-total {
+  font-weight: bold;
+}
+
+td.total-total {
+  text-align: right;
+}
+
+tr.orders:nth-child(even) {
+  background-color: #dddddd;
+}
+
+table.order-review {
+  width: 60%; 
+  padding: 10px; 
+  border: 1.5px solid;
+  margin: auto;
+}
+
+.order-items {
+  margin-bottom: 50px;
+}

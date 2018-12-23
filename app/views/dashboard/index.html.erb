@@ -1,6 +1,9 @@
 <div class="container">
   <h2 class="dashboard-title"><%= @event.title%> Dashboard</h2>
   <div class="row dashboard">
+    <%= render "dash_buttons", event: @event %>
+  </div>
+  <div class="row dashboard">
     <div class="col-sm-4">
       <div class="stat-box">
         <h3><%= number_to_currency(@event_sales_volume, :precision => 2) || 0 %></h3>
@@ -37,5 +40,8 @@
 
   </div>
 
+  
+  </div>
+  
 </div>
 

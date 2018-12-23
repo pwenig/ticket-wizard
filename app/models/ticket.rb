@@ -29,4 +29,18 @@ class Ticket < ActiveRecord::Base
       errors.add(:qty_available, "is not a number")
     end
   end
+
+  # This method reuturns a range of ticket quantities for the select option.
+  # If there are less then 4 tickets available, show the qty availaile.
+  def ticket_qty_options
+    ticket_options = (0..4)
+    purchased_tickets = PurchasedTicket.where(ticket_id: id).length
+    if qty_available
+      available_tickets = qty_available.to_i - purchased_tickets
+      if available_tickets < 4
+        ticket_options = (0..available_tickets)
+      end 
+    end 
+    ticket_options
+  end 
 end

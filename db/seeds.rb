@@ -1,10 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
 
 Category.create(name: "Arts")
 Category.create(name: "Business")
@@ -22,4 +15,31 @@ Category.create(name: "Spirituality")
 Category.create(name: "Sports & Fitness")
 Category.create(name: "Travel & Outdoor")
 Category.create(name: "Other")
-User.create(name: 'Paul Wenig', email: 'pwenig@gmail.com', password: 'password', password_confirmation: 'password')
+admin = User.create!(name: 'Paul Wenig', email: 'pwenig@gmail.com', password: 'password', password_confirmation: 'password', admin: true)
+user2 = User.create!(name: 'Joe Customer', email: 'pwenig+10@gmail.com', password: 'password', password_confirmation: 'password')
+user3 = User.create!(name: 'Mary Customer', email: 'pwenig+20@gmail.com', password: 'password', password_confirmation: 'password')
+event = Event.create!(title: 'Rock Concert', description: 'Rock Concert', address: '1400 Pearl St, Boulder, CO',  date: "#{Time.now + 4.day.to_i}", category_id: Category.first.id, user_id: admin.id)
+ticket = Ticket.create!(title: "VIP", price: 100, event_id: event.id)
+ticket2 = Ticket.create!(title: "GA", price: 50, event_id: event.id)
+event2 = Event.create!(title: 'Rap Concert', description: 'Rap Concert', address: '1400 Pearl St, Boulder, CO',  date: "#{Time.now + 10.day.to_i}", category_id: Category.first.id, user_id: admin.id)
+ticket3 = Ticket.create!(title: "VIP", price: 75, event_id: event2.id)
+
+2.times do
+  guid = SecureRandom.hex(4)
+  purchased_ticket = PurchasedTicket.create!(user_id: user2.id, event_id: event.id, ticket_id: ticket.id, ticket_guid: guid, created_at: "#{Time.now - 4.day.to_i}")
+  purchased_ticket2 = PurchasedTicket.create!(user_id: user2.id, event_id: event.id, ticket_id: ticket.id, ticket_guid: guid, created_at: "#{Time.now - 4.day.to_i}")
+  guid2 = SecureRandom.hex(4)
+  Order.create(user_id: user2.id, event_id: event.id, amount: purchased_ticket.ticket.price + purchased_ticket2.ticket.price, order_ref: guid2, purchased_ticket_ids: [purchased_ticket.id, purchased_ticket2.id])
+end
+1.times do
+  guid = SecureRandom.hex(4)
+  purchased_ticket = PurchasedTicket.create!(user_id: user2.id, event_id: event2.id, ticket_id: ticket3.id, ticket_guid: guid, created_at: "#{Time.now - 4.day.to_i}")
+  guid2 = SecureRandom.hex(4)
+  Order.create(user_id: user2.id, event_id: event2.id, amount: purchased_ticket.ticket.price, order_ref: guid2, purchased_ticket_ids: [purchased_ticket.id])
+end
+8.times do
+  guid = SecureRandom.hex(4)
+  purchased_ticket_2 = PurchasedTicket.create!(user_id: user3.id, event_id: event.id, ticket_id: ticket2.id, ticket_guid: guid, created_at: "#{Time.now - 10.day.to_i}")
+  guid3 = SecureRandom.hex(4)
+  Order.create(user_id: user3.id, event_id: event.id, amount: purchased_ticket_2.ticket.price, order_ref: guid3, purchased_ticket_ids: [purchased_ticket_2.id])
+end 

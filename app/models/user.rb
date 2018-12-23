@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   has_many :active_attends, class_name: "Attend", foreign_key: "attendee_id", dependent: :destroy
   has_many :attending, through: :active_attends, source: :attended_event
   has_many :purchased_tickets, dependent: :destroy
-
+  has_many :orders, dependent: :destroy
   validates_presence_of :name, length: { maximum: 50 }
   validates_presence_of :email, length: { maximum: 50 }, uniqueness: { case_sensitive: false }
   has_secure_password

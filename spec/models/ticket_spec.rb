@@ -8,7 +8,9 @@ RSpec.describe Ticket, type: :model do
   let(:event) { create(:event, title: "Folk Festival", date: "#{Time.now + 2.week.to_i}", category_id: category1.id, user_id: user.id) }
   let(:ticket) { create(:ticket, title: "VIP", event_id: event.id, qty_available: 1) }
   let(:ticket1) { create(:ticket, title: "GA", event_id: event.id, qty_available: 1) }
+  let(:ticket2) { create(:ticket, title: "GA", event_id: event.id, qty_available: 4) }
   let!(:purchased_ticket) { create(:purchased_ticket, user_id: user.id, event_id: event.id, ticket_id: ticket.id) }
+  let!(:purchased_ticket2) { create(:purchased_ticket, user_id: user.id, event_id: event.id, ticket_id: ticket2.id) }
 
   it "creates a ticket" do
     expect(ticket.title).to eq("VIP")
@@ -55,4 +57,9 @@ RSpec.describe Ticket, type: :model do
     expect(ticket2).to_not be_valid
     expect(ticket2.errors.full_messages).to eq ["Qty available is not a number"]
   end
+
+  it 'returns the number of availavble tickets if the available is less then 4' do 
+    range = ticket2.ticket_qty_options
+    expect(range).to eq((0..3))
+  end 
 end

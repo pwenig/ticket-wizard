@@ -1,0 +1,28 @@
+<div class="col-md-12 order-items">
+  <div class="row">
+    <h3 class="order-review">Order Items</h3>
+  </div>
+
+  <table class="order-review">
+    <tr class="order-items">
+      <th>TICKET</th>
+      <th>QUANTITY</th>
+      <th>PRICE</th>
+      <th>TOTAL</th>
+    </tr>
+    <% order.user.purchased_tickets.where(id: order.purchased_ticket_ids).each do |ticket| %>
+      <tr class="order-items">
+        <td><%= ticket.ticket.title %></td>
+        <td>1</td>
+        <td><%= number_to_currency(ticket.ticket.price, :precision => 2)%></td>
+        <td><%= number_to_currency(ticket.ticket.price, :precision => 2)%></td>
+      </tr>
+    <% end %>
+     <tr>
+        <td class="total"></td>
+        <td class="total"></td>
+        <td class="total-total">Total</td>
+        <td class="total"><%= number_to_currency(order.amount, :precision => 2)%></td>
+      </tr>
+  </table>
+  </div>

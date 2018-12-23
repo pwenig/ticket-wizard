@@ -5,6 +5,7 @@ class DashboardController < ApplicationController
 
   def index
     @event = Event.where(id: params[:event_id], event_guid: params[:key]).first
+    @event_url = event_url(@event, :key => @event.event_guid)
     if @event
       authorized?(@event)
       @event_sales_volume = Dashboard.calculate_volume(@event)

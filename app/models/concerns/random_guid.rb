@@ -4,7 +4,7 @@ module RandomGuid
   extend ActiveSupport::Concern
 
   def create_guid
-    guid = SecureRandom.base64.delete("/+=")[0, 8]
+    guid = SecureRandom.hex(4)
     guid
   end
 end
