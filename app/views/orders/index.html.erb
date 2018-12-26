@@ -1,5 +1,6 @@
 <div class="container">
   <h2 class="order-title"><%= @event.title%> Orders</h2>
+  <%= link_to 'View / Print Guest List', event_guest_list_path(@event), {class: "btn btn-primary", id: 'guest-list'} %>
   <div class="row">
     <div class="col-md-12">
       <table class="orders">
@@ -21,9 +22,7 @@
           <td><%= link_to "Details", event_order_path(@event, order.order_ref), class: "btn btn-primary", id: "show-edit-button" %></td>
         </tr>
         <% end %>
-
       </table>
     </div> 
   </div>
-
 </div>

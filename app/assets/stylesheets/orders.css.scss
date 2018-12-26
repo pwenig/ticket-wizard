@@ -46,3 +46,14 @@ table.order-review {
 .order-items {
   margin-bottom: 50px;
 }
+
+#guest-list {
+  float: right;
+  margin: 10px;
+}
+
+@media print {
+  #guest-list {
+    display: none;
+  }
+}

@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
 
   before_action :logged_in_user
+  before_action :set_event, only: [:show, :customer_order, :guest_list]
 
   def index
     @event = Event.where(id: params[:event_id], event_guid: params[:key]).first
@@ -11,18 +12,13 @@ class OrdersController < ApplicationController
   end 
 
   def show
-    @event = Event.find(params[:event_id])
     if @event
       authorized?(@event)
       @orders = Order.where(order_ref: params[:id])
-      # @tickets = PurchasedTicket.find(@order.purchased_ticket_ids)
-      # @orders.first.user.purchased_tickets
     end 
   end 
 
   def customer_order
-    # Add template so it can handle multiple orders
-    @event = Event.where(id: params[:event_id]).first
     if @event
       @orders = Order.where(user_id: current_user.id, event_id: params[:event_id])
       if @orders
@@ -33,7 +29,22 @@ class OrdersController < ApplicationController
     else 
       redirect_to root_path
     end 
-    
   end 
 
+  def set_event
+    @event = Event.find_by(id: params[:event_id])
+  end 
+
+  def guest_list
+    if @event
+      @purchased_tickets = PurchasedTicket.includes(:user).where(event_id: @event.id).order('users.name')
+      if @purchased_tickets
+        render template: 'orders/guest_list'
+      else
+        redirect_to root_path
+      end 
+    else 
+      redirect_to root_path
+    end
+  end 
 end 
