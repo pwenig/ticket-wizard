@@ -26,7 +26,7 @@ Rails.application.routes.draw do
     resources :dashboard, only: [:index]
     resources :orders, only: [:index, :show]
     get '/user_order', to: 'orders#customer_order'
-    get 'guest_list', to: 'orders#guest_list'
+    get '/guest_list', to: 'orders#guest_list'
 
     member do
       get :attendees
