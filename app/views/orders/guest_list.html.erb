@@ -1,0 +1,22 @@
+<div class="container">
+  <h2 class="order-title"><%= @event.title%> Guest List</h2>
+  <button class='btn btn-primary' id='guest-list' onclick='window.print()'>Print List</button>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="orders">
+        <tr class="orders">
+          <th>Name</th>
+          <th>Ticket</th>
+          <th>Ticket Ref.</th>
+        </tr>
+        <% @purchased_tickets.each do |ticket| %>
+        <tr class="orders">
+          <td><%= ticket.user.name %></td>
+          <td><%= ticket.ticket.title %></td>
+          <td><%= ticket.ticket_guid %></td>
+        </tr>
+        <% end %>
+      </table>
+    </div> 
+  </div>
+</div>
