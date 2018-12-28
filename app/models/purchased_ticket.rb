@@ -25,6 +25,7 @@ class PurchasedTicket < ActiveRecord::Base
         tickets << purchased_ticket
       end
     end
+    order.purchased_ticket_ids = tickets.pluck(:id)
     order.save!
     TicketMailer.with(ticket_details: tickets, order_amount: order_amount, event: ticket_details[:event], order: order ).ticket_email.deliver_now
   end

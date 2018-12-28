@@ -1,6 +1,13 @@
 <div class="container">
   <h2 class="order-title"><%= @event.title%> Orders</h2>
-  <%= link_to 'View / Print Guest List', event_guest_list_path(@event), {class: "btn btn-primary", id: 'guest-list'} %>
+  <h3 class="center"><%= @event.date.strftime("%a, %b %d %Y %I : %M %p") %></h3>
+  <p class="lead center">
+    <% if @event.date > Time.now %>
+      <%= link_to "<i class='fas fa-plus'></i> Add Guest".html_safe, event_add_guest_path(@event), {class: "btn btn-primary"} %>
+    <% end %>
+    <%= link_to "<i class='fas fa-users'></i> Guest List".html_safe, event_guest_list_path(@event), {class: "btn btn-primary"} %>
+  </p>
+
   <div class="row">
     <div class="col-md-12">
       <table class="orders">

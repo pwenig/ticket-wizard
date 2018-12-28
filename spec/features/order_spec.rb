@@ -26,12 +26,21 @@ RSpec.describe "Event Order Pages", type: :feature do
       expect(page.text).to include ticket.title
     end 
 
+    it 'adds a user to the guest list' do 
+      click_on 'Add Guest'
+      fill_in('guest_name', with: 'Guest User')
+      fill_in('guest_email', with: 'guest@guest.com')
+      select('1', from: "ticket_id_#{ticket.id}")
+      click_on 'Complete'
+      expect(page.text).to include('Guest added')
+    end 
+
     it 'renders the event guest list' do 
-      expect(page.text).to include 'View / Print Guest List'
-      click_on 'View / Print Guest List'
+      expect(page.text).to include 'Guest List'
+      click_on 'Guest List'
       expect(page.text).to include "#{event.title} Guest List"
       expect(page.text).to include purchased_ticket.user.name
-      expect(page.text).to include 'Print List'
+      expect(page.text).to include 'Print'
     end 
   end 
 

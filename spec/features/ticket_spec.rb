@@ -14,8 +14,8 @@ RSpec.describe "Tickets", type: :feature do
   it "should create a ticket for an event" do
     visit event_tickets_path(event, key: event.event_guid)
     expect(page.text).to include(event.title)
-    expect(page.text).to include("Create Tickets")
-    click_on("create-ticket-button")
+    expect(page.text).to include("Add Ticket")
+    click_on 'Add Ticket'
     expect(page.text).to include("Create Tickets for:")
     expect(page.text).to include(event.title)
     fill_in("ticket_title", with: "General Admission")
@@ -30,8 +30,8 @@ RSpec.describe "Tickets", type: :feature do
   it "should not create a ticket for an event with errors" do
     visit event_tickets_path(event, key: event.event_guid)
     expect(page.text).to include(event.title)
-    expect(page.text).to include("Create Tickets")
-    click_on("create-ticket-button")
+    expect(page.text).to include("Add Ticket")
+    click_on 'Add Ticket'
     expect(page.text).to include("Create Tickets for:")
     expect(page.text).to include(event.title)
     fill_in("ticket_title", with: "General Admission")

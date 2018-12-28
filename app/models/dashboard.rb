@@ -2,7 +2,7 @@ class Dashboard
   extend ActiveModel::Naming
 
   def self.calculate_volume(event)
-    PurchasedTicket.where(event_id: event.id).map{|x| x.ticket}.map{|c| c.price}.inject(0){|sum,x| sum + x }
+    Order.where(event_id: event.id).map{|c| c.amount}.inject(0){|sum,c| sum + c }
   end
 
   def self.calculate_tickets_sold(event)

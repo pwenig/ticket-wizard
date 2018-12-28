@@ -62,6 +62,10 @@ class User < ActiveRecord::Base
     events.where("date < ?", Time.now)
   end
 
+  def publishable_key
+    stripe_publishable_key || ENV["DEFAULT_PUB_KEY"]
+  end 
+
 private
 
   # Downcase email before being saved

@@ -10,7 +10,7 @@ class DashboardController < ApplicationController
       authorized?(@event)
       @event_sales_volume = Dashboard.calculate_volume(@event)
       @event_tickets = Dashboard.calculate_tickets_sold(@event)
-      @event_time_remaining = helpers.distance_of_time_in_words_to_now(@event.date)
+      @event_time_remaining = @event.date > Time.now ? helpers.distance_of_time_in_words_to_now(@event.date) : 'Event Ended'
       @ticket_types = Dashboard.calculate_ticket_types(@event)
       @tickets_by_day = PurchasedTicket.where(event_id: @event.id).group_by_day(:created_at).count
     end 
