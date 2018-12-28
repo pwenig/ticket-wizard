@@ -55,11 +55,11 @@ class OrdersController < ApplicationController
 
   def new_guest
     if @event
-    ticket_details = {
-        user: create_user,
-        event: @event,
-        tickets: create_tickets
-      }
+      ticket_details = {
+          user: create_user,
+          event: @event,
+          tickets: create_tickets
+        }
       PurchasedTicket.create_ticket(ticket_details, 0)
       flash[:success] = "Guest added"
       redirect_to event_orders_path(@event, key: @event.event_guid)
