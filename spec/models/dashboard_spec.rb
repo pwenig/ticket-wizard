@@ -9,7 +9,9 @@ RSpec.describe Dashboard, type: :model do
 
   before do
     FactoryBot.create_list(:purchased_ticket, 10, user_id: user.id, event_id: event.id, ticket_id: ticket.id )
+    FactoryBot.create(:order, amount: 1000, purchased_ticket_ids: [PurchasedTicket.last(10).pluck(:id)], event: event, user: user)
     FactoryBot.create_list(:purchased_ticket, 10, user_id: user.id, event_id: event.id, ticket_id: ticket2.id )
+    FactoryBot.create(:order, amount: 2500, purchased_ticket_ids: [PurchasedTicket.last(10).pluck(:id)], event: event, user: user)
   end
 
   it "calculates the ticket sales volume for an event by calling #calculate_volume" do 

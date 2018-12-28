@@ -1,0 +1,52 @@
+<section id="tickets" class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-1">
+      <h1 class="center">Tickets for: </h1>
+      <h2 class="center"><%= @event.title %></h2>
+      <h3 class="center"><%= @event.address %></h3>
+      <h3 class="center"><%= @event.date.strftime("%a, %b %d %Y %I : %M %p") %></h3>
+    </div>
+  </div>
+  <br>
+
+<div class="row">
+     <div class="col-lg-8 col-lg-offset-1">
+      <%= form_for(@purchased_ticket, url: event_new_guest_path(@event), html: { multipart: true }) do |f| %> 
+        <div class="row center">
+            <%= label "", "Name" %>
+            <%= text_field 'guest', 'name' %><br>
+            <%= label "", "Email" %>
+            <%= text_field 'guest', 'email' %>
+          <div class="table tickets">
+            <tbody>
+              <% @event.tickets.each do |ticket| %>
+                <tr class="ticket">
+                  <td>
+                    <span><%= ticket.title %></span>
+                    </td>
+                    <td>
+                    <span class="ticket-pricing" style="margin-left: 50px">
+                      <%= number_to_currency(ticket.price, :precision => 2) || 0 %>
+                        <span style="margin-left: 10px">
+                          <%= label "Ticket Quantity", "" %>
+                          <%= select_tag "ticket_id_#{ticket.id}", options_for_select(ticket.ticket_qty_options), :selected => 0 %>
+                        </span>
+                    </span>
+                  </td>
+                  <br>
+                    <td>
+                      <span><%= ticket.description %></span>
+                    </td>
+                  <br>
+                </tr>
+                <%= hidden_field_tag 'event_id', @event.id %>
+                <hr>
+              <% end %>
+                <%= f.submit "Complete", class: "btn btn-primary" %>
+            </tbody>
+          </div>
+        </div>
+      <% end %>
+  </div>
+
+</section>

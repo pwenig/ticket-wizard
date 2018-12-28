@@ -10,7 +10,9 @@ RSpec.describe "Event Dashboard", type: :feature do
 
   before do
     FactoryBot.create_list(:purchased_ticket, 10, user_id: user2.id, event_id: event.id, ticket_id: ticket.id )
+    FactoryBot.create(:order, amount: 1000, purchased_ticket_ids: [PurchasedTicket.last(10).pluck(:id)], event: event, user: user2)
     FactoryBot.create_list(:purchased_ticket, 10, user_id: user2.id, event_id: event.id, ticket_id: ticket2.id )
+    FactoryBot.create(:order, amount: 2500, purchased_ticket_ids: [PurchasedTicket.last(10).pluck(:id)], event: event, user: user2)
   end
 
   describe "Authorized User" do 

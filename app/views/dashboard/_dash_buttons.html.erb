@@ -5,13 +5,15 @@
 </script>
 
 <% if current_user%>
-  <% if (current_user.id == event.user_id) && (event.date > Time.now)  %>
+  <% if (current_user.id == event.user_id) %>
     <p class="lead center">
       <button class="clipboard-btn btn btn-primary" data-clipboard-text=<%= @event_url %>><i class="fas fa-copy"></i> Copy Event URL</button>
       <%= link_to "<i class='fas fa-ticket-alt'></i> Tickets".html_safe, event_tickets_path(event, :key => event.event_guid), class: "btn btn-primary", id: "show-edit-button" %>
       <%= link_to "<i class='fas fa-users'></i> Orders".html_safe, event_orders_path(event, :key => event.event_guid), class: "btn btn-primary", id: "show-edit-button" %>
       <%= link_to "<i class='fas fa-calendar'></i> Event".html_safe, event_path(event, :key => event.event_guid), class: "btn btn-primary", id: "show-edit-button" %>
-      <%= link_to "<i class='fas fa-calendar'></i> Edit Event".html_safe, edit_event_path(event, :key => event.event_guid), class: "btn btn-primary", id: "show-edit-button" %>
+      <% if event.date > Time.now %>
+       <%= link_to "<i class='fas fa-calendar'></i> Edit Event".html_safe, edit_event_path(event, :key => event.event_guid), class: "btn btn-primary", id: "show-edit-button" %>
+      <% end %>
       <% if event.tickets_not_sold? %>
         <%= link_to "<i class='fas fa-trash-alt'></i> Delete Event".html_safe, event, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-primary", id: "delete_event_button" %>
       <% end %>
