@@ -1,6 +1,9 @@
 <div class="container">
   <h2 class="order-title"><%= @event.title%> Guest List</h2>
-  <button class='btn btn-primary' id='guest-list' onclick='window.print()'>Print List</button>
+  <h3 class="center"><%= @event.date.strftime("%a, %b %d %Y %I : %M %p") %></h3>
+  <p class="lead center">
+    <button class='btn btn-primary' id='guest-list' onclick='window.print()'><i class="fas fa-print"></i> Print List</button>
+  </p>
   <div class="row">
     <div class="col-md-12">
       <table class="orders">

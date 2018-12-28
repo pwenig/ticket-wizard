@@ -1,5 +1,6 @@
 h2.order-title {
   text-align: center;
+  margin-bottom: 15px;
 }
 
 h3.order-review {
@@ -45,11 +46,6 @@ table.order-review {
 
 .order-items {
   margin-bottom: 50px;
-}
-
-#guest-list {
-  float: right;
-  margin: 10px;
 }
 
 @media print {
