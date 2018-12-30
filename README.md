@@ -19,3 +19,4 @@ Once you have the repo on your local machine
 
 2) Run `rspec` to verify everything is ok =)
 
+
