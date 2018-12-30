@@ -15,11 +15,8 @@
       <div class="col-md-3 text-center" id="search-sidebar">
         <% if current_user %>
           <% if current_user.id == @user.id %>
-            <h4><b>Account</b></h4>
-            <div class="list-group">
-              <%= link_to "Edit Account", edit_user_path, class: "list-group-item" %>
-              <%= link_to "Sign Out",logout_path, method: "delete", class: "list-group-item" %>
-            </div>
+              <%= link_to "Edit Account", edit_user_path, class: "btn btn-primary" %><br>
+              <%= link_to "Sign Out",logout_path, method: "delete", class: "btn btn-primary" %>
           <% end %>
         <% end %>
         <!-- <h4><b>Filter Events by Condition</b></h4>
