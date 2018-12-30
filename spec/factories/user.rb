@@ -7,6 +7,7 @@ FactoryBot.define do
     password { "password" }
     password_confirmation { "password" }
     admin { false }
+    ops { false }
     stripe_publishable_key {'1234'}
     stripe_secret_key {'abcd'}
   end
