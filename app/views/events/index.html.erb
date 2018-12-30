@@ -33,9 +33,7 @@
         <% if @created_events&.any? %>
           <div class="row">
             <h3 id="events">Upcoming Events <span><%= current_user.name %></span> Created</h3>
-            <div>(<%= page_entries_info @created_events %>)</div>
             <hr>
-              <%= will_paginate(@created_events) %><br>
               <%= render @created_events %>
           </div>
         <% end %>
@@ -43,9 +41,7 @@
        <% if @events.any? %>
         <div class="row">
             <h3 id="events"><%= params[:timeline] == "Past Events" ? "Past Events" : "Upcoming Events #{current_user.name} is Attending: " %></h3>
-              <div>(<%= page_entries_info @events %>)</div>
               <hr>
-              <%= will_paginate(@events) %><br>
               <%= render @events %>
           </div>
         </div>

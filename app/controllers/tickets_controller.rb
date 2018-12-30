@@ -6,7 +6,7 @@ class TicketsController < ApplicationController
   def index
     @event = Event.where(id: params[:event_id], event_guid: params[:key]).first
     if @event
-      @tickets = @event.tickets.paginate(page: params[:page], per_page: 12)
+      @tickets = @event.tickets
     else
       redirect_to root_path
     end

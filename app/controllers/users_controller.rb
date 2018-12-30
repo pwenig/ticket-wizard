@@ -23,19 +23,19 @@ class UsersController < ApplicationController
     @display_name = "#{@user.name}'s"
     if params[:timeline] == "Upcoming Events"
       @title = params[:timeline]
-      @events = @user.upcoming_events.paginate(page: params[:page], per_page: 12)
+      @events = @user.upcoming_events
     elsif params[:timeline] == "Past Events"
       @title = params[:timeline]
-      @events = @user.past_events.paginate(page: params[:page], per_page: 12)
+      @events = @user.past_events
     else
       @display_name = "#{@user.name} is" if @display_name == "#{@user.name}'s"
       @title = "Events You're Attending"
       user_purchased_event_ids = PurchasedTicket.where(user_id: current_user.id).pluck(:event_id).uniq
       events = Event.where(id: user_purchased_event_ids)
       current_events = events.where("date > ?", Time.now)
-      @events = current_events.paginate(page: params[:page], per_page: 12)
+      @events = current_events
       @display_name = "#{@user.name}'s" if @display_name == "#{@user.name} is"
-      @created_events = Event.user_created_events(@user).paginate(page: params[:page], per_page: 12)
+      @created_events = Event.user_created_events(@user)
     end
   end
 
