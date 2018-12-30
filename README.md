@@ -6,7 +6,7 @@
 
 * Rails version - 5.2
 
-* Database - Postgres
+* Database - PostgreSQL
 
 * Framework - Ruby on Rails
 
