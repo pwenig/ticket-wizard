@@ -40,9 +40,7 @@
         <% if @created_events&.any? %>
           <div class="row">
             <h3 id="events">Upcoming Events <span><%= current_user.name %></span> Created</h3>
-              <div class="page-entries">(<%= page_entries_info(@created_events) %>)</div>
             <hr class="event-break">
-              <%= will_paginate(@created_events) %><br>
               <%= render @created_events %>
           </div>
         <% end %>
@@ -51,9 +49,7 @@
           <div class="row">
             <div id="sub-title">
               <h3><%= @title %></h3>
-                (<%= page_entries_info(@events) %>)
             </div>
-              <%= will_paginate(@events) %><br>
               <%= render @events %>
           </div>
         <% end %>

@@ -13,8 +13,6 @@ gem "turbolinks"
 gem "jbuilder", "~> 2.0"
 gem "sdoc", "~> 0.4.0", group: :doc
 gem "bcrypt", "~> 3.1.7"
-gem "will_paginate", "3.1.0"
-gem "bootstrap-will_paginate", "0.0.10"
 gem "bootstrap-sass", "~> 3.3.6"
 gem "sass-rails", ">= 3.2"
 gem "font-awesome-sass"
@@ -36,6 +34,7 @@ gem 'clipboard-rails'
 gem 'jquery-turbolinks'
 gem 'chartkick', '~> 1.4', '>= 1.4.1'
 gem 'groupdate', '~> 4.1'
+gem "administrate"
 
 group :production, :staging do 
   gem "rails_12factor"

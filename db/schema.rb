@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_04_024429) do
+ActiveRecord::Schema.define(version: 2018_12_30_202458) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -128,6 +128,7 @@ ActiveRecord::Schema.define(version: 2018_12_04_024429) do
     t.string "stripe_secret_key"
     t.string "provider"
     t.string "uid"
+    t.boolean "ops", default: false
   end
 
   add_foreign_key "comments", "events"

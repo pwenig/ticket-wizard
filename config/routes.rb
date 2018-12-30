@@ -1,6 +1,16 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  namespace :admin do
+      resources :comments
+      resources :events
+      resources :orders
+      resources :purchased_tickets
+      resources :tickets
+      resources :users
+
+      root to: "users#index"
+    end
   root "pages#index"
 
   get "/signup",  to: "users#new"
