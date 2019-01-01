@@ -32,7 +32,8 @@ RSpec.describe "Events", type: :feature do
     fill_in("event_title", with: "Heavy Metal Concert")
     fill_in("event_description", with: "Loud event")
     fill_in("txtautocomplete", with: "Boulder Theater")
-    select("2019", from: "event_date_1i")
+    year = Date.today + 1.year
+    select(year.strftime("%Y"), from: "event_date_1i")
     click_on "create_button"
     event = Event.last
     expect(page.text).to include("Event Created")

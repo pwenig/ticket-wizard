@@ -30,14 +30,14 @@ class ChargesController < ApplicationController
         flash[:success] = "Thank you. Your tickets will be emailed shortly. You paid $#{session[:total_price]}."
         redirect_to user_path(current_user)
         clear_sessions
-      rescue Stripe::AuthenticationError
-        flash[:error] = "There was an error with the Stripe settings"
+      rescue Stripe::AuthenticationError => ae
+        flash[:error] = "There was an error with the Stripe settings #{ae}"
         redirect_to root_path
       rescue Stripe::CardError => e
         flash[:error] = "There was a problem with your credit card."
         redirect_to root_path
       rescue => exception
-        flash[:error] = "There was an error"
+        flash[:error] = "There was an error #{exception}"
         redirect_to root_path
       else
       end
