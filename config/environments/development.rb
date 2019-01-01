@@ -63,3 +63,5 @@ Rails.application.configure do
   # Send email in development mode.
   config.action_mailer.perform_deliveries = true
 end
+Rails.application.routes.default_url_options[:host] = 'ticket-wizard.com'
+
