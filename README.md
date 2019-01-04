@@ -1,4 +1,6 @@
-# Ticket-Weeb [![Build Status](https://travis-ci.org/pwenig/tick-weeb.svg?branch=master)](https://travis-ci.org/pwenig/tick-weeb)
+# Ticket-Wizard
+
+[www.ticket-wizard.com](https://www.ticket-wizard.com)
 
 ## Application / Version Information
 
