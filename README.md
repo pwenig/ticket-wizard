@@ -1,6 +1,6 @@
 # Ticket-Wizard
 
-[www.ticket-wizard.com](https://www.ticket-wizard.com)
+[www.ticket-wizard.com](http://www.ticket-wizard.com)
 
 ## Application / Version Information
 
